@@ -2,7 +2,8 @@ module.exports = function(grunt) {
 
     var cssFiles = [
         "bower_components/bootstrap/dist/css/bootstrap.css",
-        "bower_components/bootstrap/dist/css/bootstrap-theme.css"
+        "bower_components/bootstrap/dist/css/bootstrap-theme.css",
+        "css/justified-nav.css"
     ];
 
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
