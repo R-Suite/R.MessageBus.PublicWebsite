@@ -54,17 +54,14 @@
               <li><a href="#configuring">Configuring R.MessageBus</a></li>
               <li><a href="#">Sending Commands</a></li>   
               <li><a href="#">Publishing Events</a></li>   
-              <li><a href="#">Long runnning processes (Workflow)</a></li>   
+              <li><a href="#">Long runnning processes (Workflow)</a></li>
+              <li><a href="#">Mesages with Routing Slip</a></li>
+              <li><a href="#">Mesages with Recepient List</a></li> 
+              <li><a href="#">Mesage Aggregation</a></li>
+              <li><a href="#">Mesage Scatter-Gather</a></li>
+              <li><a href="#">Mesage Streaming</a></li>
               <li><a href="#">Retries</a></li>   
-              <li><a href="#">Samples</a></li>   
-              <li><a href="#" data-toggle="collapse" data-target="#sub1">Link 4 (submenu)</a>
-                <ul class="nav collapse" id="sub1">
-                  <li><a href="#">Sub Link 1</a></li>
-                  <li><a href="#">Sub Link 2</a></li>
-                  <li><a href="#">Sub Link 3</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Link 5</a></li>   
+              <li><a href="#">Samples</a></li> 
             </ul>
         </div>
     
@@ -76,7 +73,7 @@
           </p>
           <p>While R.MessageBus includes many "traditional" features found in other messaging frameworks, it adds extended support for <strong>Enterprise Integration Patterns</strong> buit-in directly into the core of the message bus, as well as high message throughput for the most demanding applications and streaming ability for transfering large files or streaming video. 
           </p>
-          <p>R.MessageBus development started in early 2014 out of a specific project''s need for high-performance messaging framework.
+          <p>R.MessageBus development started in early 2014 out of a specific project's need for high-performance messaging framework.
           The intial proof-of-concept turned into a full product and we slowly phased out the third-party messaging framework that we used at that time. Internaly, R.MessageBus proved to be a great success and by the end of 2014, we decided to open-source it.
           </p>
 
@@ -91,7 +88,26 @@
           <p>Calling initialize with no parameters will create an instance of the Bus with default configuration options.</p>
           
           <p>
-          <pre>IBus bus = Bus.Initialize();</pre>
+
+
+<pre>
+
+public class Program
+{
+    public static void Main()
+    {
+        IBus bus = Bus.Initialize();
+    }
+}
+
+</pre>
+
+
+          </p>
+
+          <p>
+              Default configuration creates an endpoint in our messaging system that is ready to send/publish and receive messages. 
+              Of course messages can only be received if we have a code to handle those messages - <a href="#">message handlers</a>. 
           </p>
 
           <p>Default configuration is the following,</p>
@@ -100,6 +116,8 @@
             <li>Consumer - RabbitMQ</li>
             <li>Container - StructureMap</li>
             <li>ScanForMessageHandlers - True</li>
+            <li>AutoStartConsuming - True</li>
+            <li>AddBusToContainer - True</li>
             <li>ProcessManagerFinder - SqlServerProcessManagerFinder</li>
             <li>
               TransportSettings
@@ -119,14 +137,28 @@
 
           <h3>Custom Configuration</h3>
           <p>Initialize also takes a single lambda/action parameter for custom configuration.</p>
-<pre>IBus bus = Bus.Initialize(config =>
+<pre>
+
+public class Program
 {
-    config.ScanForMesssageHandlers = false;
-    config.SetQueueName("MyQueue"));
-    config.SetAuditingEnabled(true));
-    config.TransportSettings.MaxRetries = 5;
-    config.TransportSettings.RetryDelay = 50000;
-});</pre>
+    public static void Main()
+    {
+        IBus bus = Bus.Initialize(config =>
+        {
+            config.ScanForMesssageHandlers = true;
+            config.AutoStartConsuming = false;
+            config.SetQueueName("MyQueue"));
+            config.SetAuditingEnabled(true));
+            config.TransportSettings.MaxRetries = 5;
+            config.TransportSettings.RetryDelay = 50000;
+        });
+    }
+}
+
+</pre>
+          <p>
+              Here we initialised the bus and we are ready to start sending or publishing messages. With this example we are not quite ready to consume incoming messages just yet, but don't worry about the configuration details at this point, we'll come back to that later. This is just to  demonstrate how to specify custom configuration options.
+          </p>
           
         </div><!-- /.col-xs-12 main -->
     </div><!--/.row-->
