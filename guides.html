@@ -52,7 +52,7 @@
             <ul class="nav">
               <li><a href="#about">About R.MessageBus</a></li>
               <li><a href="#configuring">Configuring R.MessageBus</a></li>
-              <li><a href="#">Sending Commands</a></li>   
+              <li><a href="#sendingCommands">Sending Commands (Point To Point)</a></li>   
               <li><a href="#">Publishing Events</a></li>   
               <li><a href="#">Long runnning processes (Workflow)</a></li>
               <li><a href="#">Mesages with Routing Slip</a></li>
@@ -159,6 +159,78 @@ public class Program
           <p>
               Here we initialised the bus and we are ready to start sending or publishing messages. With this example we are not quite ready to consume incoming messages just yet, but don't worry about the configuration details at this point, we'll come back to that later. This is just to  demonstrate how to specify custom configuration options.
           </p>
+
+
+
+          <h2 id="sendingCommands">Sending Commands (Point To Point)</h2>
+          <p style="margin-top:30px;">
+            <img class="img-responsive" src="scripts/images/PointToPoint.gif" />
+          </p>
+          <p>
+            A Point to Point channel ensures that only one receiver consumes any given message. The channel can have multiple receivers that can consume multiple messages concurrently (Competing Consumers), but only one of them can successfully consume a particular message. This design makes consuming and processing messages highly scalable because the work can be load balanced across multiple consumers running in multiple applications on multiple computers.
+          </p>
+          <p>
+              <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 103-105, 502-507) for more details.</i>
+          </p>
+
+<p>
+<h3>Command Definition</h3>
+<pre>
+
+public class PointToPointMessage : Message
+{
+    public PointToPointMessage(Guid correlationId) : base(correlationId){}
+}
+
+</pre>
+</p>
+
+<p>
+<h3>Sending Commands</h3>
+<pre>
+
+public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize(config => 
+            config.AddEndPointMapping(typeof(PointToPointMessage), "PointToPoint")
+        );
+
+        bus.Send(new PointToPointMessage(id));
+    }
+}
+
+</pre>
+</p>
+
+<p>
+<h3>Consuming Commands</h3>
+<pre>
+
+public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize(config => config.SetEndPoint("PointToPoint"));
+        bus.StartConsuming();
+    }
+}
+
+</pre>
+</p>
+<pre>
+
+public class PointToPointMessageHandler : IMessageHandler<PointToPointMessage>
+{
+    public void Execute(PointToPointMessage command)
+    {
+        Console.WriteLine("Received message - {0}", command.CorrelationId);
+    }
+}
+
+</pre>
+</p>
           
         </div><!-- /.col-xs-12 main -->
     </div><!--/.row-->
