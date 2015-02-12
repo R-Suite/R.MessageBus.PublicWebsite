@@ -55,6 +55,7 @@
               <li><a href="#sendingCommands">Sending Commands (Point-To-Point)</a></li>   
               <li><a href="#publishing">Publishing Events (Publish/Subscribe)</a></li>   
               <li><a href="#processManager">Long runnning processes (Workflow)</a></li>
+              <li><a href="#requestReply">Request Reply</a></li>
               <li><a href="#">Mesages with Routing Slip</a></li>
               <li><a href="#">Mesages with Recepient List</a></li> 
               <li><a href="#">Mesage Aggregation</a></li>
@@ -402,6 +403,90 @@ public class MealProcess : ProcessManager&lt;MealData&gt;, IStartProcessManager&
 </pre>
 </p>
         <p>See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/McDonalds">McDonalds - Process Manager</a> sample application for a complete example.</p>
+
+
+
+
+
+
+          <h2 id="requestReply">Request Reply</h2>
+          <p style="margin-top:30px;">
+            <img class="img-responsive" src="scripts/images/RequestReply.gif" />
+          </p>
+          <p>
+            Request Reply can be used when the applications may want a two-way conversation. Send a pair of Request-Reply messages, each on its own channel. Requestor 
+            sends a request message and waits for the reply message. Replier receives the requested message a responds with a reply message. In R.MessageBus implementation of <i>Request Reply</i> both request and reply messages are on <i>Point-to-Point</i> channel - meaning the messages are always breaodcasted to a single consumer. 
+          </p>
+          <p>
+            R.MessageBus offers two implementations of Request Reply:
+            <ul>
+              <li>
+                <strong>Synchronous</strong> - a single thread sends the request message, blocks to wait for the reply message and than processes the reply.
+              </li>
+              <li>
+                <strong>Asynchronous</strong> - the caller sends the request message and sets up a callback for reply. A separate thread listens for reply and when the reply message arrives, the new thread invokes  the callback which reestablishes the caller's context and process the reply.
+              </li>
+            </ul>
+          </p>
+          <p>
+              <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 154-158) for more details.</i>
+          </p>
+
+<p>
+<h3>Message Definition</h3>
+<pre>
+
+public class RequestMessage : Message
+{
+    public RequestMessage(Guid correlationId) : base(correlationId)  { }
+}
+
+public class ResponseMessage : Message
+{
+    public ResponseMessage(Guid correlationId) : base(correlationId) { }
+}
+
+</pre>
+</p>
+
+<p>
+<h3>Synchronous Block</h3>
+<pre>
+
+ResponseMessage result = bus.SendRequest<RequestMessage, ResponseMessage>("Responder", new RequestMessage(Guid.NewGuid()));
+
+</pre>
+</p>
+
+<p>
+<h3>Asynchronous Callback</h3>
+<pre>
+
+var message = new RequestMessage(Guid.NewGuid());
+bus.SendRequest<RequestMessage, ResponseMessage>("Responder", message, r => Console.WriteLine("Received reply - {0}", r.CorrelationId));
+
+</pre>
+</p>
+
+<p>
+<h3>Replier</h3>
+<pre>
+
+public class RequestMessageHandler : IMessageHandler<RequestMessage>
+{
+    public IConsumeContext Context { get; set; }
+
+    public void Execute(RequestMessage message)
+    {
+        Context.Reply(new ResponseMessage(message.CorrelationId));
+    }
+}
+
+</pre>
+</p>
+
+        <p>See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RequestResponse">Request Response</a> sample application for a complete example.</p>
+
 
 
         </div><!-- /.col-xs-12 main -->
