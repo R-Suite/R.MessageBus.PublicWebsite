@@ -49,7 +49,7 @@
             <li><a href="#requestReply">Request Reply</a></li>
             <li><a href="#routingSlip">Mesages with Routing Slip</a></li>
             <li><a href="#recipientList">Mesages with Recipient List</a></li>
-            <li><a href="#">Mesage Aggregation</a></li>
+            <li><a href="#aggregator">Mesage Aggregation</a></li>
             <li><a href="#">Mesage Scatter-Gather</a></li>
             <li><a href="#">Mesage Streaming</a></li>
             <li><a href="#">Retries</a></li>
@@ -638,10 +638,90 @@
       public IConsumeContext Context { get; set; }
   }
 
-</pre> 
-
+</pre>
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RecipientList">Recipient List</a> sample application for a complete example.
+          </p>
+
+
+
+
+
+
+
+          <br />
+          <h2 id="aggregator">Aggregator</h2>
+          <p style="margin-top:30px;">
+          <img class="img-responsive" src="scripts/images/Aggregator.gif" />
+          </p>
+          <p>
+          Aggregator collects and stores individual messages until a complete set of related messages has been received. Then, the Aggregator publishes a single message distilled from the individual messages.
+           </p>
+          <p>
+          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 268-282) for more details.</i>
+          </p>
+          <h3>Message Definitions</h3>
+<pre>
+
+public class TestMessage : Message
+{
+    public TestMessage(Guid correlationId) : base(correlationId)
+    {
+    }
+    public int Num { get; set; }
+}
+
+</pre>
+          <h3>Send messages to Aggregator</h3>
+<pre>
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var bus = Bus.Initialize(x =>
+        {
+            x.SetQueueName("Aggregator.Publisher");
+            x.PurgeQueuesOnStart();
+        });
+
+        for (int i = 0; i < 1000; i++)
+        {
+            bus.Send("Aggregator.Consumer", new TestMessage(Guid.NewGuid())
+            {
+                Num = i + 1
+            });
+            Thread.Sleep(10);
+        }
+
+        Console.ReadLine();
+    }
+}
+
+</pre>
+          <h3>Consuming messages with Aggregator</h3>
+<pre>
+
+public class TestMessageHandler : Aggregator<TestMessage>
+{
+    public override int BatchSize()
+    {
+        return 100;
+    }
+    public override TimeSpan Timeout()
+    {
+        return new TimeSpan(0, 0, 0, 2);
+    }
+    
+    public override void Execute(IList<TestMessage> message)
+    {
+        Console.WriteLine("***** Received batch of messages ({0}) ******", message.Count);
+    }
+}
+
+</pre>
+          <p>
+          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Aggregator">Aggregator</a> sample application for a complete example.
           </p>
 
 
