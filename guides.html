@@ -47,11 +47,11 @@
             <li><a href="#publishing">Publishing Events (Publish/Subscribe)</a></li>
             <li><a href="#processManager">Long runnning processes (Workflow)</a></li>
             <li><a href="#requestReply">Request Reply</a></li>
-            <li><a href="#routingSlip">Mesages with Routing Slip</a></li>
-            <li><a href="#recipientList">Mesages with Recipient List</a></li>
-            <li><a href="#aggregator">Mesage Aggregation</a></li>
-            <li><a href="#">Mesage Scatter-Gather</a></li>
-            <li><a href="#">Mesage Streaming</a></li>
+            <li><a href="#routingSlip">Messages with Routing Slip</a></li>
+            <li><a href="#recipientList">Messages with Recipient List</a></li>
+            <li><a href="#aggregator">Message Aggregation</a></li>
+            <li><a href="#scatterGather">Message Scatter-Gather</a></li>
+            <li><a href="#">Message Streaming</a></li>
             <li><a href="#">Retries</a></li>
             <li><a href="#">Samples</a></li>
           </ul>
@@ -724,6 +724,121 @@ public class TestMessageHandler : Aggregator<TestMessage>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Aggregator">Aggregator</a> sample application for a complete example.
           </p>
 
+
+
+
+
+          <br />
+          <h2 id="scatterGather">Scatter-Gather</h2>
+          <p style="margin-top:30px;">
+          <img class="img-responsive" src="scripts/images/BroadcastAggregate.gif" />
+          </p>
+          <p>
+          Scatter-Gather broadcasts a message to multiple recipients and re-aggregates the responses back into a single message.
+           </p>
+          <p>
+          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 297-300) for more details.</i>
+          </p>
+          <h3>Message Definitions</h3>
+<pre>
+
+public class Request : Message
+{
+    public Request(Guid correlationId) : base(correlationId)
+    {
+    }
+
+    public bool Delay { get; set; }
+}
+
+public class Response : Message
+{
+    public Response(Guid correlationId) : base(correlationId)
+    {
+    }
+
+    public string Endpoint { get; set; }
+}
+
+</pre>
+
+          <h3>Publishing Request Messages</h3>
+<pre>
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var bus = Bus.Initialize();
+        bus.StartConsuming();
+
+        // Scatter Gather Expects 2 replies
+        var id = Guid.NewGuid();
+        var responses = bus.PublishRequest<Request, Response>(new Request(id), 2);
+
+        foreach (var response in responses)
+        {
+            Console.WriteLine("Received response from - {0}", response.Endpoint);
+        }
+
+        // Scatter Gather unknown number of replies
+        id = Guid.NewGuid();
+        var responses = bus.PublishRequest<Request, Response>(new Request(id){ Delay = true }, timeout: 500);
+
+        foreach (var response in responses)
+        {
+            Console.WriteLine("Received response from - {0}", response.Endpoint);
+        }
+    }
+}
+
+</pre>
+
+          <h3>Consuming messages</h3>
+<pre>
+
+// Consumer 1 Process
+public class Handler : IMessageHandler<Request>
+{
+    public void Execute(Request message)
+    {
+        Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
+
+        if (message.Delay)
+        {
+            Thread.Sleep(1000);
+        }
+        
+        Context.Reply(new Response(message.CorrelationId)
+        {
+            Endpoint = "Consumer1"
+        });
+    }
+
+    public IConsumeContext Context { get; set; }
+}
+
+// Consumer 2 Process
+public class Handler : IMessageHandler<Request>
+{
+    public void Execute(Request message)
+    {
+        Console.WriteLine("Consumer 2 Received Message - {0}", message.CorrelationId);
+
+        Context.Reply(new Response(message.CorrelationId)
+        {
+            Endpoint = "Consumer2"
+        });
+    }
+
+    public IConsumeContext Context { get; set; }
+}
+
+</pre>
+
+          <p>
+          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/ScatterGather">Scatter-Gather</a> sample application for a complete example.
+          </p>
 
           </div><!-- /.col-xs-12 main -->
           </div><!--/.row-->
