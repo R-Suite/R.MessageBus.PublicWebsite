@@ -51,7 +51,7 @@
             <li><a href="#recipientList">Messages with Recipient List</a></li>
             <li><a href="#aggregator">Message Aggregation</a></li>
             <li><a href="#scatterGather">Message Scatter-Gather</a></li>
-            <li><a href="#">Message Streaming</a></li>
+            <li><a href="#streaming">Message Streaming</a></li>
             <li><a href="#">Retries</a></li>
             <li><a href="#">Samples</a></li>
           </ul>
@@ -137,7 +137,7 @@
 
 </pre>
           <p>
-          Here we initialised the bus and we are ready to start sending or publishing messages. With this example we are not quite ready to consume incoming messages just yet, but don't worry about the configuration details at this point, we'll come back to that later. This is just to  demonstrate how to specify custom configuration options.
+          Here we initialised the bus and we are ready to start sending or publishing messages. With this example we are not quite ready to consume incoming messages just yet, but don&apos;t worry about the configuration details at this point, we&apos;ll come back to that later. This is just to  demonstrate how to specify custom configuration options.
           </p>
 
 
@@ -418,7 +418,7 @@
           <p>
           <h3>Synchronous Block</h3>
 <pre>
-    ResponseMessage result = bus.SendRequest<RequestMessage, ResponseMessage>("Responder", new RequestMessage(Guid.NewGuid()));
+    ResponseMessage result = bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", new RequestMessage(Guid.NewGuid()));
 </pre>
           </p>
           <p>
@@ -426,7 +426,7 @@
 <pre>
 
   var message = new RequestMessage(Guid.NewGuid());
-  bus.SendRequest<RequestMessage, ResponseMessage>("Responder", message, r => Console.WriteLine("Received reply - {0}", r.CorrelationId));
+  bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", message, r => Console.WriteLine("Received reply - {0}", r.CorrelationId));
 
 </pre>
           </p>
@@ -434,7 +434,7 @@
           <h3>Replier</h3>
 <pre>
 
-  public class RequestMessageHandler : IMessageHandler<RequestMessage>
+  public class RequestMessageHandler : IMessageHandler&lt;RequestMessage&gt;
   {
       public IConsumeContext Context { get; set; }
       
@@ -620,7 +620,7 @@
           <h3>Consuming messages</h3>
 <pre>
 
-  public class MyMessageHandler : IMessageHandler<RecipientListMessage>
+  public class MyMessageHandler : IMessageHandler&lt;RecipientListMessage&gt;
   {
       public void Execute(RecipientListMessage message)
       {
@@ -702,7 +702,7 @@ class Program
           <h3>Consuming messages with Aggregator</h3>
 <pre>
 
-public class TestMessageHandler : Aggregator<TestMessage>
+public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
 {
     public override int BatchSize()
     {
@@ -713,7 +713,7 @@ public class TestMessageHandler : Aggregator<TestMessage>
         return new TimeSpan(0, 0, 0, 2);
     }
     
-    public override void Execute(IList<TestMessage> message)
+    public override void Execute(IList&lt;TestMessage&gt; message)
     {
         Console.WriteLine("***** Received batch of messages ({0}) ******", message.Count);
     }
@@ -774,7 +774,7 @@ class Program
 
         // Scatter Gather Expects 2 replies
         var id = Guid.NewGuid();
-        var responses = bus.PublishRequest<Request, Response>(new Request(id), 2);
+        var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id), 2);
 
         foreach (var response in responses)
         {
@@ -783,7 +783,7 @@ class Program
 
         // Scatter Gather unknown number of replies
         id = Guid.NewGuid();
-        var responses = bus.PublishRequest<Request, Response>(new Request(id){ Delay = true }, timeout: 500);
+        var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id){ Delay = true }, timeout: 500);
 
         foreach (var response in responses)
         {
@@ -798,7 +798,7 @@ class Program
 <pre>
 
 // Consumer 1 Process
-public class Handler : IMessageHandler<Request>
+public class Handler : IMessageHandler&lt;Request&gt;
 {
     public void Execute(Request message)
     {
@@ -819,7 +819,7 @@ public class Handler : IMessageHandler<Request>
 }
 
 // Consumer 2 Process
-public class Handler : IMessageHandler<Request>
+public class Handler : IMessageHandler&lt;Request&gt;
 {
     public void Execute(Request message)
     {
@@ -839,6 +839,82 @@ public class Handler : IMessageHandler<Request>
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/ScatterGather">Scatter-Gather</a> sample application for a complete example.
           </p>
+
+
+
+
+
+
+          <br />
+          <h2 id="streaming">Message Streaming</h2>
+          <p style="margin-top:30px;">
+            By utilising message streaming, R.MessageBus allows transfering large files or even audio/video streaming between two endpoints.
+          </p>
+          <br />
+          <p>
+            Simple use the bus to <strong>create a stream object</strong>
+          </p>
+<pre>
+
+var stream = bus.CreateStream("StreamConsumer", new StartStreamMessage(Guid.NewGuid())
+{
+    Path = @"logoCopy.bmp"
+});   
+
+</pre>
+
+          <p>
+            ...and <strong>write your binary data</strong> to it.
+          </p>
+<pre>
+
+var f = new FileStream(@"logo.bmp", FileMode.Open);
+
+byte[] buffer = new byte[100000];
+int read;
+while ((read = f.Read(buffer, 0, buffer.Length)) > 0)
+{
+    stream.Write(buffer);
+}
+
+stream.Close(); //stop sending
+
+</pre>
+
+
+          <p>
+            Finally, here is how you <strong>consume the stream</strong> on the receiving side.
+          </p>
+<pre>
+
+public class StreamHandler : IStreamHandler&lt;StartStreamMessage&gt;
+{
+    public IMessageBusReadStream Stream { get; set; }
+
+    public void Execute(StartStreamMessage message)
+    {
+        var ms = new FileStream(message.Path, FileMode.Create);
+        
+        while (!Stream.IsComplete())
+        {
+            var bytes = Stream.Read();
+            if (bytes.Length > 0)
+            {
+                ms.Write(bytes, 0, bytes.Length);
+            }
+        }
+        
+        ms.Close();
+
+        Console.WriteLine("Stream Read - {0}", message.Path);
+    }
+}
+
+</pre>
+          <p>
+          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Streaming">Streaming</a> sample application for a complete example.
+          </p>
+
 
           </div><!-- /.col-xs-12 main -->
           </div><!--/.row-->
