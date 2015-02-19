@@ -13,14 +13,25 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="scripts/dist/rmessagebus.min.js"></script>
+    
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </head>
   <script>
-  $(document).ready(function() {
-  $('[data-toggle=offcanvas]').click(function() {
-  $('.row-offcanvas').toggleClass('active');
-  });
-  });
-  </script
+  // $(document).ready(function() {
+  // $('[data-toggle=offcanvas]').click(function() {
+  // $('.row-offcanvas').toggleClass('active');
+  // });
+  // });
+  </script>
+  <style>
+    pre{
+      background-color: white;
+    }
+  </style>
+
   <body>
     <div class="container">
       <div class="masthead">
@@ -52,8 +63,7 @@
             <li><a href="#aggregator">Message Aggregation</a></li>
             <li><a href="#scatterGather">Message Scatter-Gather</a></li>
             <li><a href="#streaming">Message Streaming</a></li>
-            <li><a href="#">Retries</a></li>
-            <li><a href="#">Samples</a></li>
+            <li><a href="#retries">Retries</a></li>
           </ul>
         </div>
 
@@ -76,8 +86,7 @@
           <h3>Simple Configuration</h3>
           <p>Calling initialize with no parameters will create an instance of the Bus with default configuration options.</p>
           <p>
-<pre>
-
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -85,8 +94,8 @@
           IBus bus = Bus.Initialize();
       }
   }
-
-</pre>
+  
+</code></pre>
           </p>
           <p>
           Default configuration creates an endpoint in our messaging system that is ready to send/publish and receive messages.
@@ -117,8 +126,7 @@
           </ul>
           <h3>Custom Configuration</h3>
           <p>Initialize also takes a single lambda/action parameter for custom configuration.</p>
-<pre>
-
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -135,7 +143,7 @@
       }
   }
 
-</pre>
+</code></pre>
           <p>
           Here we initialised the bus and we are ready to start sending or publishing messages. With this example we are not quite ready to consume incoming messages just yet, but don&apos;t worry about the configuration details at this point, we&apos;ll come back to that later. This is just to  demonstrate how to specify custom configuration options.
           </p>
@@ -156,19 +164,17 @@
           </p>
           <p>
           <h3>Command Definition</h3>
-<pre>
-
+<pre><code class="cs">
   public class PointToPointMessage : Message
   {
       public PointToPointMessage(Guid correlationId) : base(correlationId){}
   }
 
-</pre>
+</code></pre>
           </p>
           <p>
           <h3>Sending Commands</h3>
-<pre>
-
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -178,12 +184,11 @@
       }
   }
 
-</pre>
+</code></pre>
           </p>
           <p>
           <h3>Consuming Commands</h3>
-<pre>
-
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -192,10 +197,9 @@
       }
   }
 
-</pre>
+</code></pre>
           </p>
-<pre>
-
+<pre><code class="cs">
   public class PointToPointMessageHandler : IMessageHandler&lt;PointToPointMessage&gt;
   {
       public void Execute(PointToPointMessage command)
@@ -204,7 +208,7 @@
       }
   }
 
-</pre>
+</code></pre>
           </p>
           <p>See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/PointToPoint">Point To Point</a> sample application for a complete example.</p>
           
@@ -223,19 +227,17 @@
           </p>
           <p>
           <h3>Event Definition</h3>
-<pre>
-
+<pre><code class="cs">
   public class PublishSubscribeMessage : Message
   {
       public PublishSubscribeMessage(Guid correlationId) : base(correlationId){}
   }
 
-</pre>
+</code></pre>
           </p>
           <p>
           <h3>Publishing Events</h3>
-<pre>
-
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -245,12 +247,11 @@
       }
   }
 
-</pre>
+</code></pre>
           </p>
           <p>
           <h3>Consuming Events</h3>
-<pre>
-
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -259,10 +260,9 @@
       }
   }
 
-</pre>
+</code></pre>
           </p>
-<pre>
-
+<pre><code class="cs">
   public class PublishSubscribeMessageHandler : IMessageHandler&lt;PublishSubscribeMessage&gt;
   {
       public void Execute(PublishSubscribeMessage message)
@@ -271,7 +271,7 @@
       }
   }
 
-</pre>
+</code></pre>
           </p>
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/PublishSubscribe">Publish - Subscribe</a> sample application for a complete example.
@@ -292,8 +292,8 @@
           </p>
           <p>
           <h3>Creating the Process Manager</h3>
-<pre>
 
+<pre><code class="cs">
   public class MealData : IProcessManagerData
   {
       public Guid CorrelationId { get; set; }
@@ -303,10 +303,9 @@
       public string Size { get; set; }
   }
 
-</pre>
+</code></pre>
 
-<pre>
-
+<pre><code class="cs">
   public class MealProcess : ProcessManager&lt;MealData&gt;, IStartProcessManager&lt;NewOrderMessage&gt;,
                               IMessageHandler&lt;BurgerCookedMessage&gt;,
                               IMessageHandler&lt;FoodPrepped&gt;
@@ -367,7 +366,8 @@
       }
   }
 
-</pre>
+</code></pre>
+
           </p>
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/McDonalds">McDonalds - Process Manager</a> sample application for a complete example.
@@ -401,8 +401,8 @@
           </p>
           <p>
           <h3>Message Definition</h3>
-<pre>
 
+<pre><code class="cs">
   public class RequestMessage : Message
   {
       public RequestMessage(Guid correlationId) : base(correlationId)  { }
@@ -413,27 +413,32 @@
       public ResponseMessage(Guid correlationId) : base(correlationId) { }
   }
 
-</pre>
+</code></pre>
+
           </p>
           <p>
           <h3>Synchronous Block</h3>
-<pre>
+
+<pre><code class="cs">
     ResponseMessage result = bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", new RequestMessage(Guid.NewGuid()));
-</pre>
+</code></pre>
+
           </p>
           <p>
           <h3>Asynchronous Callback</h3>
-<pre>
+
+<pre><code class="cs">
 
   var message = new RequestMessage(Guid.NewGuid());
   bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", message, r => Console.WriteLine("Received reply - {0}", r.CorrelationId));
 
-</pre>
+</code></pre>
+
           </p>
           <p>
           <h3>Replier</h3>
-<pre>
 
+<pre><code class="cs">
   public class RequestMessageHandler : IMessageHandler&lt;RequestMessage&gt;
   {
       public IConsumeContext Context { get; set; }
@@ -444,7 +449,8 @@
       }
   }
 
-</pre>
+</code></pre>
+
           </p>
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RequestResponse">Request Response</a> sample application for a complete example.
@@ -466,17 +472,18 @@
           <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 308-311) for more details.</i>
           </p>
           <h3>Message Definition</h3>
-<pre>
 
+<pre><code class="cs">
   public class RoutingSlipMessage : Message
   {
       public RoutingSlipMessage(Guid correlationId) : base(correlationId)  { }
   }
 
-</pre> 
-          <h3>Routing messages</h3>
-<pre>
+</code></pre>
 
+          <h3>Routing messages</h3>
+
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -486,10 +493,11 @@
       }
   }
 
-</pre> 
-          <h3>Consuming messages</h3>
-<pre>
+</code></pre>
 
+          <h3>Consuming messages</h3>
+
+<pre><code class="cs">
   public class RoutingSlipMessageHandler : IMessageHandler<RoutingSlipMessage>
   {
       public void Execute(RoutingSlipMessage message)
@@ -500,7 +508,8 @@
       public IConsumeContext Context { get; set; }
   }
 
-</pre> 
+</code></pre>
+
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RoutingSlip">Routing Slip</a> sample application for a complete example.
           </p>
@@ -524,8 +533,8 @@
           <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 249-258) for more details.</i>
           </p>
           <h3>Message Definitions</h3>
-<pre>
 
+<pre><code class="cs">
   public class RecipientListMessage : Message
   {
       public RecipientListMessage(Guid correlationId) : base(correlationId) { }
@@ -538,10 +547,11 @@
       public string Endpoint { get; set; }
   }
 
-</pre>
-          <h3>Send message to recipients</h3>
-<pre>
+</code></pre>
 
+          <h3>Send message to recipients</h3>
+
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -558,11 +568,12 @@
           );
       }
   }
-</pre>
+
+</code></pre>
 
             <h3>Send message to recipients and receive synchronous replies</h3>
-<pre>
 
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -584,11 +595,12 @@
           }
       }
   }
-</pre>
+
+</code></pre>
 
             <h3>Send message to recipients and receive asynchronous replies</h3>
-<pre>
 
+<pre><code class="cs">
   public class Program
   {
       public static void Main()
@@ -615,11 +627,12 @@
             );
       }
   }
-</pre>
+
+</code></pre>
 
           <h3>Consuming messages</h3>
-<pre>
 
+<pre><code class="cs">
   public class MyMessageHandler : IMessageHandler&lt;RecipientListMessage&gt;
   {
       public void Execute(RecipientListMessage message)
@@ -638,7 +651,8 @@
       public IConsumeContext Context { get; set; }
   }
 
-</pre>
+</code></pre>
+
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RecipientList">Recipient List</a> sample application for a complete example.
           </p>
@@ -661,65 +675,68 @@
           <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 268-282) for more details.</i>
           </p>
           <h3>Message Definitions</h3>
-<pre>
 
-public class TestMessage : Message
-{
-    public TestMessage(Guid correlationId) : base(correlationId)
-    {
-    }
-    public int Num { get; set; }
-}
+<pre><code class="cs">
+  public class TestMessage : Message
+  {
+      public TestMessage(Guid correlationId) : base(correlationId)
+      {
+      }
+      public int Num { get; set; }
+  }
 
-</pre>
+</code></pre>
+
           <h3>Send messages to Aggregator</h3>
-<pre>
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        var bus = Bus.Initialize(x =>
-        {
-            x.SetQueueName("Aggregator.Publisher");
-            x.PurgeQueuesOnStart();
-        });
+<pre><code class="cs">
+  class Program
+  {
+      static void Main(string[] args)
+      {
+          var bus = Bus.Initialize(x =>
+          {
+              x.SetQueueName("Aggregator.Publisher");
+              x.PurgeQueuesOnStart();
+          });
 
-        for (int i = 0; i < 1000; i++)
-        {
-            bus.Send("Aggregator.Consumer", new TestMessage(Guid.NewGuid())
-            {
-                Num = i + 1
-            });
-            Thread.Sleep(10);
-        }
+          for (int i = 0; i < 1000; i++)
+          {
+              bus.Send("Aggregator.Consumer", new TestMessage(Guid.NewGuid())
+              {
+                  Num = i + 1
+              });
+              Thread.Sleep(10);
+          }
 
-        Console.ReadLine();
-    }
-}
+          Console.ReadLine();
+      }
+  }
 
-</pre>
+</code></pre>
+
           <h3>Consuming messages with Aggregator</h3>
-<pre>
 
-public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
-{
-    public override int BatchSize()
-    {
-        return 100;
-    }
-    public override TimeSpan Timeout()
-    {
-        return new TimeSpan(0, 0, 0, 2);
-    }
-    
-    public override void Execute(IList&lt;TestMessage&gt; message)
-    {
-        Console.WriteLine("***** Received batch of messages ({0}) ******", message.Count);
-    }
-}
+<pre><code class="cs">
+  public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
+  {
+      public override int BatchSize()
+      {
+          return 100;
+      }
+      public override TimeSpan Timeout()
+      {
+          return new TimeSpan(0, 0, 0, 2);
+      }
+      
+      public override void Execute(IList&lt;TestMessage&gt; message)
+      {
+          Console.WriteLine("***** Received batch of messages ({0}) ******", message.Count);
+      }
+  }
 
-</pre>
+</code></pre>
+
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Aggregator">Aggregator</a> sample application for a complete example.
           </p>
@@ -740,101 +757,101 @@ public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
           <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 297-300) for more details.</i>
           </p>
           <h3>Message Definitions</h3>
-<pre>
 
-public class Request : Message
-{
-    public Request(Guid correlationId) : base(correlationId)
-    {
-    }
+<pre><code class="cs">
+  public class Request : Message
+  {
+      public Request(Guid correlationId) : base(correlationId)
+      {
+      }
 
-    public bool Delay { get; set; }
-}
+      public bool Delay { get; set; }
+  }
 
-public class Response : Message
-{
-    public Response(Guid correlationId) : base(correlationId)
-    {
-    }
+  public class Response : Message
+  {
+      public Response(Guid correlationId) : base(correlationId)
+      {
+      }
 
-    public string Endpoint { get; set; }
-}
+      public string Endpoint { get; set; }
+  }
 
-</pre>
+</code></pre>
 
           <h3>Publishing Request Messages</h3>
-<pre>
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        var bus = Bus.Initialize();
-        bus.StartConsuming();
+<pre><code class="cs">
+  class Program
+  {
+      static void Main(string[] args)
+      {
+          var bus = Bus.Initialize();
+          bus.StartConsuming();
 
-        // Scatter Gather Expects 2 replies
-        var id = Guid.NewGuid();
-        var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id), 2);
+          // Scatter Gather Expects 2 replies
+          var id = Guid.NewGuid();
+          var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id), 2);
 
-        foreach (var response in responses)
-        {
-            Console.WriteLine("Received response from - {0}", response.Endpoint);
-        }
+          foreach (var response in responses)
+          {
+              Console.WriteLine("Received response from - {0}", response.Endpoint);
+          }
 
-        // Scatter Gather unknown number of replies
-        id = Guid.NewGuid();
-        var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id){ Delay = true }, timeout: 500);
+          // Scatter Gather unknown number of replies
+          id = Guid.NewGuid();
+          var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id){ Delay = true }, timeout: 500);
 
-        foreach (var response in responses)
-        {
-            Console.WriteLine("Received response from - {0}", response.Endpoint);
-        }
-    }
-}
+          foreach (var response in responses)
+          {
+              Console.WriteLine("Received response from - {0}", response.Endpoint);
+          }
+      }
+  }
 
-</pre>
+</code></pre>
 
           <h3>Consuming messages</h3>
-<pre>
 
-// Consumer 1 Process
-public class Handler : IMessageHandler&lt;Request&gt;
-{
-    public void Execute(Request message)
-    {
-        Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
+<pre><code class="cs">
+  // Consumer 1 Process
+  public class Handler : IMessageHandler&lt;Request&gt;
+  {
+      public void Execute(Request message)
+      {
+          Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
 
-        if (message.Delay)
-        {
-            Thread.Sleep(1000);
-        }
-        
-        Context.Reply(new Response(message.CorrelationId)
-        {
-            Endpoint = "Consumer1"
-        });
-    }
+          if (message.Delay)
+          {
+              Thread.Sleep(1000);
+          }
+          
+          Context.Reply(new Response(message.CorrelationId)
+          {
+              Endpoint = "Consumer1"
+          });
+      }
 
-    public IConsumeContext Context { get; set; }
-}
+      public IConsumeContext Context { get; set; }
+  }
 
-// Consumer 2 Process
-public class Handler : IMessageHandler&lt;Request&gt;
-{
-    public void Execute(Request message)
-    {
-        Console.WriteLine("Consumer 2 Received Message - {0}", message.CorrelationId);
+  // Consumer 2 Process
+  public class Handler : IMessageHandler&lt;Request&gt;
+  {
+      public void Execute(Request message)
+      {
+          Console.WriteLine("Consumer 2 Received Message - {0}", message.CorrelationId);
 
-        Context.Reply(new Response(message.CorrelationId)
-        {
-            Endpoint = "Consumer2"
-        });
-    }
+          Context.Reply(new Response(message.CorrelationId)
+          {
+              Endpoint = "Consumer2"
+          });
+      }
 
-    public IConsumeContext Context { get; set; }
-}
+      public IConsumeContext Context { get; set; }
+  }
 
-</pre>
+</code></pre>
 
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/ScatterGather">Scatter-Gather</a> sample application for a complete example.
@@ -854,66 +871,86 @@ public class Handler : IMessageHandler&lt;Request&gt;
           <p>
             Simple use the bus to <strong>create a stream object</strong>
           </p>
-<pre>
 
+<pre><code class="cs">
 var stream = bus.CreateStream("StreamConsumer", new StartStreamMessage(Guid.NewGuid())
 {
     Path = @"logoCopy.bmp"
 });   
 
-</pre>
+</code></pre>
 
           <p>
             ...and <strong>write your binary data</strong> to it.
           </p>
-<pre>
 
-var f = new FileStream(@"logo.bmp", FileMode.Open);
+<pre><code class="cs">
+  var f = new FileStream(@"logo.bmp", FileMode.Open);
 
-byte[] buffer = new byte[100000];
-int read;
-while ((read = f.Read(buffer, 0, buffer.Length)) > 0)
-{
-    stream.Write(buffer);
-}
+  byte[] buffer = new byte[100000];
+  int read;
+  while ((read = f.Read(buffer, 0, buffer.Length)) > 0)
+  {
+      stream.Write(buffer);
+  }
 
-stream.Close(); //stop sending
+  stream.Close(); //stop sending
 
-</pre>
+</code></pre>
 
 
           <p>
             Finally, here is how you <strong>consume the stream</strong> on the receiving side.
           </p>
-<pre>
 
-public class StreamHandler : IStreamHandler&lt;StartStreamMessage&gt;
-{
-    public IMessageBusReadStream Stream { get; set; }
+<pre><code class="cs">
+  public class StreamHandler : IStreamHandler&lt;StartStreamMessage&gt;
+  {
+      public IMessageBusReadStream Stream { get; set; }
 
-    public void Execute(StartStreamMessage message)
-    {
-        var ms = new FileStream(message.Path, FileMode.Create);
-        
-        while (!Stream.IsComplete())
-        {
-            var bytes = Stream.Read();
-            if (bytes.Length > 0)
-            {
-                ms.Write(bytes, 0, bytes.Length);
-            }
-        }
-        
-        ms.Close();
+      public void Execute(StartStreamMessage message)
+      {
+          var ms = new FileStream(message.Path, FileMode.Create);
+          
+          while (!Stream.IsComplete())
+          {
+              var bytes = Stream.Read();
+              if (bytes.Length > 0)
+              {
+                  ms.Write(bytes, 0, bytes.Length);
+              }
+          }
+          
+          ms.Close();
 
-        Console.WriteLine("Stream Read - {0}", message.Path);
-    }
-}
+          Console.WriteLine("Stream Read - {0}", message.Path);
+      }
+  }
 
-</pre>
+</code></pre>
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Streaming">Streaming</a> sample application for a complete example.
           </p>
+
+
+
+
+
+
+
+          <br />
+          <h2 id="retries">Retries</h2>
+          <p style="margin-top:30px;">
+          When your application fails to successfully proccess a message, R.MessageBus implements a generic error handling for all your consumers. Upon catching an exception, the message is held in the "*.Retries" queue for a certain amount of time before being requeued. This process is repeated a number of times until either the message is handled successfully, or the "MaxRetries" limit is reached, at which point the message is moved to the error queue.
+           </p>
+
+<pre><code class="cs">
+  bus.Configuration.TransportSettings.MaxRetries = 5;
+  bus.Configuration.TransportSettings.RetryDelay = 50000;
+
+</code></pre>
+
+
 
 
           </div><!-- /.col-xs-12 main -->
