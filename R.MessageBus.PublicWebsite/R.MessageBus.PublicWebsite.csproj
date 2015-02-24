@@ -179,6 +179,9 @@
     <Content Include="Scripts\bower.json" />
     <Content Include="Scripts\package.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\_chat.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

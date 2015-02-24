@@ -13,5 +13,20 @@ namespace R.MessageBus.PublicWebsite.Controllers
         {
             return View();
         }
+
+        public ActionResult GettingStarted()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        public ActionResult News()
+        {
+            return View();
+        }
     }
 }
