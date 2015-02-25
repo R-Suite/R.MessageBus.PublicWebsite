@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>A Sandcastle Documented Class Library - Table of Content</title>
+<title>Documented Class Library - Table of Content</title>
 <link rel="stylesheet" href="TOC.css">
 <link rel="shortcut icon" href="favicon.ico"/>
 <script type="text/javascript" src="TOC.js"></script>
@@ -99,7 +99,7 @@ foreach($nodes as $node)
 
 <div id="TOCSizer" class="TOCSizer" onmousedown="OnMouseDown(event)" onselectstart="javascript: return false;"></div>
 
-<iframe id="TopicContent" name="TopicContent" class="TopicContent" src="html/44d66388-5bc8-6fb6-376a-33668447fecb.htm">
+<iframe id="TopicContent" name="TopicContent" class="TopicContent" src="html/5f38b93b-71d7-1725-83bc-6106fdaf889c.htm">
 This page uses an IFRAME but your browser does not support it.
 </iframe>
 

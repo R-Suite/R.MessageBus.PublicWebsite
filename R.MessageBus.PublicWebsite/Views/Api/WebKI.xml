@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
-  <HelpKINode Title="Add method">
-    <HelpKINode Title="Arguments.Add Method " Url="html/ac058123-a907-7e32-6802-e720b1d729a7.htm" />
-    <HelpKINode Title="BusSettingEnpoint.Add Method " Url="html/d2039b7c-44ac-8d64-bda7-e22d0a5efdef.htm" />
-  </HelpKINode>
   <HelpKINode Title="AddBus method">
     <HelpKINode Title="IBusContainer.AddBus Method " Url="html/46203271-3c13-c3cf-b1d3-f8ad5a152e8e.htm" />
     <HelpKINode Title="StructuremapContainer.AddBus Method " Url="html/8e67d99a-9f68-2a71-3dd8-97a35de1fd86.htm" />
@@ -75,57 +71,10 @@
     <HelpKINode Title="ConfigurationManagerWrapper.AppSettings Property " Url="html/f9854c26-7d54-0ea7-a5ba-cbc5d45de00b.htm" />
     <HelpKINode Title="IConfigurationManager.AppSettings Property " Url="html/e87a3706-cfd8-9f14-54b4-348433dfe0ce.htm" />
   </HelpKINode>
-  <HelpKINode Title="Argument class">
-    <HelpKINode Title="Argument Class" Url="html/04fa1701-05aa-e60b-1679-47b4a929baaa.htm" />
-    <HelpKINode Title="about Argument class" Url="html/04fa1701-05aa-e60b-1679-47b4a929baaa.htm" />
-    <HelpKINode Title="constructor" Url="html/7074ccd2-6b2b-256d-310b-3270bd4e5134.htm" />
-    <HelpKINode Title="methods" Url="html/a16d6410-1e8e-ad01-feb0-b2b26fbc31ca.htm" />
-    <HelpKINode Title="properties" Url="html/3489d018-58af-e000-3a9f-3fca68a41757.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Argument.Argument constructor" Url="html/7074ccd2-6b2b-256d-310b-3270bd4e5134.htm" />
-  <HelpKINode Title="Argument.IsReadOnly method" Url="html/1b3c4162-dfb0-0be9-6173-7fc5723d9b78.htm" />
-  <HelpKINode Title="Argument.Name property" Url="html/2d146733-bbfb-fe5b-1ff4-8cce000b8e1e.htm" />
-  <HelpKINode Title="Argument.Value property" Url="html/7f0cd63a-e903-c1b0-0b17-cc3e5471fda9.htm" />
-  <HelpKINode Title="Arguments class">
-    <HelpKINode Title="Arguments Class" Url="html/d8fbeb41-19d7-c00e-6ff5-4c73dfc24eae.htm" />
-    <HelpKINode Title="about Arguments class" Url="html/d8fbeb41-19d7-c00e-6ff5-4c73dfc24eae.htm" />
-    <HelpKINode Title="constructor" Url="html/5b2d7b48-291e-14cf-21c5-7897507a0549.htm" />
-    <HelpKINode Title="methods" Url="html/1ff21dd9-70b2-5764-58b3-3b390c863d52.htm" />
-    <HelpKINode Title="properties" Url="html/d35aa0f0-cc0f-71c1-669c-cd28dc5933d4.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Arguments property">
-    <HelpKINode Title="Exchange.Arguments Property " Url="html/8c387319-3220-fdfb-307f-32d6ae2a71f2.htm" />
-    <HelpKINode Title="Queue.Arguments Property " Url="html/a239f0e0-389f-2887-3227-401d2ce52ac9.htm" />
-    <HelpKINode Title="Queue.Arguments Property " Url="html/932a450c-2a0b-c5e7-9a1e-11eec896ae6c.htm" />
-    <HelpKINode Title="Retries.Arguments Property " Url="html/cd91f1e0-507b-a10d-c402-95e8ec380dfc.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Arguments.Add method" Url="html/ac058123-a907-7e32-6802-e720b1d729a7.htm" />
-  <HelpKINode Title="Arguments.Arguments constructor" Url="html/5b2d7b48-291e-14cf-21c5-7897507a0549.htm" />
-  <HelpKINode Title="Arguments.CollectionType property" Url="html/e50d3143-a826-7bec-39d0-9eeef8138078.htm" />
-  <HelpKINode Title="Arguments.CreateNewElement method" Url="html/a8c57df6-7f46-49e9-65a6-80bc85eb26fe.htm" />
-  <HelpKINode Title="Arguments.ElementName property" Url="html/a6ea36e3-3260-1b5b-056c-96901e6298c5.htm" />
-  <HelpKINode Title="Arguments.GetElementKey method" Url="html/c2257d2b-b282-bdc2-1d9d-ffe3b9e5ad12.htm" />
-  <HelpKINode Title="Arguments.GetItemAt method" Url="html/81a63940-68c0-2e2d-cae5-cff8d03e833f.htm" />
-  <HelpKINode Title="Arguments.GetItemByKey method" Url="html/bf7ae60a-5055-0796-e0ec-1cb3516f3a29.htm" />
-  <HelpKINode Title="Arguments.IsElementName method" Url="html/df430516-6938-960b-2fd4-9f1b4c25c93b.htm" />
-  <HelpKINode Title="Arguments.IsReadOnly method" Url="html/48de45af-07d5-d901-42f9-4316a7dbaa4f.htm" />
-  <HelpKINode Title="Arguments.Item property" Url="html/bcc29d4b-ccf2-7dc1-37f1-c4b524704fb0.htm" />
-  <HelpKINode Title="Arguments.Remove method" Url="html/f93a77df-f8ce-8730-56d3-35904adf450b.htm" />
-  <HelpKINode Title="AuditingEnabled property">
-    <HelpKINode Title="ITransportSettings.AuditingEnabled Property " Url="html/34e4d641-3ee5-04ea-701b-9275bb5ceadb.htm" />
-    <HelpKINode Title="TransportSettings.AuditingEnabled Property " Url="html/079b48bd-2c5c-3d65-99f0-9a69e2e30894.htm" />
-    <HelpKINode Title="TransportSettings.AuditingEnabled Property " Url="html/40efaf00-758e-eae9-afd4-484b23d917e9.htm" />
-  </HelpKINode>
-  <HelpKINode Title="AuditQueueName property">
-    <HelpKINode Title="ITransportSettings.AuditQueueName Property " Url="html/74a01251-358c-0b87-544c-4fe83c97abd8.htm" />
-    <HelpKINode Title="TransportSettings.AuditQueueName Property " Url="html/25c01dc1-161b-d864-35fe-92e2d1fdb5a7.htm" />
-    <HelpKINode Title="TransportSettings.AuditQueueName Property " Url="html/408bbb53-d227-fb7a-6047-6de623eb146f.htm" />
-  </HelpKINode>
-  <HelpKINode Title="AutoDelete property">
-    <HelpKINode Title="Exchange.AutoDelete Property " Url="html/751d5979-9e12-9576-38b2-b28aeb2bd193.htm" />
-    <HelpKINode Title="Queue.AutoDelete Property " Url="html/620c6368-297f-c101-718c-17ace52b6910.htm" />
-    <HelpKINode Title="Queue.AutoDelete Property " Url="html/41ccc284-7fea-d788-6bb5-8b2eab57af98.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Arguments property" Url="html/a239f0e0-389f-2887-3227-401d2ce52ac9.htm" />
+  <HelpKINode Title="AuditingEnabled property" Url="html/34e4d641-3ee5-04ea-701b-9275bb5ceadb.htm" />
+  <HelpKINode Title="AuditQueueName property" Url="html/74a01251-358c-0b87-544c-4fe83c97abd8.htm" />
+  <HelpKINode Title="AutoDelete property" Url="html/41ccc284-7fea-d788-6bb5-8b2eab57af98.htm" />
   <HelpKINode Title="AutoStartConsuming property">
     <HelpKINode Title="Configuration.AutoStartConsuming Property " Url="html/68c56abe-87bc-cecb-3780-ebeb2f4b62af.htm" />
     <HelpKINode Title="IConfiguration.AutoStartConsuming Property " Url="html/b0c454b2-884f-3c83-5da6-b583e56c9a30.htm" />
@@ -158,60 +107,10 @@
   <HelpKINode Title="Bus.SendRequest method" Url="html/0f7403de-3ec3-18e4-f6c6-01566756cc6f.htm" />
   <HelpKINode Title="Bus.StartConsuming method" Url="html/8b04a53b-2af3-98f9-2881-1939b2912471.htm" />
   <HelpKINode Title="Bus.StopConsuming method" Url="html/74c61802-cc43-fb3a-9dc2-6210a69219e7.htm" />
-  <HelpKINode Title="BusConfiguration namespace" Url="html/44d66388-5bc8-6fb6-376a-33668447fecb.htm" />
-  <HelpKINode Title="BusConfiguration.PersistanceSettings class" Url="html/47f1b51b-dcf8-5d6e-e945-818714df80ee.htm" />
-  <HelpKINode Title="BusConfiguration.TransportSettings class" Url="html/15070c37-e185-c922-799f-34293f658688.htm" />
-  <HelpKINode Title="BusSettingEnpoint class">
-    <HelpKINode Title="BusSettingEnpoint Class" Url="html/d1372a18-c420-d747-f28a-8b8285c9ce4a.htm" />
-    <HelpKINode Title="about BusSettingEnpoint class" Url="html/d1372a18-c420-d747-f28a-8b8285c9ce4a.htm" />
-    <HelpKINode Title="constructor" Url="html/9d7261f3-220c-c667-abb9-24f1ff1a9d8f.htm" />
-    <HelpKINode Title="methods" Url="html/a1dbabe5-6eab-ee1c-94e5-72d371284e8c.htm" />
-    <HelpKINode Title="properties" Url="html/fdf59a4d-1f19-44da-9270-1d16114164f7.htm" />
-  </HelpKINode>
-  <HelpKINode Title="BusSettingEnpoint.Add method" Url="html/d2039b7c-44ac-8d64-bda7-e22d0a5efdef.htm" />
-  <HelpKINode Title="BusSettingEnpoint.BusSettingEnpoint constructor" Url="html/9d7261f3-220c-c667-abb9-24f1ff1a9d8f.htm" />
-  <HelpKINode Title="BusSettingEnpoint.CollectionType property" Url="html/95535240-50ce-7681-077f-f0677e35f278.htm" />
-  <HelpKINode Title="BusSettingEnpoint.CreateNewElement method" Url="html/8fe11960-c2c5-63aa-78fd-a4c1271a1d4e.htm" />
-  <HelpKINode Title="BusSettingEnpoint.ElementName property" Url="html/9e97f6fe-c90d-7563-5a95-4d7104630210.htm" />
-  <HelpKINode Title="BusSettingEnpoint.GetElementKey method" Url="html/7f6ab3ef-6e50-a666-978a-81b6ed03967f.htm" />
-  <HelpKINode Title="BusSettingEnpoint.GetItemAt method" Url="html/d0c03ed5-9568-e709-c21e-d1c03b4f1ff9.htm" />
-  <HelpKINode Title="BusSettingEnpoint.GetItemByKey method" Url="html/1f54996a-5c6f-11cd-039f-6bb61bb29fc2.htm" />
-  <HelpKINode Title="BusSettingEnpoint.IsElementName method" Url="html/2940894e-20a2-259a-9b2b-f1267f11f08d.htm" />
-  <HelpKINode Title="BusSettingEnpoint.IsReadOnly method" Url="html/be809230-bfe7-e86a-bdcc-04bc3c02e3a7.htm" />
-  <HelpKINode Title="BusSettingEnpoint.Item property" Url="html/daff28a7-8609-19aa-bc34-3f4e302e603a.htm" />
-  <HelpKINode Title="BusSettingEnpoint.Remove method" Url="html/99dce86a-d6c9-79fb-be8f-d715a5374c39.htm" />
-  <HelpKINode Title="BusSettings class">
-    <HelpKINode Title="BusSettings Class" Url="html/76cc0506-bf1f-074b-ae8c-8b348f9936f4.htm" />
-    <HelpKINode Title="about BusSettings class" Url="html/76cc0506-bf1f-074b-ae8c-8b348f9936f4.htm" />
-    <HelpKINode Title="constructor" Url="html/8112d8b0-1ce0-07ce-df21-ee5c54e322f1.htm" />
-    <HelpKINode Title="methods" Url="html/aa667340-0655-9278-4370-4a25f7eaeb58.htm" />
-    <HelpKINode Title="properties" Url="html/0a05ad64-bd17-c91e-20fe-626f9b8d5492.htm" />
-  </HelpKINode>
-  <HelpKINode Title="BusSettings namespace" Url="html/dda0b05c-ea09-0339-dd93-754b1228af4e.htm" />
-  <HelpKINode Title="BusSettings.Argument class" Url="html/04fa1701-05aa-e60b-1679-47b4a929baaa.htm" />
-  <HelpKINode Title="BusSettings.Arguments class" Url="html/d8fbeb41-19d7-c00e-6ff5-4c73dfc24eae.htm" />
-  <HelpKINode Title="BusSettings.BusSettingEnpoint class" Url="html/d1372a18-c420-d747-f28a-8b8285c9ce4a.htm" />
-  <HelpKINode Title="BusSettings.BusSettings class" Url="html/76cc0506-bf1f-074b-ae8c-8b348f9936f4.htm" />
-  <HelpKINode Title="BusSettings.BusSettings constructor" Url="html/8112d8b0-1ce0-07ce-df21-ee5c54e322f1.htm" />
-  <HelpKINode Title="BusSettings.EndpointSettings class" Url="html/c63410ad-cde8-a732-7719-bb799ca548c0.htm" />
-  <HelpKINode Title="BusSettings.EndpointSettings property" Url="html/628be5b1-1209-fc1e-18ce-42fe04503ef6.htm" />
-  <HelpKINode Title="BusSettings.Exchange class" Url="html/c03f0027-df5f-34ed-090d-f52160bb1b82.htm" />
-  <HelpKINode Title="BusSettings.Instance property" Url="html/12b98c5f-b181-ef37-cedb-644d28d1701d.htm" />
-  <HelpKINode Title="BusSettings.IsReadOnly method" Url="html/39f3cf98-bd44-522c-7cb3-5a0e7f6bb091.htm" />
-  <HelpKINode Title="BusSettings.Queue class" Url="html/40c399e8-2487-e21b-cb0e-5550ef692fe3.htm" />
-  <HelpKINode Title="BusSettings.Retries class" Url="html/6e301877-c886-0bf1-d5a3-da9fdda4fbd3.htm" />
-  <HelpKINode Title="BusSettings.Xmlns property" Url="html/95a2409a-19cb-98ff-ec1b-a5b58ae63d94.htm" />
-  <HelpKINode Title="ClientSettings property">
-    <HelpKINode Title="ITransportSettings.ClientSettings Property " Url="html/5e742aee-2b79-259d-bdb4-fd5e416ed0d8.htm" />
-    <HelpKINode Title="TransportSettings.ClientSettings Property " Url="html/dfe31b08-22f4-98ae-7f85-72a441e783e9.htm" />
-  </HelpKINode>
+  <HelpKINode Title="ClientSettings property" Url="html/5e742aee-2b79-259d-bdb4-fd5e416ed0d8.htm" />
   <HelpKINode Title="Close method">
     <HelpKINode Title="IMessageBusWriteStream.Close Method " Url="html/8d694b08-5c3f-3495-0b50-6fbf3579a2d7.htm" />
     <HelpKINode Title="MessageBusWriteStream.Close Method " Url="html/affeb9f9-b671-0e69-4d4b-348c897dc011.htm" />
-  </HelpKINode>
-  <HelpKINode Title="CollectionType property">
-    <HelpKINode Title="Arguments.CollectionType Property " Url="html/e50d3143-a826-7bec-39d0-9eeef8138078.htm" />
-    <HelpKINode Title="BusSettingEnpoint.CollectionType Property " Url="html/95535240-50ce-7681-077f-f0677e35f278.htm" />
   </HelpKINode>
   <HelpKINode Title="Complete property" Url="html/cb7c15eb-6c37-0fa5-7aae-99f62161d00f.htm" />
   <HelpKINode Title="CompleteEventHandler property">
@@ -300,7 +199,6 @@
     <HelpKINode Title="IProcessManagerPropertyMapper.ConfigureMapping(TProcessManagerData, TMessage) Method " Url="html/fe9331f4-b079-d717-b34a-870a9a35e1c8.htm" />
     <HelpKINode Title="ProcessManagerPropertyMapper.ConfigureMapping(TProcessManagerData, TMessage) Method " Url="html/8ad76f08-64a0-f388-cad2-b496e15be049.htm" />
   </HelpKINode>
-  <HelpKINode Title="ConnectionString property" Url="html/76b6f23a-bcd1-911f-717e-c592a8f6477f.htm" />
   <HelpKINode Title="ConnectionStrings method">
     <HelpKINode Title="ConfigurationManagerWrapper.ConnectionStrings Method " Url="html/145cefff-51df-3b92-a9ad-0bd574a05a2c.htm" />
     <HelpKINode Title="IConfigurationManager.ConnectionStrings Method " Url="html/41fc1c38-cf44-94b0-e04f-62130094b4a5.htm" />
@@ -352,10 +250,6 @@
     <HelpKINode Title="InMemoryAggregatorPersistor.Count Method " Url="html/f00a97a5-dccf-fe4f-9f45-96014814d327.htm" />
   </HelpKINode>
   <HelpKINode Title="CpuCounter property" Url="html/fd9e992e-1265-f9e7-64d9-9629608ae8ee.htm" />
-  <HelpKINode Title="CreateNewElement method">
-    <HelpKINode Title="Arguments.CreateNewElement Method " Url="html/a8c57df6-7f46-49e9-65a6-80bc85eb26fe.htm" />
-    <HelpKINode Title="BusSettingEnpoint.CreateNewElement Method " Url="html/8fe11960-c2c5-63aa-78fd-a4c1271a1d4e.htm" />
-  </HelpKINode>
   <HelpKINode Title="CreateStream(Of T) method">
     <HelpKINode Title="Bus.CreateStream(T) Method " Url="html/1c5d1392-9cf2-a07d-6d47-8ab1663a9693.htm" />
     <HelpKINode Title="IBus.CreateStream(T) Method " Url="html/7c19ba85-30ca-2ae4-e4be-a1782c887a8d.htm" />
@@ -371,7 +265,6 @@
     <HelpKINode Title="ProcessManager(T).Data Property " Url="html/afc3354d-0d9c-9607-da0e-2b70c16d3a71.htm" />
     <HelpKINode Title="SqlServerData(T).Data Property " Url="html/684ed680-a04b-90e5-28b4-cec3271b690d.htm" />
   </HelpKINode>
-  <HelpKINode Title="Database property" Url="html/d563ed30-1c4f-c742-df39-a7fbb9d9cdcf.htm" />
   <HelpKINode Title="DeleteData(Of T) method">
     <HelpKINode Title="InMemoryProcessManagerFinder.DeleteData(T) Method " Url="html/90a2d469-cf50-df35-9052-5eefc012a1d5.htm" />
     <HelpKINode Title="IProcessManagerFinder.DeleteData(T) Method " Url="html/eb68afbf-399b-b0cc-fc70-75f0fbd9f0fb.htm" />
@@ -384,70 +277,25 @@
     <HelpKINode Title="MongoDbProcessManagerFinder.DeleteData(T) Method " Url="html/2daf3d6c-95b4-f11c-99fb-eef0e2914e0d.htm" />
     <HelpKINode Title="SqlServerProcessManagerFinder.DeleteData(T) Method " Url="html/12fbccec-be36-9f80-db0a-1f77d78e9db9.htm" />
   </HelpKINode>
-  <HelpKINode Title="DisableErrors property">
-    <HelpKINode Title="ITransportSettings.DisableErrors Property " Url="html/2719a4ba-99bf-50c7-e54c-106510909a12.htm" />
-    <HelpKINode Title="TransportSettings.DisableErrors Property " Url="html/3e81b636-9398-5656-cd2d-273ab46467bc.htm" />
-  </HelpKINode>
+  <HelpKINode Title="DisableErrors property" Url="html/2719a4ba-99bf-50c7-e54c-106510909a12.htm" />
   <HelpKINode Title="Disconnect method" Url="html/dff485f8-8215-723c-8044-009ffb4df06a.htm" />
   <HelpKINode Title="Dispose method">
     <HelpKINode Title="AggregatorTimer.Dispose Method " Url="html/d799b2e6-7cf0-757b-a4f7-6d2722900b09.htm" />
     <HelpKINode Title="Bus.Dispose Method " Url="html/31e8d572-8e7a-4e08-a89f-e6a10ccc4d0d.htm" />
     <HelpKINode Title="MessageBusWriteStream.Dispose Method " Url="html/6a799795-8999-6bee-b521-9b277b513b1f.htm" />
   </HelpKINode>
-  <HelpKINode Title="Durable property">
-    <HelpKINode Title="Exchange.Durable Property " Url="html/001b10f9-7247-4e2a-7442-be78be531c21.htm" />
-    <HelpKINode Title="Queue.Durable Property " Url="html/f03159a7-656a-e7bf-74d7-f6794d3984a1.htm" />
-    <HelpKINode Title="Queue.Durable Property " Url="html/e2484097-b8c9-dc24-bc39-c8cb87111fc6.htm" />
-  </HelpKINode>
-  <HelpKINode Title="ElementName property">
-    <HelpKINode Title="Arguments.ElementName Property " Url="html/a6ea36e3-3260-1b5b-056c-96901e6298c5.htm" />
-    <HelpKINode Title="BusSettingEnpoint.ElementName Property " Url="html/9e97f6fe-c90d-7563-5a95-4d7104630210.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Durable property" Url="html/e2484097-b8c9-dc24-bc39-c8cb87111fc6.htm" />
   <HelpKINode Title="EndpointsCount property">
     <HelpKINode Title="IRequestConfiguration.EndpointsCount Property " Url="html/58f20c90-e6e8-c8d0-c194-7a1d8d76833c.htm" />
     <HelpKINode Title="RequestConfiguration.EndpointsCount Property " Url="html/c4f35d4c-08f0-6d91-fb97-9b1c7bf24c6a.htm" />
   </HelpKINode>
-  <HelpKINode Title="EndpointSettings class">
-    <HelpKINode Title="EndpointSettings Class" Url="html/c63410ad-cde8-a732-7719-bb799ca548c0.htm" />
-    <HelpKINode Title="about EndpointSettings class" Url="html/c63410ad-cde8-a732-7719-bb799ca548c0.htm" />
-    <HelpKINode Title="constructor" Url="html/69e1f123-0673-7bae-6e5f-99675532bc4c.htm" />
-    <HelpKINode Title="methods" Url="html/64a2dee0-73e2-a4a9-2242-c2373ce9c2d8.htm" />
-    <HelpKINode Title="properties" Url="html/e5d7d351-1583-b25d-d2f6-e5f2861e9085.htm" />
-  </HelpKINode>
-  <HelpKINode Title="EndpointSettings property" Url="html/628be5b1-1209-fc1e-18ce-42fe04503ef6.htm" />
-  <HelpKINode Title="EndpointSettings.EndpointSettings constructor" Url="html/69e1f123-0673-7bae-6e5f-99675532bc4c.htm" />
-  <HelpKINode Title="EndpointSettings.IsReadOnly method" Url="html/a29633eb-2866-399d-0a90-c0d5d26c127f.htm" />
-  <HelpKINode Title="EndpointSettings.Name property" Url="html/2a059be5-532a-0f5a-8b73-5c4fe0ae0a30.htm" />
-  <HelpKINode Title="EndpointSettings.PersistanceSettings property" Url="html/2a47f662-4d01-2e4e-6206-eeec14113783.htm" />
-  <HelpKINode Title="EndpointSettings.TransportSettings property" Url="html/61128b68-7d84-42c5-e3b6-57580a55922f.htm" />
-  <HelpKINode Title="ErrorQueueName property">
-    <HelpKINode Title="ITransportSettings.ErrorQueueName Property " Url="html/16ea4c12-6a79-a4fb-587f-6b5dfccf950f.htm" />
-    <HelpKINode Title="TransportSettings.ErrorQueueName Property " Url="html/7540b03e-d7a4-1301-4359-537d18df4d43.htm" />
-    <HelpKINode Title="TransportSettings.ErrorQueueName Property " Url="html/be6f3685-053b-3e1b-e12f-cf362d5a8e2b.htm" />
-  </HelpKINode>
+  <HelpKINode Title="ErrorQueueName property" Url="html/16ea4c12-6a79-a4fb-587f-6b5dfccf950f.htm" />
   <HelpKINode Title="Exception property" Url="html/d4934394-76aa-3df5-7630-99d0d77abf45.htm" />
   <HelpKINode Title="ExceptionHandler property">
     <HelpKINode Title="Configuration.ExceptionHandler Property " Url="html/d7165224-d78d-04aa-d07e-5eb0fa14635f.htm" />
     <HelpKINode Title="IConfiguration.ExceptionHandler Property " Url="html/45169885-b081-1b13-a5c2-8622be60c5c2.htm" />
   </HelpKINode>
-  <HelpKINode Title="Exchange class">
-    <HelpKINode Title="Exchange Class" Url="html/c03f0027-df5f-34ed-090d-f52160bb1b82.htm" />
-    <HelpKINode Title="about Exchange class" Url="html/c03f0027-df5f-34ed-090d-f52160bb1b82.htm" />
-    <HelpKINode Title="constructor" Url="html/8daa98fe-8d59-3c40-e0ce-ee45b43e0fd8.htm" />
-    <HelpKINode Title="methods" Url="html/6aca63c9-adbe-fedd-f859-c8989f0790ef.htm" />
-    <HelpKINode Title="properties" Url="html/bcbf81d8-a5a6-4e7c-a65c-2333d9de6283.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Exchange property" Url="html/ebda19a1-2449-a32d-3845-e18a1e8416ba.htm" />
-  <HelpKINode Title="Exchange.Arguments property" Url="html/8c387319-3220-fdfb-307f-32d6ae2a71f2.htm" />
-  <HelpKINode Title="Exchange.AutoDelete property" Url="html/751d5979-9e12-9576-38b2-b28aeb2bd193.htm" />
-  <HelpKINode Title="Exchange.Durable property" Url="html/001b10f9-7247-4e2a-7442-be78be531c21.htm" />
-  <HelpKINode Title="Exchange.Exchange constructor" Url="html/8daa98fe-8d59-3c40-e0ce-ee45b43e0fd8.htm" />
-  <HelpKINode Title="Exchange.IsReadOnly method" Url="html/50c9cfe0-54d9-eb1f-dbc0-9b8f643d25b9.htm" />
-  <HelpKINode Title="Exchange.Name property" Url="html/a35d06b2-e931-5fe4-af1b-8abf4953337f.htm" />
-  <HelpKINode Title="Exclusive property">
-    <HelpKINode Title="Queue.Exclusive Property " Url="html/44ba11e9-433a-d305-c4a2-e95bdfd63fc5.htm" />
-    <HelpKINode Title="Queue.Exclusive Property " Url="html/7557797a-94ff-8518-65b4-a1b2f5b8ffc1.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Exclusive property" Url="html/44ba11e9-433a-d305-c4a2-e95bdfd63fc5.htm" />
   <HelpKINode Title="Execute method">
     <HelpKINode Title="Aggregator(T).Execute Method " Url="html/bc649ba2-dd3a-da38-1ba3-7399062b33f0.htm" />
     <HelpKINode Title="IMessageHandler(TMessage).Execute Method " Url="html/edbd33e8-feab-9fe6-0dd9-9862f9d3f569.htm" />
@@ -491,10 +339,6 @@
     <HelpKINode Title="IAggregatorPersistor.GetData Method " Url="html/887b2fcb-014c-6a7c-aaf7-5e769c96a757.htm" />
     <HelpKINode Title="InMemoryAggregatorPersistor.GetData Method " Url="html/fa4c2f82-cbb7-be1c-6eb0-7a786fdd89e2.htm" />
   </HelpKINode>
-  <HelpKINode Title="GetElementKey method">
-    <HelpKINode Title="Arguments.GetElementKey Method " Url="html/c2257d2b-b282-bdc2-1d9d-ffe3b9e5ad12.htm" />
-    <HelpKINode Title="BusSettingEnpoint.GetElementKey Method " Url="html/7f6ab3ef-6e50-a666-978a-81b6ed03967f.htm" />
-  </HelpKINode>
   <HelpKINode Title="GetErrorQueueName method">
     <HelpKINode Title="Configuration.GetErrorQueueName Method " Url="html/73fb0622-b64e-e4aa-3be0-05b4b134455c.htm" />
     <HelpKINode Title="IConfiguration.GetErrorQueueName Method " Url="html/c43b8dbe-0af7-94a1-5ea5-138529402219.htm" />
@@ -506,14 +350,6 @@
   <HelpKINode Title="GetInstance method">
     <HelpKINode Title="IBusContainer.GetInstance Method " Url="html/5092f90f-02b5-395d-ea0f-d2404daa8415.htm" />
     <HelpKINode Title="StructuremapContainer.GetInstance Method " Url="html/b0b6da96-6059-3ec2-4384-773bc85a03d8.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetItemAt method">
-    <HelpKINode Title="Arguments.GetItemAt Method " Url="html/81a63940-68c0-2e2d-cae5-cff8d03e833f.htm" />
-    <HelpKINode Title="BusSettingEnpoint.GetItemAt Method " Url="html/d0c03ed5-9568-e709-c21e-d1c03b4f1ff9.htm" />
-  </HelpKINode>
-  <HelpKINode Title="GetItemByKey method">
-    <HelpKINode Title="Arguments.GetItemByKey Method " Url="html/bf7ae60a-5055-0796-e0ec-1cb3516f3a29.htm" />
-    <HelpKINode Title="BusSettingEnpoint.GetItemByKey Method " Url="html/1f54996a-5c6f-11cd-039f-6bb61bb29fc2.htm" />
   </HelpKINode>
   <HelpKINode Title="GetMessageBusReadStream method">
     <HelpKINode Title="Configuration.GetMessageBusReadStream Method " Url="html/c556aaed-2589-3588-561f-c6bb46c07cbd.htm" />
@@ -581,10 +417,7 @@
   <HelpKINode Title="HeartbeatMessage.Location property" Url="html/1fab9c41-5620-0cef-7616-d128367ce762.htm" />
   <HelpKINode Title="HeartbeatMessage.Name property" Url="html/fa608257-a7eb-03f1-0a87-a655e9f43c8e.htm" />
   <HelpKINode Title="HeartbeatMessage.Timestamp property" Url="html/53a1d0bd-585f-5305-adbd-5c6316dba5d6.htm" />
-  <HelpKINode Title="HeartbeatQueueName property">
-    <HelpKINode Title="ITransportSettings.HeartbeatQueueName Property " Url="html/9d410af6-fa74-f1f8-52dd-a31dd11c2bb2.htm" />
-    <HelpKINode Title="TransportSettings.HeartbeatQueueName Property " Url="html/40db82b4-53d2-43e2-a77a-394e42bf1356.htm" />
-  </HelpKINode>
+  <HelpKINode Title="HeartbeatQueueName property" Url="html/9d410af6-fa74-f1f8-52dd-a31dd11c2bb2.htm" />
   <HelpKINode Title="HeartbeatTimerState class">
     <HelpKINode Title="HeartbeatTimerState Class" Url="html/568e26c8-e0a5-c24c-8949-7196f5f973f1.htm" />
     <HelpKINode Title="about HeartbeatTimerState class" Url="html/568e26c8-e0a5-c24c-8949-7196f5f973f1.htm" />
@@ -595,11 +428,7 @@
   <HelpKINode Title="HeartbeatTimerState.CpuCounter property" Url="html/fd9e992e-1265-f9e7-64d9-9629608ae8ee.htm" />
   <HelpKINode Title="HeartbeatTimerState.HeartbeatTimerState constructor" Url="html/abbc6915-dc8c-e7f6-7585-7ee6d20c499f.htm" />
   <HelpKINode Title="HeartbeatTimerState.RamCounter property" Url="html/364b44b8-efe3-298b-5aab-e117de3010a8.htm" />
-  <HelpKINode Title="Host property">
-    <HelpKINode Title="ITransportSettings.Host Property " Url="html/ff6bdb7f-f668-a1cc-1b3b-ab4899d0d85d.htm" />
-    <HelpKINode Title="TransportSettings.Host Property " Url="html/5987abc5-15bf-44e8-caa5-c28f60288f08.htm" />
-    <HelpKINode Title="TransportSettings.Host Property " Url="html/5d56fe21-7fc8-923b-efde-f26395ac7582.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Host property" Url="html/ff6bdb7f-f668-a1cc-1b3b-ab4899d0d85d.htm" />
   <HelpKINode Title="IAggregatorPersistor interface">
     <HelpKINode Title="IAggregatorPersistor Interface" Url="html/8cabbff4-2381-b50f-8ac2-a11c04f5f1b2.htm" />
     <HelpKINode Title="about IAggregatorPersistor interface" Url="html/8cabbff4-2381-b50f-8ac2-a11c04f5f1b2.htm" />
@@ -825,7 +654,6 @@
     <HelpKINode Title="MongoDbProcessManagerFinder.InsertData Method " Url="html/33bebae1-9ec8-b1f6-0756-819ab1d8ed34.htm" />
     <HelpKINode Title="SqlServerProcessManagerFinder.InsertData Method " Url="html/033e0341-4330-cd39-3e54-bbc7bf450ef5.htm" />
   </HelpKINode>
-  <HelpKINode Title="Instance property" Url="html/12b98c5f-b181-ef37-cedb-644d28d1701d.htm" />
   <HelpKINode Title="IPersistanceData(Of T) interface">
     <HelpKINode Title="IPersistanceData(T) Interface" Url="html/3511a637-f113-986e-b40e-a029eacf0e9f.htm" />
     <HelpKINode Title="about IPersistanceData(Of T) interface" Url="html/3511a637-f113-986e-b40e-a029eacf0e9f.htm" />
@@ -900,22 +728,6 @@
     <HelpKINode Title="IMessageBusReadStream.IsComplete Method " Url="html/f111fcf8-ab56-bac2-2ffc-11199a79320a.htm" />
     <HelpKINode Title="MessageBusReadStream.IsComplete Method " Url="html/df08a142-a3d4-e632-c8fe-77c0c1f45594.htm" />
   </HelpKINode>
-  <HelpKINode Title="IsElementName method">
-    <HelpKINode Title="Arguments.IsElementName Method " Url="html/df430516-6938-960b-2fd4-9f1b4c25c93b.htm" />
-    <HelpKINode Title="BusSettingEnpoint.IsElementName Method " Url="html/2940894e-20a2-259a-9b2b-f1267f11f08d.htm" />
-  </HelpKINode>
-  <HelpKINode Title="IsReadOnly method">
-    <HelpKINode Title="Argument.IsReadOnly Method " Url="html/1b3c4162-dfb0-0be9-6173-7fc5723d9b78.htm" />
-    <HelpKINode Title="Arguments.IsReadOnly Method " Url="html/48de45af-07d5-d901-42f9-4316a7dbaa4f.htm" />
-    <HelpKINode Title="BusSettingEnpoint.IsReadOnly Method " Url="html/be809230-bfe7-e86a-bdcc-04bc3c02e3a7.htm" />
-    <HelpKINode Title="BusSettings.IsReadOnly Method " Url="html/39f3cf98-bd44-522c-7cb3-5a0e7f6bb091.htm" />
-    <HelpKINode Title="EndpointSettings.IsReadOnly Method " Url="html/a29633eb-2866-399d-0a90-c0d5d26c127f.htm" />
-    <HelpKINode Title="Exchange.IsReadOnly Method " Url="html/50c9cfe0-54d9-eb1f-dbc0-9b8f643d25b9.htm" />
-    <HelpKINode Title="PersistanceSettings.IsReadOnly Method " Url="html/5ab42665-867b-c80c-ad31-af362c5c9420.htm" />
-    <HelpKINode Title="Queue.IsReadOnly Method " Url="html/57121351-ef5b-0dff-18c5-62e91e25f23a.htm" />
-    <HelpKINode Title="Retries.IsReadOnly Method " Url="html/2d8ebfc2-cfd9-264c-54d4-6aa5009515eb.htm" />
-    <HelpKINode Title="TransportSettings.IsReadOnly Method " Url="html/5b28c2f5-257f-804a-bbd6-b7d8cdd40603.htm" />
-  </HelpKINode>
   <HelpKINode Title="IsReadOnly property" Url="html/e9f9e47b-fbf7-43eb-3177-fe97a6e82aca.htm" />
   <HelpKINode Title="IStartProcessManager(Of TMessage) interface">
     <HelpKINode Title="IStartProcessManager(TMessage) Interface" Url="html/7b2c35a5-531d-97f1-b853-a22f5c8e0afe.htm" />
@@ -956,10 +768,6 @@
   </HelpKINode>
   <HelpKINode Title="IStreamProcessor.ProcessMessage(Of T) method" Url="html/18c22a12-ae6c-7a0e-8fec-e7b2317fa888.htm" />
   <HelpKINode Title="IStreamProcessor.ProcessMessage&lt;T&gt; method" Url="html/18c22a12-ae6c-7a0e-8fec-e7b2317fa888.htm" />
-  <HelpKINode Title="Item property">
-    <HelpKINode Title="Arguments.Item Property " Url="html/bcc29d4b-ccf2-7dc1-37f1-c4b524704fb0.htm" />
-    <HelpKINode Title="BusSettingEnpoint.Item Property " Url="html/daff28a7-8609-19aa-bc34-3f4e302e603a.htm" />
-  </HelpKINode>
   <HelpKINode Title="ITransportSettings interface">
     <HelpKINode Title="ITransportSettings Interface" Url="html/cdf56f4b-d83c-4631-6096-76189d413193.htm" />
     <HelpKINode Title="about ITransportSettings interface" Url="html/cdf56f4b-d83c-4631-6096-76189d413193.htm" />
@@ -990,21 +798,14 @@
     <HelpKINode Title="IConfiguration.LoadSettings Method " Url="html/8d212410-0d4c-099a-3b9b-6d41a01e46d9.htm" />
   </HelpKINode>
   <HelpKINode Title="Location property" Url="html/1fab9c41-5620-0cef-7616-d128367ce762.htm" />
-  <HelpKINode Title="MachineName property">
-    <HelpKINode Title="ITransportSettings.MachineName Property " Url="html/1dfef47d-592c-a81f-8efc-c4111dcd2dcc.htm" />
-    <HelpKINode Title="TransportSettings.MachineName Property " Url="html/78d86a3e-b55d-331c-77fa-161b25fe64c9.htm" />
-  </HelpKINode>
+  <HelpKINode Title="MachineName property" Url="html/1dfef47d-592c-a81f-8efc-c4111dcd2dcc.htm" />
   <HelpKINode Title="Mappings property">
     <HelpKINode Title="IProcessManagerPropertyMapper.Mappings Property " Url="html/b98c92b4-82fe-9b12-c691-e011071d3caa.htm" />
     <HelpKINode Title="ProcessManagerPropertyMapper.Mappings Property " Url="html/bfe382df-b7d7-4b03-7a2b-64baae269b8e.htm" />
   </HelpKINode>
   <HelpKINode Title="MarkAsComplete method" Url="html/63bf5941-8808-e426-4c05-eb08b888c149.htm" />
   <HelpKINode Title="MaximumMessageSize property" Url="html/f5051495-acf4-4f33-2f72-248c4c04808e.htm" />
-  <HelpKINode Title="MaxRetries property">
-    <HelpKINode Title="ITransportSettings.MaxRetries Property " Url="html/d2c3e284-88a1-d717-ad4e-fe79bb35c060.htm" />
-    <HelpKINode Title="Retries.MaxRetries Property " Url="html/5cf5859a-f94d-0cee-6ed3-917802b66638.htm" />
-    <HelpKINode Title="TransportSettings.MaxRetries Property " Url="html/7bdb3e8f-98e6-e79a-9427-c79a3d69dcba.htm" />
-  </HelpKINode>
+  <HelpKINode Title="MaxRetries property" Url="html/d2c3e284-88a1-d717-ad4e-fe79bb35c060.htm" />
   <HelpKINode Title="MemoryData(Of T) class">
     <HelpKINode Title="MemoryData(T) Class" Url="html/c1e37f7a-5526-9eb6-19d0-49fabcfa393d.htm" />
     <HelpKINode Title="about MemoryData(Of T) class" Url="html/c1e37f7a-5526-9eb6-19d0-49fabcfa393d.htm" />
@@ -1119,30 +920,10 @@
   <HelpKINode Title="MongoDbProcessManagerFinder.UpdateData(Of T) method" Url="html/d90f6bba-f12d-2ee9-57d2-54ccafebe088.htm" />
   <HelpKINode Title="MongoDbProcessManagerFinder.UpdateData&lt;T&gt; method" Url="html/d90f6bba-f12d-2ee9-57d2-54ccafebe088.htm" />
   <HelpKINode Title="Name property">
-    <HelpKINode Title="Argument.Name Property " Url="html/2d146733-bbfb-fe5b-1ff4-8cce000b8e1e.htm" />
-    <HelpKINode Title="EndpointSettings.Name Property " Url="html/2a059be5-532a-0f5a-8b73-5c4fe0ae0a30.htm" />
-    <HelpKINode Title="Exchange.Name Property " Url="html/a35d06b2-e931-5fe4-af1b-8abf4953337f.htm" />
     <HelpKINode Title="HeartbeatMessage.Name Property " Url="html/fa608257-a7eb-03f1-0a87-a655e9f43c8e.htm" />
-    <HelpKINode Title="Queue.Name Property " Url="html/d14d254c-c2a6-62cf-6804-947fd500ca1f.htm" />
     <HelpKINode Title="Queue.Name Property " Url="html/ca838a49-b8fe-9de1-94f8-a964b7bca8a0.htm" />
   </HelpKINode>
-  <HelpKINode Title="Password property">
-    <HelpKINode Title="ITransportSettings.Password Property " Url="html/2b08ddd9-4779-2217-340f-ff804fe3cdbb.htm" />
-    <HelpKINode Title="TransportSettings.Password Property " Url="html/67859ab7-d38c-f0c4-d9cb-b04fcecca68f.htm" />
-    <HelpKINode Title="TransportSettings.Password Property " Url="html/4b282f62-df67-d5ed-a15c-946d8a2baf7d.htm" />
-  </HelpKINode>
-  <HelpKINode Title="PersistanceSettings class">
-    <HelpKINode Title="PersistanceSettings Class" Url="html/47f1b51b-dcf8-5d6e-e945-818714df80ee.htm" />
-    <HelpKINode Title="about PersistanceSettings class" Url="html/47f1b51b-dcf8-5d6e-e945-818714df80ee.htm" />
-    <HelpKINode Title="constructor" Url="html/d9124fe3-b0ba-e6b2-02a8-e61b85f0fccf.htm" />
-    <HelpKINode Title="methods" Url="html/d6767d9a-9da4-4ac4-e4f4-eec35591da13.htm" />
-    <HelpKINode Title="properties" Url="html/093ade18-175e-173b-89d5-7914c88144f4.htm" />
-  </HelpKINode>
-  <HelpKINode Title="PersistanceSettings property" Url="html/2a47f662-4d01-2e4e-6206-eeec14113783.htm" />
-  <HelpKINode Title="PersistanceSettings.ConnectionString property" Url="html/76b6f23a-bcd1-911f-717e-c592a8f6477f.htm" />
-  <HelpKINode Title="PersistanceSettings.Database property" Url="html/d563ed30-1c4f-c742-df39-a7fbb9d9cdcf.htm" />
-  <HelpKINode Title="PersistanceSettings.IsReadOnly method" Url="html/5ab42665-867b-c80c-ad31-af362c5c9420.htm" />
-  <HelpKINode Title="PersistanceSettings.PersistanceSettings constructor" Url="html/d9124fe3-b0ba-e6b2-02a8-e61b85f0fccf.htm" />
+  <HelpKINode Title="Password property" Url="html/2b08ddd9-4779-2217-340f-ff804fe3cdbb.htm" />
   <HelpKINode Title="PersistenceStoreConnectionString property">
     <HelpKINode Title="Configuration.PersistenceStoreConnectionString Property " Url="html/e09d37c1-81bb-ce29-8cac-aa17abc960c4.htm" />
     <HelpKINode Title="IConfiguration.PersistenceStoreConnectionString Property " Url="html/5001713b-e4f6-c492-b25a-af95b523e2d7.htm" />
@@ -1274,53 +1055,22 @@
     <HelpKINode Title="IConfiguration.PurgeQueuesOnStart Method " Url="html/b6fffbc1-3fac-fd56-5498-09b0c65c04ca.htm" />
   </HelpKINode>
   <HelpKINode Title="Queue class">
-    <HelpKINode Title="Queue Class" Url="html/40c399e8-2487-e21b-cb0e-5550ef692fe3.htm" />
     <HelpKINode Title="Queue Class" Url="html/a74f377f-9759-26d1-0067-455280987947.htm" />
-    <HelpKINode Title="about Queue class" Url="html/40c399e8-2487-e21b-cb0e-5550ef692fe3.htm" />
     <HelpKINode Title="about Queue class" Url="html/a74f377f-9759-26d1-0067-455280987947.htm" />
-    <HelpKINode Title="constructor" Url="html/9f60e3ef-b83b-f6a2-e318-4a3a695f391c.htm" />
     <HelpKINode Title="constructor" Url="html/a6cb7178-3690-5cf1-6085-70b0420d066f.htm" />
     <HelpKINode Title="methods" Url="html/baf3d424-d9f0-6b5d-378e-5a16175000bf.htm" />
-    <HelpKINode Title="methods" Url="html/b6a834d2-aea4-083c-4ed7-05abc6cee942.htm" />
     <HelpKINode Title="properties" Url="html/5a6e6d82-454e-1d42-c5bc-e9b357274204.htm" />
-    <HelpKINode Title="properties" Url="html/08976eab-8ebc-dc52-f870-cdf705c318fe.htm" />
   </HelpKINode>
-  <HelpKINode Title="Queue property">
-    <HelpKINode Title="ITransportSettings.Queue Property " Url="html/a450aca4-dafa-c9c5-edf0-ec51982b3335.htm" />
-    <HelpKINode Title="TransportSettings.Queue Property " Url="html/65131ae9-7d8b-a4a2-0325-b9e55a4b777e.htm" />
-    <HelpKINode Title="TransportSettings.Queue Property " Url="html/7795c21b-25b8-3ad7-5501-f5608f114214.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Queue.Arguments property">
-    <HelpKINode Title="Queue.Arguments Property " Url="html/a239f0e0-389f-2887-3227-401d2ce52ac9.htm" />
-    <HelpKINode Title="Queue.Arguments Property " Url="html/932a450c-2a0b-c5e7-9a1e-11eec896ae6c.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Queue.AutoDelete property">
-    <HelpKINode Title="Queue.AutoDelete Property " Url="html/620c6368-297f-c101-718c-17ace52b6910.htm" />
-    <HelpKINode Title="Queue.AutoDelete Property " Url="html/41ccc284-7fea-d788-6bb5-8b2eab57af98.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Queue.Durable property">
-    <HelpKINode Title="Queue.Durable Property " Url="html/f03159a7-656a-e7bf-74d7-f6794d3984a1.htm" />
-    <HelpKINode Title="Queue.Durable Property " Url="html/e2484097-b8c9-dc24-bc39-c8cb87111fc6.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Queue.Exclusive property">
-    <HelpKINode Title="Queue.Exclusive Property " Url="html/7557797a-94ff-8518-65b4-a1b2f5b8ffc1.htm" />
-    <HelpKINode Title="Queue.Exclusive Property " Url="html/44ba11e9-433a-d305-c4a2-e95bdfd63fc5.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Queue.IsReadOnly method" Url="html/57121351-ef5b-0dff-18c5-62e91e25f23a.htm" />
+  <HelpKINode Title="Queue property" Url="html/a450aca4-dafa-c9c5-edf0-ec51982b3335.htm" />
+  <HelpKINode Title="Queue.Arguments property" Url="html/a239f0e0-389f-2887-3227-401d2ce52ac9.htm" />
+  <HelpKINode Title="Queue.AutoDelete property" Url="html/41ccc284-7fea-d788-6bb5-8b2eab57af98.htm" />
+  <HelpKINode Title="Queue.Durable property" Url="html/e2484097-b8c9-dc24-bc39-c8cb87111fc6.htm" />
+  <HelpKINode Title="Queue.Exclusive property" Url="html/44ba11e9-433a-d305-c4a2-e95bdfd63fc5.htm" />
   <HelpKINode Title="Queue.IsReadOnly property" Url="html/e9f9e47b-fbf7-43eb-3177-fe97a6e82aca.htm" />
-  <HelpKINode Title="Queue.Name property">
-    <HelpKINode Title="Queue.Name Property " Url="html/d14d254c-c2a6-62cf-6804-947fd500ca1f.htm" />
-    <HelpKINode Title="Queue.Name Property " Url="html/ca838a49-b8fe-9de1-94f8-a964b7bca8a0.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Queue.Name property" Url="html/ca838a49-b8fe-9de1-94f8-a964b7bca8a0.htm" />
   <HelpKINode Title="Queue.PurgeOnStartup property" Url="html/be1cf8b2-2202-abd1-7aa1-5471443d6803.htm" />
-  <HelpKINode Title="Queue.Queue constructor">
-    <HelpKINode Title="Queue Constructor " Url="html/a6cb7178-3690-5cf1-6085-70b0420d066f.htm" />
-    <HelpKINode Title="Queue Constructor " Url="html/9f60e3ef-b83b-f6a2-e318-4a3a695f391c.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Queue.RoutingKey property">
-    <HelpKINode Title="Queue.RoutingKey Property " Url="html/8954c229-4537-60d8-461a-f2eedb3bfa63.htm" />
-    <HelpKINode Title="Queue.RoutingKey Property " Url="html/a3af081b-4086-1eca-70ed-283303e72237.htm" />
-  </HelpKINode>
+  <HelpKINode Title="Queue.Queue constructor" Url="html/a6cb7178-3690-5cf1-6085-70b0420d066f.htm" />
+  <HelpKINode Title="Queue.RoutingKey property" Url="html/a3af081b-4086-1eca-70ed-283303e72237.htm" />
   <HelpKINode Title="QueueMappings property">
     <HelpKINode Title="Configuration.QueueMappings Property " Url="html/788bd110-7538-f91b-1559-b6343d0506ea.htm" />
     <HelpKINode Title="IConfiguration.QueueMappings Property " Url="html/b1af243b-aaa0-e497-6491-41e948156789.htm" />
@@ -1398,16 +1148,10 @@
   <HelpKINode Title="R.MessageBus.Persistance.SqlServer.SqlServerData(Of T) class" Url="html/bf2bc337-c090-aaf0-8839-65115a4a59da.htm" />
   <HelpKINode Title="R.MessageBus.Persistance.SqlServer.SqlServerData&lt;T&gt; class" Url="html/bf2bc337-c090-aaf0-8839-65115a4a59da.htm" />
   <HelpKINode Title="R.MessageBus.Persistance.SqlServer.SqlServerProcessManagerFinder class" Url="html/dd683bc9-3841-98ba-8df6-893925d127d9.htm" />
-  <HelpKINode Title="R.MessageBus.Settings namespace" Url="html/ac0315ce-0313-b006-968c-85d86e5c804b.htm" />
-  <HelpKINode Title="R.MessageBus.Settings.TransportSettings class" Url="html/bfd39d3c-b6f0-9c7a-c2f7-5fd8915d8be0.htm" />
   <HelpKINode Title="RamCounter property" Url="html/364b44b8-efe3-298b-5aab-e117de3010a8.htm" />
   <HelpKINode Title="Read method">
     <HelpKINode Title="IMessageBusReadStream.Read Method " Url="html/d1076de3-873f-cc6b-de3a-55182ed546d9.htm" />
     <HelpKINode Title="MessageBusReadStream.Read Method " Url="html/c0cc3e2f-5282-cc62-507e-caceaf1b41dc.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Remove method">
-    <HelpKINode Title="Arguments.Remove Method " Url="html/f93a77df-f8ce-8730-56d3-35904adf450b.htm" />
-    <HelpKINode Title="BusSettingEnpoint.Remove Method " Url="html/99dce86a-d6c9-79fb-be8f-d715a5374c39.htm" />
   </HelpKINode>
   <HelpKINode Title="RemoveAll method">
     <HelpKINode Title="IAggregatorPersistor.RemoveAll Method " Url="html/fc699007-194a-ed61-0c8e-16c48ac01648.htm" />
@@ -1438,24 +1182,7 @@
     <HelpKINode Title="IRequestConfiguration.RequestMessageId Property " Url="html/b5b80f73-08e8-5642-2f31-98ed4f68446f.htm" />
     <HelpKINode Title="RequestConfiguration.RequestMessageId Property " Url="html/98879cd7-36d7-f58f-872c-b93725342c47.htm" />
   </HelpKINode>
-  <HelpKINode Title="Retries class">
-    <HelpKINode Title="Retries Class" Url="html/6e301877-c886-0bf1-d5a3-da9fdda4fbd3.htm" />
-    <HelpKINode Title="about Retries class" Url="html/6e301877-c886-0bf1-d5a3-da9fdda4fbd3.htm" />
-    <HelpKINode Title="constructor" Url="html/9392b12e-4a9d-04f5-478d-a5fcb1406aa6.htm" />
-    <HelpKINode Title="methods" Url="html/fcecc520-a923-1eb3-8d1f-8aaefe1c50cc.htm" />
-    <HelpKINode Title="properties" Url="html/b63cf1f8-4cf3-6582-1ab7-b63dd1d8e82e.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Retries property" Url="html/a39c0577-aee2-5878-b89e-7b9ff45b179a.htm" />
-  <HelpKINode Title="Retries.Arguments property" Url="html/cd91f1e0-507b-a10d-c402-95e8ec380dfc.htm" />
-  <HelpKINode Title="Retries.IsReadOnly method" Url="html/2d8ebfc2-cfd9-264c-54d4-6aa5009515eb.htm" />
-  <HelpKINode Title="Retries.MaxRetries property" Url="html/5cf5859a-f94d-0cee-6ed3-917802b66638.htm" />
-  <HelpKINode Title="Retries.Retries constructor" Url="html/9392b12e-4a9d-04f5-478d-a5fcb1406aa6.htm" />
-  <HelpKINode Title="Retries.RetryDelay property" Url="html/e6aa5481-b32a-9c7a-6d25-9c541daca6ea.htm" />
-  <HelpKINode Title="RetryDelay property">
-    <HelpKINode Title="ITransportSettings.RetryDelay Property " Url="html/4dc9d51a-cec9-0e3d-ce08-5f38468bd3a5.htm" />
-    <HelpKINode Title="Retries.RetryDelay Property " Url="html/e6aa5481-b32a-9c7a-6d25-9c541daca6ea.htm" />
-    <HelpKINode Title="TransportSettings.RetryDelay Property " Url="html/4796c9da-9c1e-4eac-c361-4f19020126fd.htm" />
-  </HelpKINode>
+  <HelpKINode Title="RetryDelay property" Url="html/4dc9d51a-cec9-0e3d-ce08-5f38468bd3a5.htm" />
   <HelpKINode Title="Route(Of T) method">
     <HelpKINode Title="Bus.Route(T) Method " Url="html/5b5c8808-a3ef-9901-520b-fd1377de864a.htm" />
     <HelpKINode Title="IBus.Route(T) Method " Url="html/f3167b3b-a8e6-4b05-dcd8-21d374574b19.htm" />
@@ -1464,10 +1191,7 @@
     <HelpKINode Title="Bus.Route(T) Method " Url="html/5b5c8808-a3ef-9901-520b-fd1377de864a.htm" />
     <HelpKINode Title="IBus.Route(T) Method " Url="html/f3167b3b-a8e6-4b05-dcd8-21d374574b19.htm" />
   </HelpKINode>
-  <HelpKINode Title="RoutingKey property">
-    <HelpKINode Title="Queue.RoutingKey Property " Url="html/8954c229-4537-60d8-461a-f2eedb3bfa63.htm" />
-    <HelpKINode Title="Queue.RoutingKey Property " Url="html/a3af081b-4086-1eca-70ed-283303e72237.htm" />
-  </HelpKINode>
+  <HelpKINode Title="RoutingKey property" Url="html/a3af081b-4086-1eca-70ed-283303e72237.htm" />
   <HelpKINode Title="ScanForHandlers method">
     <HelpKINode Title="IBusContainer.ScanForHandlers Method " Url="html/292cbf45-53cb-ff37-350e-d8c6b5d28552.htm" />
     <HelpKINode Title="StructuremapContainer.ScanForHandlers Method " Url="html/0ad0f6f8-74c9-9c79-3709-377ffbd05ac7.htm" />
@@ -1655,63 +1379,9 @@
   <HelpKINode Title="Success property" Url="html/d71dd919-92ae-450f-155e-a8326e731d6d.htm" />
   <HelpKINode Title="Timeout method" Url="html/3cf2f2a1-0ebd-444f-7ae2-4bf2a8b7252c.htm" />
   <HelpKINode Title="Timestamp property" Url="html/53a1d0bd-585f-5305-adbd-5c6316dba5d6.htm" />
-  <HelpKINode Title="TransportSettings class">
-    <HelpKINode Title="TransportSettings Class" Url="html/bfd39d3c-b6f0-9c7a-c2f7-5fd8915d8be0.htm" />
-    <HelpKINode Title="TransportSettings Class" Url="html/15070c37-e185-c922-799f-34293f658688.htm" />
-    <HelpKINode Title="about TransportSettings class" Url="html/bfd39d3c-b6f0-9c7a-c2f7-5fd8915d8be0.htm" />
-    <HelpKINode Title="about TransportSettings class" Url="html/15070c37-e185-c922-799f-34293f658688.htm" />
-    <HelpKINode Title="constructor" Url="html/93bd3950-1609-c2fb-3bc3-02e10a7ce919.htm" />
-    <HelpKINode Title="constructor" Url="html/919b5c9e-6b80-025b-fb24-d8a98645910d.htm" />
-    <HelpKINode Title="methods" Url="html/4b3e34fa-b508-2b5f-aa36-b0c94b4e30a0.htm" />
-    <HelpKINode Title="methods" Url="html/1c432502-9363-0729-5145-e4139e6382f2.htm" />
-    <HelpKINode Title="properties" Url="html/f46e5c28-95a3-51b9-ea62-4df6e79108aa.htm" />
-    <HelpKINode Title="properties" Url="html/fb5fe4b4-92ce-51b9-10e5-74547fef6c5f.htm" />
-  </HelpKINode>
   <HelpKINode Title="TransportSettings property">
     <HelpKINode Title="Configuration.TransportSettings Property " Url="html/f35e2b8e-20bb-ecea-5f18-afb97153ec92.htm" />
-    <HelpKINode Title="EndpointSettings.TransportSettings Property " Url="html/61128b68-7d84-42c5-e3b6-57580a55922f.htm" />
     <HelpKINode Title="IConfiguration.TransportSettings Property " Url="html/b794860b-2d21-c1ee-e75e-03d450f154ba.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TransportSettings.AuditingEnabled property">
-    <HelpKINode Title="TransportSettings.AuditingEnabled Property " Url="html/079b48bd-2c5c-3d65-99f0-9a69e2e30894.htm" />
-    <HelpKINode Title="TransportSettings.AuditingEnabled Property " Url="html/40efaf00-758e-eae9-afd4-484b23d917e9.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TransportSettings.AuditQueueName property">
-    <HelpKINode Title="TransportSettings.AuditQueueName Property " Url="html/25c01dc1-161b-d864-35fe-92e2d1fdb5a7.htm" />
-    <HelpKINode Title="TransportSettings.AuditQueueName Property " Url="html/408bbb53-d227-fb7a-6047-6de623eb146f.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TransportSettings.ClientSettings property" Url="html/dfe31b08-22f4-98ae-7f85-72a441e783e9.htm" />
-  <HelpKINode Title="TransportSettings.DisableErrors property" Url="html/3e81b636-9398-5656-cd2d-273ab46467bc.htm" />
-  <HelpKINode Title="TransportSettings.ErrorQueueName property">
-    <HelpKINode Title="TransportSettings.ErrorQueueName Property " Url="html/7540b03e-d7a4-1301-4359-537d18df4d43.htm" />
-    <HelpKINode Title="TransportSettings.ErrorQueueName Property " Url="html/be6f3685-053b-3e1b-e12f-cf362d5a8e2b.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TransportSettings.Exchange property" Url="html/ebda19a1-2449-a32d-3845-e18a1e8416ba.htm" />
-  <HelpKINode Title="TransportSettings.HeartbeatQueueName property" Url="html/40db82b4-53d2-43e2-a77a-394e42bf1356.htm" />
-  <HelpKINode Title="TransportSettings.Host property">
-    <HelpKINode Title="TransportSettings.Host Property " Url="html/5d56fe21-7fc8-923b-efde-f26395ac7582.htm" />
-    <HelpKINode Title="TransportSettings.Host Property " Url="html/5987abc5-15bf-44e8-caa5-c28f60288f08.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TransportSettings.IsReadOnly method" Url="html/5b28c2f5-257f-804a-bbd6-b7d8cdd40603.htm" />
-  <HelpKINode Title="TransportSettings.MachineName property" Url="html/78d86a3e-b55d-331c-77fa-161b25fe64c9.htm" />
-  <HelpKINode Title="TransportSettings.MaxRetries property" Url="html/7bdb3e8f-98e6-e79a-9427-c79a3d69dcba.htm" />
-  <HelpKINode Title="TransportSettings.Password property">
-    <HelpKINode Title="TransportSettings.Password Property " Url="html/4b282f62-df67-d5ed-a15c-946d8a2baf7d.htm" />
-    <HelpKINode Title="TransportSettings.Password Property " Url="html/67859ab7-d38c-f0c4-d9cb-b04fcecca68f.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TransportSettings.Queue property">
-    <HelpKINode Title="TransportSettings.Queue Property " Url="html/65131ae9-7d8b-a4a2-0325-b9e55a4b777e.htm" />
-    <HelpKINode Title="TransportSettings.Queue Property " Url="html/7795c21b-25b8-3ad7-5501-f5608f114214.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TransportSettings.Retries property" Url="html/a39c0577-aee2-5878-b89e-7b9ff45b179a.htm" />
-  <HelpKINode Title="TransportSettings.RetryDelay property" Url="html/4796c9da-9c1e-4eac-c361-4f19020126fd.htm" />
-  <HelpKINode Title="TransportSettings.TransportSettings constructor">
-    <HelpKINode Title="TransportSettings Constructor " Url="html/919b5c9e-6b80-025b-fb24-d8a98645910d.htm" />
-    <HelpKINode Title="TransportSettings Constructor " Url="html/93bd3950-1609-c2fb-3bc3-02e10a7ce919.htm" />
-  </HelpKINode>
-  <HelpKINode Title="TransportSettings.Username property">
-    <HelpKINode Title="TransportSettings.Username Property " Url="html/07fd3478-21ce-bb46-e9c5-050af00ea4ae.htm" />
-    <HelpKINode Title="TransportSettings.Username Property " Url="html/2822cf4e-173f-e429-284d-3773c052f492.htm" />
   </HelpKINode>
   <HelpKINode Title="Type property">
     <HelpKINode Title="IConsumer.Type Property " Url="html/86c6b8cf-f14a-14fe-09c6-39189dc0e568.htm" />
@@ -1729,12 +1399,7 @@
     <HelpKINode Title="MongoDbProcessManagerFinder.UpdateData(T) Method " Url="html/d90f6bba-f12d-2ee9-57d2-54ccafebe088.htm" />
     <HelpKINode Title="SqlServerProcessManagerFinder.UpdateData(T) Method " Url="html/98e36c22-ae06-d524-8ad2-ca7610ac5a34.htm" />
   </HelpKINode>
-  <HelpKINode Title="Username property">
-    <HelpKINode Title="ITransportSettings.Username Property " Url="html/4a5c4195-f8f6-99ad-0f24-247d5ac9e6cb.htm" />
-    <HelpKINode Title="TransportSettings.Username Property " Url="html/07fd3478-21ce-bb46-e9c5-050af00ea4ae.htm" />
-    <HelpKINode Title="TransportSettings.Username Property " Url="html/2822cf4e-173f-e429-284d-3773c052f492.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Value property" Url="html/7f0cd63a-e903-c1b0-0b17-cc3e5471fda9.htm" />
+  <HelpKINode Title="Username property" Url="html/4a5c4195-f8f6-99ad-0f24-247d5ac9e6cb.htm" />
   <HelpKINode Title="Version property">
     <HelpKINode Title="MemoryData(T).Version Property " Url="html/e49ac752-af2c-3eea-fd27-f1b397ec6002.htm" />
     <HelpKINode Title="MongoDbData(T).Version Property " Url="html/072f4820-52a9-1d35-2a5c-506570dfb928.htm" />
@@ -1746,5 +1411,4 @@
     <HelpKINode Title="MessageBusReadStream.Write Method " Url="html/73cb6ddc-6ee9-42ac-3e7c-f297301d4a53.htm" />
     <HelpKINode Title="MessageBusWriteStream.Write Method " Url="html/d9e6ca52-111b-209c-753e-dbc9d5a9753d.htm" />
   </HelpKINode>
-  <HelpKINode Title="Xmlns property" Url="html/95a2409a-19cb-98ff-ec1b-a5b58ae63d94.htm" />
 </HelpKI>
