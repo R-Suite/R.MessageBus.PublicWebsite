@@ -195,6 +195,23 @@
   <ItemGroup>
     <Content Include="Views\Home\GettingStarted.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Auditing.cshtml" />
+    <Content Include="Views\Home\Configuring.cshtml" />
+    <Content Include="Views\Home\Commands.cshtml" />
+    <Content Include="Views\Home\Aggregator.cshtml" />
+    <Content Include="Views\Home\Api.cshtml" />
+    <Content Include="Views\Home\Streaming.cshtml" />
+    <Content Include="Views\Home\ScatterGather.cshtml" />
+    <Content Include="Views\Home\Events.cshtml" />
+    <Content Include="Views\Home\RequestReply.cshtml" />
+    <Content Include="Views\Home\ProcessManagers.cshtml" />
+    <Content Include="Views\Home\RoutingSlip.cshtml" />
+    <Content Include="Views\Home\RecipientList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\_footer.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

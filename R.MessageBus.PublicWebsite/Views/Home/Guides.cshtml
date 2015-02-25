@@ -1,904 +1,129 @@
-﻿      <br /><br />
-      <div class="row row-offcanvas row-offcanvas-left">
-      <!-- sidebar -->
-
-        @Html.Partial("_sidebar")
-
-      
-
-        <!-- main area -->
-        <div class="col-xs-12 col-sm-9">
-          <h2 id="about">About</h2>
-          <p>R.MessageBus is a simple, easy to use asynchronous .NET messaging framework for C#. It sits on top of RabbitMQ as the transport of choice, so will need to have it installed. Currently R.MessageBus is tested on on .Net 4.5  and .Net 4.5.1.
-          </p>
-          <p>While R.MessageBus includes many "traditional" features found in other messaging frameworks, it adds extended support for <strong>Enterprise Integration Patterns</strong> buit-in directly into the core of the message bus, as well as high message throughput for the most demanding applications and streaming ability for transfering large files or streaming video.
-          </p>
-          <p>R.MessageBus development started in early 2014 out of a specific project&apos;s need for high-performance messaging framework.
-          The intial proof-of-concept turned into a full product and we slowly phased out the third-party messaging framework that we used at that time. Internaly, R.MessageBus proved to be a great success and by the end of 2014, we decided to open-source it.
-          </p>
-          <!--<h3>Why async messaging?</h3>
-          <p>Unlike in conventional programming where functions are invoked directly by name, asynchronous messaging relies on sending a message to a process where supporting infrastructure select the actual code to run. The primary benefits of this architectual style are encapsulation where clients invoke services without any knowledge of their implementation; and distribution which allows developers to build systems made up of sub-systems that run on disparate computers in different locations and at different times.</p>-->
-          
-
-          <br />
-          <h2 id="configuring">Configuring R.MessageBus</h2>
-          <h3>Simple Configuration</h3>
-          <p>Calling initialize with no parameters will create an instance of the Bus with default configuration options.</p>
-          <p>
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          IBus bus = Bus.Initialize();
-      }
-  }
-  
-</code></pre>
-          </p>
-          <p>
-          Default configuration creates an endpoint in our messaging system that is ready to send/publish and receive messages.
-          Of course messages can only be received if we have a code to handle those messages - <a href="#">message handlers</a>.
-          </p>
-          <p>Default configuration is the following,</p>
-          <ul class="task-list">
-            <li>Consumer - RabbitMQ</li>
-            <li>Container - StructureMap</li>
-            <li>ScanForMessageHandlers - True</li>
-            <li>AutoStartConsuming - True</li>
-            <li>AddBusToContainer - True</li>
-            <li>ProcessManagerFinder - SqlServerProcessManagerFinder</li>
-            <li>
-              TransportSettings
-              <ul class="task-list">
-                <li>Host - localhost</li>
-                <li>MaxRetries - 3</li>
-                <li>RetryDelay - 3000 ms</li>
-                <li>AuditingEnabled - false</li>
-                <li>AuditQueueName - "audit"</li>
-                <li>ErrorQueueName = "errors"</li>
-                <li>HeartbeatQueueName = "heartbeat"</li>
-                <li>MachineName = Environment.MachineName</li>
-                <li>Queue.Name = System.Diagnostics.Process.GetCurrentProcess().ProcessName;</li>
-              </ul>
-            </li>
-          </ul>
-          <h3>Custom Configuration</h3>
-          <p>Initialize also takes a single lambda/action parameter for custom configuration.</p>
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          IBus bus = Bus.Initialize(config =>
-          {
-              config.ScanForMesssageHandlers = true;
-              config.AutoStartConsuming = false;
-              config.SetQueueName("MyQueue"));
-              config.SetAuditingEnabled(true));
-              config.TransportSettings.MaxRetries = 5;
-              config.TransportSettings.RetryDelay = 50000;
-          });
-      }
-  }
-
-</code></pre>
-          <p>
-          Here we initialised the bus and we are ready to start sending or publishing messages. With this example we are not quite ready to consume incoming messages just yet, but don&apos;t worry about the configuration details at this point, we&apos;ll come back to that later. This is just to  demonstrate how to specify custom configuration options.
-          </p>
-
-
-
-          
-          <br />
-          <h2 id="sendingCommands">Sending Commands (Point To Point)</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/PointToPoint.gif" />
-          </p>
-          <p>
-          A Point to Point channel ensures that only one receiver consumes any given message. The channel can have multiple receivers that can consume multiple messages concurrently (Competing Consumers), but only one of them can successfully consume a particular message. This design makes consuming and processing messages highly scalable because the work can be load balanced across multiple consumers running in multiple applications on multiple computers.
-          </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 103-105, 502-507) for more details.</i>
-          </p>
-          <p>
-          <h3>Command Definition</h3>
-<pre><code class="cs">
-  public class PointToPointMessage : Message
-  {
-      public PointToPointMessage(Guid correlationId) : base(correlationId){}
-  }
-
-</code></pre>
-          </p>
-          <p>
-          <h3>Sending Commands</h3>
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize(config => config.AddEndPointMapping(typeof(PointToPointMessage), "PointToPoint"));
-          bus.Send(new PointToPointMessage(id));
-      }
-  }
-
-</code></pre>
-          </p>
-          <p>
-          <h3>Consuming Commands</h3>
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize(config => config.SetEndPoint("PointToPoint"));
-      }
-  }
-
-</code></pre>
-          </p>
-<pre><code class="cs">
-  public class PointToPointMessageHandler : IMessageHandler&lt;PointToPointMessage&gt;
-  {
-      public void Execute(PointToPointMessage command)
-      {
-          Console.WriteLine("Received message - {0}", command.CorrelationId);
-      }
-  }
-
-</code></pre>
-          </p>
-          <p>See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/PointToPoint">Point To Point</a> sample application for a complete example.</p>
-          
-
-
-          <br />
-          <h2 id="publishing">Publishing Events (Publish/Subscribe)</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/PublishSubscribe.gif" />
-          </p>
-          <p>
-          Publish-Subscribe channel works like this: It has one input channel that splits into multiple output channels, one for each subscriber. When an event is published into the channel, the Publish-Subscribe Channel, delivers a copy of the message to each of the output channels. Each output end of the channel has only one subscriber, which is allowed to consume a message only once. In this way, each subscriber gets the message only once, and consumed copies disapear from their channels.
-          </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 106-110) for more details.</i>
-          </p>
-          <p>
-          <h3>Event Definition</h3>
-<pre><code class="cs">
-  public class PublishSubscribeMessage : Message
-  {
-      public PublishSubscribeMessage(Guid correlationId) : base(correlationId){}
-  }
-
-</code></pre>
-          </p>
-          <p>
-          <h3>Publishing Events</h3>
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          bus.Publish(new PublishSubscribeMessage(id));
-      }
-  }
-
-</code></pre>
-          </p>
-          <p>
-          <h3>Consuming Events</h3>
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-      }
-  }
-
-</code></pre>
-          </p>
-<pre><code class="cs">
-  public class PublishSubscribeMessageHandler : IMessageHandler&lt;PublishSubscribeMessage&gt;
-  {
-      public void Execute(PublishSubscribeMessage message)
-      {
-          Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
-      }
-  }
-
-</code></pre>
-          </p>
-          <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/PublishSubscribe">Publish - Subscribe</a> sample application for a complete example.
-          </p>
-
-
-
-          <br />
-          <h2 id="processManager">Long runnning processes (Process Manager/Workflow/Saga)</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/ProcessManager.gif" />
-          </p>
-          <p>
-          Using a Process Manager results in a so-called hub-and-spoke pattern of message flow. An incoming message initializes the Process Manager. We call this message the trigger message. Based on the rules inside the process manager it sends a message to processing steps which then send reply messages back. When receiving messages the Process Manager determines the next step to be executed. As a result, all traffic runs through this central hub, hence the term hub-and-spoke. The downside of this central control element is the danger of turning the Process Manager into a performance bottleneck.
-          </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 312-321) for more details.</i>
-          </p>
-          <p>
-          <h3>Creating the Process Manager</h3>
-
-<pre><code class="cs">
-  public class MealData : IProcessManagerData
-  {
-      public Guid CorrelationId { get; set; }
-      public bool BurgerCooked { get; set; }
-      public bool FoodPrepped { get; set; }
-      public string Meal { get; set; }
-      public string Size { get; set; }
-  }
-
-</code></pre>
-
-<pre><code class="cs">
-  public class MealProcess : ProcessManager&lt;MealData&gt;, IStartProcessManager&lt;NewOrderMessage&gt;,
-                              IMessageHandler&lt;BurgerCookedMessage&gt;,
-                              IMessageHandler&lt;FoodPrepped&gt;
-  {
-      private readonly IBus _bus;
-      public Meal(IBus bus)
-      {
-          _bus = bus;
-      }
-
-      public void Execute(NewOrderMessage message)
-      {
-          Data.CorrelationId = Guid.NewGuid();
-          Data.Meal = message.Name;
-          Data.Size = message.Size;
-          var prepFoodMessage = new PrepFoodMessage(Data.CorrelationId)
-          {
-              BunSize = message.Size
-          };
-
-          _bus.Publish(prepFoodMessage);
-
-          var flipBurgerMessage = new CookBurgerMessage(Data.CorrelationId)
-          {
-              BurgerSize = message.Size
-          };
-
-          _bus.Publish(flipBurgerMessage);
-      }
-
-      public void Execute(BurgerCookedMessage message)
-      {
-          Data.BurgerCooked = true;
-          if (Data.FoodPrepped)
-          {
-              _bus.Publish(new OrderReadyMessage(message.CorrelationId)
-              {
-                Size = Data.Size,
-                Meal = Data.Meal
-              });
-
-              Complete = true;
-          }
-      }
-
-      public void Execute(FoodPrepped message)
-      {
-          Data.FoodPrepped = true;
-          if (Data.BurgerCooked)
-          {
-              _bus.Publish(new OrderReadyMessage(message.CorrelationId)
-              {
-                  Size = Data.Size,
-                  Meal = Data.Meal
-              });
-              Complete = true;
-          }
-      }
-  }
-
-</code></pre>
-
-          </p>
-          <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/McDonalds">McDonalds - Process Manager</a> sample application for a complete example.
-          </p>
-
-
-
-
-          <br />
-          <h2 id="requestReply">Request Reply</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/RequestReply.gif" />
-          </p>
-          <p>
-          Request Reply can be used when the applications may want a two-way conversation. Send a pair of Request-Reply messages, each on its own channel. Requestor
-          sends a request message and waits for the reply message. Replier receives the requested message a responds with a reply message. In R.MessageBus implementation of <i>Request Reply</i> both request and reply messages are on <i>Point-to-Point</i> channel - meaning the messages are always breaodcasted to a single consumer.
-          </p>
-          <p>
-          R.MessageBus offers two implementations of Request Reply:
-          <ul>
-            <li>
-              <strong>Synchronous</strong> - a single thread sends the request message, blocks to wait for the reply message and than processes the reply.
-            </li>
-            <li>
-              <strong>Asynchronous</strong> - the caller sends the request message and sets up a callback for reply. A separate thread listens for reply and when the reply message arrives, the new thread invokes  the callback which reestablishes the caller&apos;s context and process the reply.
-            </li>
-          </ul>
-          </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 154-158) for more details.</i>
-          </p>
-          <p>
-          <h3>Message Definition</h3>
-
-<pre><code class="cs">
-  public class RequestMessage : Message
-  {
-      public RequestMessage(Guid correlationId) : base(correlationId)  { }
-  }
-
-  public class ResponseMessage : Message
-  {
-      public ResponseMessage(Guid correlationId) : base(correlationId) { }
-  }
-
-</code></pre>
-
-          </p>
-          <p>
-          <h3>Synchronous Block</h3>
-
-<pre><code class="cs">
-    ResponseMessage result = bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", new RequestMessage(Guid.NewGuid()));
-</code></pre>
-
-          </p>
-          <p>
-          <h3>Asynchronous Callback</h3>
-
-<pre><code class="cs">
-
-  var message = new RequestMessage(Guid.NewGuid());
-  bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", message, r => Console.WriteLine("Received reply - {0}", r.CorrelationId));
-
-</code></pre>
-
-          </p>
-          <p>
-          <h3>Replier</h3>
-
-<pre><code class="cs">
-  public class RequestMessageHandler : IMessageHandler&lt;RequestMessage&gt;
-  {
-      public IConsumeContext Context { get; set; }
-      
-      public void Execute(RequestMessage message)
-      {
-          Context.Reply(new ResponseMessage(message.CorrelationId));
-      }
-  }
-
-</code></pre>
-
-          </p>
-          <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RequestResponse">Request Response</a> sample application for a complete example.
-          </p>
-
-
-
-
-
-          <br />
-          <h2 id="routingSlip">RoutingSlip</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/RoutingTableSimple.gif" />
-          </p>
-          <p>
-          Attach a Routing Slip to each message, specifying the sequence of processing steps. Wrap each component with a special message router that reads the Routing Slip and routes the message to the next component in the list.
-          </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 308-311) for more details.</i>
-          </p>
-          <h3>Message Definition</h3>
-
-<pre><code class="cs">
-  public class RoutingSlipMessage : Message
-  {
-      public RoutingSlipMessage(Guid correlationId) : base(correlationId)  { }
-  }
-
-</code></pre>
-
-          <h3>Routing messages</h3>
-
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          bus.Route(new RoutingSlipMessage(id), new List<string> { "RoutingSlip.Endpoint1", "RoutingSlip.Endpoint2" });
-      }
-  }
-
-</code></pre>
-
-          <h3>Consuming messages</h3>
-
-<pre><code class="cs">
-  public class RoutingSlipMessageHandler : IMessageHandler<RoutingSlipMessage>
-  {
-      public void Execute(RoutingSlipMessage message)
-      {
-          Console.WriteLine("Endpoint1 received message - {0}", message.CorrelationId);
-      }
-
-      public IConsumeContext Context { get; set; }
-  }
-
-</code></pre>
-
-          <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RoutingSlip">Routing Slip</a> sample application for a complete example.
-          </p>
-
-
-
-
-
-
-          <br />
-          <h2 id="recipientList">Recipient List</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/RecipientList.gif" />
-          </p>
-          <p>
-          With R.MessageBus implementation of Recipient List you can route a message to a list of dynamically specified recipients. You can choose to
-          wait for synchronous reply from each recipient or provide a callback method for asynchronous replies. 
-          The default timeout for the synchrounous replies is 10 seconds, but can be overriden on per-request basis.
-           </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 249-258) for more details.</i>
-          </p>
-          <h3>Message Definitions</h3>
-
-<pre><code class="cs">
-  public class RecipientListMessage : Message
-  {
-      public RecipientListMessage(Guid correlationId) : base(correlationId) { }
-      public bool SendReply { get; set; }
-  }
-
-  public class RecipientListResponse : Message
-  {
-      public RecipientListResponse(Guid correlationId) : base(correlationId) { }
-      public string Endpoint { get; set; }
-  }
-
-</code></pre>
-
-          <h3>Send message to recipients</h3>
-
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          var id = Guid.NewGuid();
-          bus.Send(
-              new List<string>
-                  {
-                      "Consumer1",
-                      "Consumer2"
-                  },
-              new RecipientListMessage(id)
-          );
-      }
-  }
-
-</code></pre>
-
-            <h3>Send message to recipients and receive synchronous replies</h3>
-
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          var id = Guid.NewGuid();
-          var responses = bus.SendRequest<RecipientListMessage, RecipientListResponse>(
-              new List<string>
-                  {
-                      "Consumer1",
-                      "Consumer2"
-                  },
-              new RecipientListMessage(id)
-          );
-
-          foreach (RecipientListResponse response in responses)
-          {
-              Console.WriteLine("Received response from - {0}", response.Endpoint);
-          }
-      }
-  }
-
-</code></pre>
-
-            <h3>Send message to recipients and receive asynchronous replies</h3>
-
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          bus.SendRequest<RecipientListMessage, RecipientListResponse>(
-                new List<string>
-                {
-                    "Consumer1",
-                    "Consumer2"
-                },
-                new RecipientListMessage(id)
-                {
-                    SendReply = true
-                },
-                r =>
-                {
-                    foreach (RecipientListResponse recipientListResponse in r)
-                    {
-                        Console.WriteLine("Received response from - {0}", recipientListResponse.Endpoint); 
-                    }
-                    Console.WriteLine("");
-                }
-            );
-      }
-  }
-
-</code></pre>
-
-          <h3>Consuming messages</h3>
-
-<pre><code class="cs">
-  public class MyMessageHandler : IMessageHandler&lt;RecipientListMessage&gt;
-  {
-      public void Execute(RecipientListMessage message)
-      {
-          Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
-
-          if (message.SendReply)
-          {
-              Context.Reply(new RecipientListResponse(message.CorrelationId)
-              {
-                  Endpoint = "Consumer1"
-              });
-          }
-      }
-
-      public IConsumeContext Context { get; set; }
-  }
-
-</code></pre>
-
-          <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RecipientList">Recipient List</a> sample application for a complete example.
-          </p>
-
-
-
-
-
-
-
-          <br />
-          <h2 id="aggregator">Aggregator</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/Aggregator.gif" />
-          </p>
-          <p>
-          Aggregator collects and stores individual messages until a complete set of related messages has been received. Then, the Aggregator publishes a single message distilled from the individual messages.
-           </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 268-282) for more details.</i>
-          </p>
-          <h3>Message Definitions</h3>
-
-<pre><code class="cs">
-  public class TestMessage : Message
-  {
-      public TestMessage(Guid correlationId) : base(correlationId)
-      {
-      }
-      public int Num { get; set; }
-  }
-
-</code></pre>
-
-          <h3>Send messages to Aggregator</h3>
-
-<pre><code class="cs">
-  class Program
-  {
-      static void Main(string[] args)
-      {
-          var bus = Bus.Initialize(x =>
-          {
-              x.SetQueueName("Aggregator.Publisher");
-              x.PurgeQueuesOnStart();
-          });
-
-          for (int i = 0; i < 1000; i++)
-          {
-              bus.Send("Aggregator.Consumer", new TestMessage(Guid.NewGuid())
-              {
-                  Num = i + 1
-              });
-              Thread.Sleep(10);
-          }
-
-          Console.ReadLine();
-      }
-  }
-
-</code></pre>
-
-          <h3>Consuming messages with Aggregator</h3>
-
-<pre><code class="cs">
-  public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
-  {
-      public override int BatchSize()
-      {
-          return 100;
-      }
-      public override TimeSpan Timeout()
-      {
-          return new TimeSpan(0, 0, 0, 2);
-      }
-      
-      public override void Execute(IList&lt;TestMessage&gt; message)
-      {
-          Console.WriteLine("***** Received batch of messages ({0}) ******", message.Count);
-      }
-  }
-
-</code></pre>
-
-          <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Aggregator">Aggregator</a> sample application for a complete example.
-          </p>
-
-
-
-
-
-          <br />
-          <h2 id="scatterGather">Scatter-Gather</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/BroadcastAggregate.gif" />
-          </p>
-          <p>
-          Scatter-Gather broadcasts a message to multiple recipients and re-aggregates the responses back into a single message.
-           </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 297-300) for more details.</i>
-          </p>
-          <h3>Message Definitions</h3>
-
-<pre><code class="cs">
-  public class Request : Message
-  {
-      public Request(Guid correlationId) : base(correlationId)
-      {
-      }
-
-      public bool Delay { get; set; }
-  }
-
-  public class Response : Message
-  {
-      public Response(Guid correlationId) : base(correlationId)
-      {
-      }
-
-      public string Endpoint { get; set; }
-  }
-
-</code></pre>
-
-          <h3>Publishing Request Messages</h3>
-
-<pre><code class="cs">
-  class Program
-  {
-      static void Main(string[] args)
-      {
-          var bus = Bus.Initialize();
-          bus.StartConsuming();
-
-          // Scatter Gather Expects 2 replies
-          var id = Guid.NewGuid();
-          var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id), 2);
-
-          foreach (var response in responses)
-          {
-              Console.WriteLine("Received response from - {0}", response.Endpoint);
-          }
-
-          // Scatter Gather unknown number of replies
-          id = Guid.NewGuid();
-          var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id){ Delay = true }, timeout: 500);
-
-          foreach (var response in responses)
-          {
-              Console.WriteLine("Received response from - {0}", response.Endpoint);
-          }
-      }
-  }
-
-</code></pre>
-
-          <h3>Consuming messages</h3>
-
-<pre><code class="cs">
-  // Consumer 1 Process
-  public class Handler : IMessageHandler&lt;Request&gt;
-  {
-      public void Execute(Request message)
-      {
-          Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
-
-          if (message.Delay)
-          {
-              Thread.Sleep(1000);
-          }
-          
-          Context.Reply(new Response(message.CorrelationId)
-          {
-              Endpoint = "Consumer1"
-          });
-      }
-
-      public IConsumeContext Context { get; set; }
-  }
-
-  // Consumer 2 Process
-  public class Handler : IMessageHandler&lt;Request&gt;
-  {
-      public void Execute(Request message)
-      {
-          Console.WriteLine("Consumer 2 Received Message - {0}", message.CorrelationId);
-
-          Context.Reply(new Response(message.CorrelationId)
-          {
-              Endpoint = "Consumer2"
-          });
-      }
-
-      public IConsumeContext Context { get; set; }
-  }
-
-</code></pre>
-
-          <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/ScatterGather">Scatter-Gather</a> sample application for a complete example.
-          </p>
-
-
-
-
-
-
-          <br />
-          <h2 id="streaming">Message Streaming</h2>
-          <p style="margin-top:30px;">
-            By utilising message streaming, R.MessageBus allows transfering large files or even audio/video streaming between two endpoints.
-          </p>
-          <br />
-          <p>
-            Simple use the bus to <strong>create a stream object</strong>
-          </p>
-
-<pre><code class="cs">
-var stream = bus.CreateStream("StreamConsumer", new StartStreamMessage(Guid.NewGuid())
-{
-    Path = "logoCopy.bmp"
-});   
-
-</code></pre>
-
-          <p>
-            ...and <strong>write your binary data</strong> to it.
-          </p>
-
-<pre><code class="cs">
-  var f = new FileStream("logo.bmp", FileMode.Open);
-
-  byte[] buffer = new byte[100000];
-  int read;
-  while ((read = f.Read(buffer, 0, buffer.Length)) > 0)
-  {
-      stream.Write(buffer);
-  }
-
-  stream.Close(); //stop sending
-
-</code></pre>
-
-
-          <p>
-            Finally, here is how you <strong>consume the stream</strong> on the receiving side.
-          </p>
-
-<pre><code class="cs">
-  public class StreamHandler : IStreamHandler&lt;StartStreamMessage&gt;
-  {
-      public IMessageBusReadStream Stream { get; set; }
-
-      public void Execute(StartStreamMessage message)
-      {
-          var ms = new FileStream(message.Path, FileMode.Create);
-          
-          while (!Stream.IsComplete())
-          {
-              var bytes = Stream.Read();
-              if (bytes.Length > 0)
-              {
-                  ms.Write(bytes, 0, bytes.Length);
-              }
-          }
-          
-          ms.Close();
-
-          Console.WriteLine("Stream Read - {0}", message.Path);
-      }
-  }
-
-</code></pre>
-          <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Streaming">Streaming</a> sample application for a complete example.
-          </p>
-
-
-
-
-
-
-
-          <br />
-          <h2 id="retries">Retries</h2>
-          <p style="margin-top:30px;">
-          When your application fails to successfully proccess a message, R.MessageBus implements a generic error handling for all your consumers. Upon catching an exception, the message is held in the "*.Retries" queue for a certain amount of time before being requeued. This process is repeated a number of times until either the message is handled successfully, or the "MaxRetries" limit is reached, at which point the message is moved to the error queue.
-           </p>
-
-<pre><code class="cs">
-  bus.Configuration.TransportSettings.MaxRetries = 5;
-  bus.Configuration.TransportSettings.RetryDelay = 50000;
-
-</code></pre>
-
-
-
-
-</div><!-- /.col-xs-12 main -->
-</div><!--/.row-->
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<div class="row">
-     @Html.Partial("../Home/_chat")
+﻿@{
+    ViewBag.Title = "All Guides";
+}
+
+<div class="container-fluid">
+<div class="row row-offcanvas row-offcanvas-left">
+    @Html.Partial("_sidebar")
+
+    <div class="col-xs-12 col-sm-9">
+        <h2 id="guide_list">Guide list</h2>
+
+        <p>We recommend that you read these guides, if possible, in this order:</p>
+
+        <h3 id="gettingstarted"><a href="/gettingstarted">Getting started</a></h3>
+
+        <p>This guide combines an overview of R.MessageBus with a quick tutorial that helps you to get started with it.
+        It should take about 10 minutes to read and study the provided code examples. This guide covers:</p>
+
+        <ul>
+            <li>Features of R.MessageBus, why R.MessageBus was created</li>
+            <li>R.MessageBus version requirements</li>
+            <li>How to add R.MessageBus dependency to your project</li>
+            <li>Basic Configuration</li>
+            <li>Basic Usage</li>
+        </ul>
+
+        <h3 id="configuring"><a href="/configuring">Configuring R.MessageBus</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="commands"><a href="/commands">Sending Commands</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="events"><a href="/events">Publishing Events</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="requestreply"><a href="/requestreply">Request Reply</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="processmanagers"><a href="/processmanagers">Process Managers (Long Running Processes)</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="routingslip"><a href="/routingslip">Routing Slip</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="recipientList"><a href="/recipientList">Recipient List</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="aggregator"><a href="/aggregator">Message Aggregation</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="scattergather"><a href="/scattergather">Scatter Gather</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="streaming"><a href="/streaming">Streaming</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+        <h3 id="auditing"><a href="/auditing">Message Auditing</a></h3>
+
+        <p>This guide covers:</p>
+
+        <ul>
+            <li>.....</li>
+        </ul>
+
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        
+
+
+            </div>
+    
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
 </div>

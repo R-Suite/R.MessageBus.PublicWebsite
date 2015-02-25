@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Message Auditing";
+}
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#Placeholder">Placeholder</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+        </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

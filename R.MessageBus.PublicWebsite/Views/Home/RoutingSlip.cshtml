@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Routing Slip";
+}
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#routingSlip">Routing Slip</a>
+                    </li>
+                    <li>
+                        <a href="#message">Message Definition</a>
+                    </li>
+                    <li>
+                        <a href="#routing">Routing Messages</a>
+                    </li>
+                    <li>
+                        <a href="#consuming">Consuming Messages</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+            <h2 id="routingSlip">RoutingSlip</h2>
+          <p style="margin-top:30px;">
+          <img class="img-responsive" src="scripts/images/RoutingTableSimple.gif" />
+          </p>
+          <p>
+          Attach a Routing Slip to each message, specifying the sequence of processing steps. Wrap each component with a special message router that reads the Routing Slip and routes the message to the next component in the list.
+          </p>
+          <p>
+          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 308-311) for more details.</i>
+          </p>
+          <h3 id="message">Message Definition</h3>
+
+<pre><code class="cs">
+  public class RoutingSlipMessage : Message
+  {
+      public RoutingSlipMessage(Guid correlationId) : base(correlationId)  { }
+  }
+
+</code></pre>
+
+          <h3 id="routing">Routing messages</h3>
+
+<pre><code class="cs">
+  public class Program
+  {
+      public static void Main()
+      {
+          var bus = Bus.Initialize();
+          bus.Route(new RoutingSlipMessage(id), new List<string> { "RoutingSlip.Endpoint1", "RoutingSlip.Endpoint2" });
+      }
+  }
+
+</code></pre>
+
+          <h3 id="consuming">Consuming messages</h3>
+
+<pre><code class="cs">
+  public class RoutingSlipMessageHandler : IMessageHandler<RoutingSlipMessage>
+  {
+      public void Execute(RoutingSlipMessage message)
+      {
+          Console.WriteLine("Endpoint1 received message - {0}", message.CorrelationId);
+      }
+
+      public IConsumeContext Context { get; set; }
+  }
+
+</code></pre>
+
+          <p>
+          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RoutingSlip">Routing Slip</a> sample application for a complete example.
+          </p>
+
+
+        </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

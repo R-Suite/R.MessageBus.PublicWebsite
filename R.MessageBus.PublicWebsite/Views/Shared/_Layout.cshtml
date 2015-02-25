@@ -18,31 +18,41 @@
 
     <script src="/scripts/dist/rmessagebus.min.js"></script>
     
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
   </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-          <h3 class="text-muted">R.MessageBus</h3>
-          <nav>
-            <ul class="nav nav-justified">
-              <li><a href="/">Home</a></li>
-              <li><a href="guides">All guides</a></li>
-              <li><a href="api">API Reference</a></li>
-              <li><a href="https://github.com/R-Suite/R.MessageBus">Code</a></li>
-              <li><a href="https://github.com/R-Suite/R.MessageBus/releases">Releases</a></li>
-              <li><a href="news">News</a></li>
-              <li><a href="contact">Get in touch</a></li>
-              <li><a href="monitor">Audit Monitor</a></li>
-            </ul>
-          </nav>
+<body style="height: 100%">
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">R.MessageBus</a>
+        </div>
+
+        
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="guides">All guides</a></li>
+            <li><a href="api">API Reference</a></li>
+            <li><a href="https://github.com/R-Suite/R.MessageBus">Code</a></li>
+            <li><a href="https://github.com/R-Suite/R.MessageBus/releases">Releases</a></li>
+            <li><a href="news">News</a></li>
+            <li><a href="contact">Get in touch</a></li>
+            <li><a href="monitor">Audit Monitor</a></li>
+          </ul>
+        </div>
       </div>
-      @RenderBody()
-      <footer class="footer">
-        <p>&copy; R.MessageBus</p>
-      </footer>
-    </div>
-  </body>
+    </nav>
+
+    @RenderBody()
+</body>
 </html>

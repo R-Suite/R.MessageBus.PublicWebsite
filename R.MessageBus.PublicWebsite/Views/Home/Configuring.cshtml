@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Configuring R.MessageBus";
+}
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#simple">Simple Configuration</a>
+                    </li>
+                    <li>
+                        <a href="#defaults">Default Configuration</a>
+                    </li>
+                    <li>
+                        <a href="#custom">Custom Configuration</a>
+                    </li>
+                    <li>
+                        <a href="#custom">Retries</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+          <h2>Configuring R.MessageBus</h2>
+          <h3 id="simple">Simple Configuration</h3>
+          <p>Calling initialize with no parameters will create an instance of the Bus with default configuration options.</p>
+          <p>
+            <pre><code class="cs">
+              public class Program
+              {
+                  public static void Main()
+                  {
+                      IBus bus = Bus.Initialize();
+                  }
+              }
+  
+            </code></pre>
+          </p>
+
+            <br/>
+            <h3 id="defaults">Default Configuration</h3>
+            <p>
+          Default configuration creates an endpoint in our messaging system that is ready to send/publish and receive messages.
+          Of course messages can only be received if we have a code to handle those messages.
+          </p>
+          <p>Default configuration is the following,</p>
+            <ul class="task-list">
+                <li>Consumer - RabbitMQ</li>
+                <li>Container - StructureMap</li>
+                <li>ScanForMessageHandlers - True</li>
+                <li>AutoStartConsuming - True</li>
+                <li>AddBusToContainer - True</li>
+                <li>ProcessManagerFinder - SqlServerProcessManagerFinder</li>
+                <li>
+                    TransportSettings
+                    <ul class="task-list">
+                        <li>Host - localhost</li>
+                        <li>MaxRetries - 3</li>
+                        <li>RetryDelay - 3000 ms</li>
+                        <li>AuditingEnabled - false</li>
+                        <li>AuditQueueName - "audit"</li>
+                        <li>ErrorQueueName = "errors"</li>
+                        <li>HeartbeatQueueName = "heartbeat"</li>
+                        <li>MachineName = Environment.MachineName</li>
+                        <li>Queue.Name = System.Diagnostics.Process.GetCurrentProcess().ProcessName;</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <br/>
+            <h3 id="custom">Custom Configuration</h3>
+          <p>Initialize also takes a single lambda/action parameter for custom configuration.</p>
+            <pre><code class="cs">
+              public class Program
+              {
+                  public static void Main()
+                  {
+                      IBus bus = Bus.Initialize(config =>
+                      {
+                          config.ScanForMesssageHandlers = true;
+                          config.AutoStartConsuming = false;
+                          config.SetQueueName("MyQueue"));
+                          config.SetAuditingEnabled(true));
+                          config.TransportSettings.MaxRetries = 5;
+                          config.TransportSettings.RetryDelay = 50000;
+                      });
+                  }
+              }
+
+            </code></pre>
+          <p>
+          Here we initialised the bus and we are ready to start sending or publishing messages. With this example we are not quite ready to consume incoming messages just yet, but don&apos;t worry about the configuration details at this point, we&apos;ll come back to that later. This is just to  demonstrate how to specify custom configuration options.
+          </p>
+
+            <h3 id="retries">Retries</h3>
+          <p style="margin-top:30px;">
+          When your application fails to successfully proccess a message, R.MessageBus implements a generic error handling for all your consumers. Upon catching an exception, the message is held in the "*.Retries" queue for a certain amount of time before being requeued. This process is repeated a number of times until either the message is handled successfully, or the "MaxRetries" limit is reached, at which point the message is moved to the error queue.
+           </p>
+
+<pre><code class="cs">
+  bus.Configuration.TransportSettings.MaxRetries = 5;
+  bus.Configuration.TransportSettings.RetryDelay = 50000;
+
+</code></pre>
+
+        </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

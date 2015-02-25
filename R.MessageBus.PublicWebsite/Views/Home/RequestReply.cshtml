@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Request Reply";
+}
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#requestReply">Request Reply</a>
+                    </li>
+                    <li>
+                        <a href="#message">Message Definition</a>
+                    </li>
+                    <li>
+                        <a href="#synchronous">Synchronous Request Reply</a>
+                    </li>
+                    <li>
+                        <a href="#asynchronous">Asynchronous Request Reply</a>
+                    </li>
+                    <li>
+                        <a href="#replier">Replier</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+            <h2 id="requestReply">Request Reply</h2>
+          <p style="margin-top:30px;">
+          <img class="img-responsive" src="scripts/images/RequestReply.gif" />
+          </p>
+          <p>
+          Request Reply can be used when the applications may want a two-way conversation. Send a pair of Request-Reply messages, each on its own channel. Requestor
+          sends a request message and waits for the reply message. Replier receives the requested message a responds with a reply message. In R.MessageBus implementation of <i>Request Reply</i> both request and reply messages are on <i>Point-to-Point</i> channel - meaning the messages are always breaodcasted to a single consumer.
+          </p>
+          <p>
+          R.MessageBus offers two implementations of Request Reply:
+          <ul>
+            <li>
+              <strong>Synchronous</strong> - a single thread sends the request message, blocks to wait for the reply message and than processes the reply.
+            </li>
+            <li>
+              <strong>Asynchronous</strong> - the caller sends the request message and sets up a callback for reply. A separate thread listens for reply and when the reply message arrives, the new thread invokes  the callback which reestablishes the caller&apos;s context and process the reply.
+            </li>
+          </ul>
+          </p>
+          <p>
+          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 154-158) for more details.</i>
+          </p>
+          <p>
+          <h3 id="message">Message Definition</h3>
+
+<pre><code class="cs">
+  public class RequestMessage : Message
+  {
+      public RequestMessage(Guid correlationId) : base(correlationId)  { }
+  }
+
+  public class ResponseMessage : Message
+  {
+      public ResponseMessage(Guid correlationId) : base(correlationId) { }
+  }
+
+</code></pre>
+
+          </p>
+          <p>
+          <h3 id="synchronous">Synchronous Block</h3>
+
+<pre><code class="cs">
+    ResponseMessage result = bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", new RequestMessage(Guid.NewGuid()));
+</code></pre>
+
+          </p>
+          <p>
+          <h3 id="asynchronous">Asynchronous Callback</h3>
+
+<pre><code class="cs">
+
+  var message = new RequestMessage(Guid.NewGuid());
+  bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", message, r => Console.WriteLine("Received reply - {0}", r.CorrelationId));
+
+</code></pre>
+
+          </p>
+          <p>
+          <h3 id="replier">Replier</h3>
+
+<pre><code class="cs">
+  public class RequestMessageHandler : IMessageHandler&lt;RequestMessage&gt;
+  {
+      public IConsumeContext Context { get; set; }
+      
+      public void Execute(RequestMessage message)
+      {
+          Context.Reply(new ResponseMessage(message.CorrelationId));
+      }
+  }
+
+</code></pre>
+
+          </p>
+          <p>
+          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RequestResponse">Request Response</a> sample application for a complete example.
+          </p>
+
+
+        </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

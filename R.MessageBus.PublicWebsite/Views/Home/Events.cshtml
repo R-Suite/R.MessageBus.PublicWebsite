@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Events";
+}
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#events">Events</a>
+                    </li>
+                    <li>
+                        <a href="#eventdefinition">Event Definition</a>
+                    </li>
+                    <li>
+                        <a href="#publishing">Publishing Events</a>
+                    </li>
+                    <li>
+                        <a href="#consuming">Consuming Events</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+            <h2 id="events">Events (Publish/Subscribe)</h2>
+          <p style="margin-top:30px;">
+          <img class="img-responsive" src="scripts/images/PublishSubscribe.gif" />
+          </p>
+          <p>
+          Publish-Subscribe channel works like this: It has one input channel that splits into multiple output channels, one for each subscriber. When an event is published into the channel, the Publish-Subscribe Channel, delivers a copy of the message to each of the output channels. Each output end of the channel has only one subscriber, which is allowed to consume a message only once. In this way, each subscriber gets the message only once, and consumed copies disapear from their channels.
+          </p>
+          <p>
+          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 106-110) for more details.</i>
+          </p>
+            <p>
+                
+                <h3 id="eventdefinition">Event Definition</h3>
+                <pre><code class="cs">
+  public class PublishSubscribeMessage : Message
+  {
+      public PublishSubscribeMessage(Guid correlationId) : base(correlationId){}
+  }
+
+</code></pre>
+            </p>
+          <p>
+          <h3 id="publishing">Publishing Events</h3>
+<pre><code class="cs">
+  public class Program
+  {
+      public static void Main()
+      {
+          var bus = Bus.Initialize();
+          bus.Publish(new PublishSubscribeMessage(id));
+      }
+  }
+
+</code></pre>
+          </p>
+          <p>
+          <h3 id="consuming">Consuming Events</h3>
+<pre><code class="cs">
+  public class Program
+  {
+      public static void Main()
+      {
+          var bus = Bus.Initialize();
+      }
+  }
+
+</code></pre>
+          </p>
+            <p>
+<pre><code class="cs">
+  public class PublishSubscribeMessageHandler : IMessageHandler&lt;PublishSubscribeMessage&gt;
+  {
+      public void Execute(PublishSubscribeMessage message)
+      {
+          Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
+      }
+  }
+
+</code></pre>
+          </p>
+          <p>
+          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/PublishSubscribe">Publish - Subscribe</a> sample application for a complete example.
+          </p>
+
+        </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

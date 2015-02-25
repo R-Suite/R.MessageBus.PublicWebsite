@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Message Aggregation";
+}
+
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#aggregator">Aggregator</a>
+                    </li>
+                    <li>
+                        <a href="#sending">Sending messages to Aggregator</a>
+                    </li>
+                    <li>
+                        <a href="#consuming">Consuming messages with Aggregator</a>
+                    </li>
+                    <li>
+                        <a href="#configuring">Aggregator Configuration Options</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+                <h2 id="aggregator">Aggregator</h2>
+                <p style="margin-top: 30px;">
+                    <img class="img-responsive" src="scripts/images/Aggregator.gif"/>
+                </p>
+                <p>
+                    Aggregator collects and stores individual messages until a complete set of related messages has been received. Then, the Aggregator publishes a single message distilled from the individual messages.
+                </p>
+                <p>
+                    <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 268-282) for more details.</i>
+                </p>
+                <h3>Message Definitions</h3>
+
+                <pre><code class="cs">
+  public class TestMessage : Message
+  {
+      public TestMessage(Guid correlationId) : base(correlationId)
+      {
+      }
+      public int Num { get; set; }
+  }
+
+</code></pre>
+
+                <h3 id="sending">Sending messages to Aggregator</h3>
+
+                <pre><code class="cs">
+  class Program
+  {
+      static void Main(string[] args)
+      {
+          var bus = Bus.Initialize(x =>
+          {
+              x.SetQueueName("Aggregator.Publisher");
+              x.PurgeQueuesOnStart();
+          });
+
+          for (int i = 0; i < 1000; i++)
+          {
+              bus.Send("Aggregator.Consumer", new TestMessage(Guid.NewGuid())
+              {
+                  Num = i + 1
+              });
+              Thread.Sleep(10);
+          }
+
+          Console.ReadLine();
+      }
+  }
+
+</code></pre>
+
+                <h3 id="consuming">Consuming messages with Aggregator</h3>
+
+                <pre><code class="cs">
+  public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
+  {
+      public override int BatchSize()
+      {
+          return 100;
+      }
+      public override TimeSpan Timeout()
+      {
+          return new TimeSpan(0, 0, 0, 2);
+      }
+      
+      public override void Execute(IList&lt;TestMessage&gt; message)
+      {
+          Console.WriteLine("***** Received batch of messages ({0}) ******", message.Count);
+      }
+  }
+
+</code></pre>
+            
+            
+             <h3 id="configuring">Aggregator Configuration Options</h3>
+
+                <pre><code class="cs">
+  
+
+</code></pre>
+
+            <p>
+                    See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Aggregator">Aggregator</a> sample application for a complete example.
+                </p>
+
+            </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

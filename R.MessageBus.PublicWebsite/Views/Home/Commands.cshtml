@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Sending Commands";
+}
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#commands">Commands (Point to Point)</a>
+                    </li>
+                    <li>
+                        <a href="#commanddefinition">Command Definition</a>
+                    </li>
+                    <li>
+                        <a href="#endpointmappings">Endpoint Mappings</a>
+                    </li>
+                    <li>
+                        <a href="#sendingCommands">Sending Commands</a>
+                    </li> 
+                    <li>
+                        <a href="#consumingCommands">Consuming Commands</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+
+            <h2 id="commands">Commands (Point To Point)</h2>
+          <p style="margin-top:30px;">
+          <img class="img-responsive" src="scripts/images/PointToPoint.gif" />
+          </p>
+          <p>
+          A Point to Point channel ensures that only one receiver consumes any given message. The channel can have multiple receivers that can consume multiple messages concurrently (Competing Consumers), but only one of them can successfully consume a particular message. This design makes consuming and processing messages highly scalable because the work can be load balanced across multiple consumers running in multiple applications on multiple computers.
+          </p>
+          <p>
+          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 103-105, 502-507) for more details.</i>
+          </p>
+          <p>
+          <h3 id="commanddefinition">Command Definition</h3>
+            <pre><code class="cs">
+              public class PointToPointMessage : Message
+              {
+                  public PointToPointMessage(Guid correlationId) : base(correlationId){}
+              }
+
+            </code></pre>
+          </p>
+
+          <p>
+            <h3 id="endpointmappings">Endpoint Mappings</h3>
+            <p style="margin-top: 30px;">
+                ...
+            </p>
+
+          <p>
+              <h3 id="sendingCommands">Sending Commands</h3>
+            <pre><code class="cs">
+              public class Program
+              {
+                  public static void Main()
+                  {
+                      var bus = Bus.Initialize(config => config.AddEndPointMapping(typeof(PointToPointMessage), "PointToPoint"));
+                      bus.Send(new PointToPointMessage(id));
+                  }
+              }
+
+            </code></pre>
+                      </p>
+                      <p>
+                      <h3 id="consumingCommands">Consuming Commands</h3>
+            <pre><code class="cs">
+              public class Program
+              {
+                  public static void Main()
+                  {
+                      var bus = Bus.Initialize(config => config.SetEndPoint("PointToPoint"));
+                  }
+              }
+
+            </code></pre>
+                      </p>
+            <p>
+            <pre><code class="cs">
+              public class PointToPointMessageHandler : IMessageHandler&lt;PointToPointMessage&gt;
+              {
+                  public void Execute(PointToPointMessage command)
+                  {
+                      Console.WriteLine("Received message - {0}", command.CorrelationId);
+                  }
+              }
+
+            </code></pre>
+          </p>
+          <p>See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/PointToPoint">Point To Point</a> sample application for a complete example.</p>
+          
+        </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

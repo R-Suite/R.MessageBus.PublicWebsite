@@ -16,11 +16,6 @@ namespace R.MessageBus.PublicWebsite.Controllers
             return View();
         }
 
-        public ActionResult GettingStarted()
-        {
-            return View();
-        }
-
         public ActionResult Contact()
         {
             return View();
@@ -62,7 +57,72 @@ namespace R.MessageBus.PublicWebsite.Controllers
             return View();
         }
 
+        public ActionResult GettingStarted()
+        {
+            return View();
+        }
+
+        public ActionResult Configuring()
+        {
+            return View();
+        }
+
+        public ActionResult Commands()
+        {
+            return View();
+        }
+
+        public ActionResult Events()
+        {
+            return View();
+        }
+
+        public ActionResult RequestReply()
+        {
+            return View();
+        }
+
+        public ActionResult ProcessManagers()
+        {
+            return View();
+        }
+
+        public ActionResult RoutingSlip()
+        {
+            return View();
+        }
+
+        public ActionResult RecipientList()
+        {
+            return View();
+        }
+
+        public ActionResult Aggregator()
+        {
+            return View();
+        }
+
+        public ActionResult ScatterGather()
+        {
+            return View();
+        }
+
+        public ActionResult Streaming()
+        {
+            return View();
+        }
+
+        public ActionResult Auditing()
+        {
+            return View();
+        }
+
         public ActionResult Monitor()
+        {
+            return View();
+        }
+
+        public ActionResult Api()
         {
             return View();
         }
