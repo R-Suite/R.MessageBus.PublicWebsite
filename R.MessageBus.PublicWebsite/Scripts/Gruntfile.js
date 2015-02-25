@@ -18,13 +18,10 @@ module.exports = function(grunt) {
         },
 
         concat: {
-            options: {
-              separator: ';',
-            },
             dist: {
               src: ['bower_components/bootstrap/dist/bootstrap.js'],
-              dest: 'dist/rmessagebus.min.js',
-            },
+              dest: 'dist/rmessagebus.min.js'
+            }
         },
 
         cssmin: {
