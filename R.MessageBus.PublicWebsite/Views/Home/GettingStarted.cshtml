@@ -10,11 +10,25 @@
                     <li>
                         <a href="#about">About</a>
                     </li>
+                     <li>
+                        <a href="#version">What version does this guide cover?</a>
+                    </li>
                     <li>
                         <a href="#versionrequirements">Requirements</a>
                     </li>
                     <li>
                         <a href="#dependancy">Adding R.MessageBus to your project</a>
+                        <ul class="nav nav-list">
+                            <li>
+                                <a href="#nuget">Nuget</a>
+                            </li>
+                            <li>
+                                <a href="#compiling">Compiling From Source</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#project">Using the R.MessageBus Service Project Template</a>
                     </li>
                     <li>
                         <a href="#configuration">Basic Configuration</a>
@@ -42,38 +56,60 @@
             <!--<h3>Why async messaging?</h3>
             <p>Unlike in conventional programming where functions are invoked directly by name, asynchronous messaging relies on sending a message to a process where supporting infrastructure select the actual code to run. The primary benefits of this architectual style are encapsulation where clients invoke services without any knowledge of their implementation; and distribution which allows developers to build systems made up of sub-systems that run on disparate computers in different locations and at different times.</p>-->
 
+            <h3 id="version">What version does this guide cover?</h3>
+            <p>
+               This guide covers R.MessageBus 2.0 (including preview releases).
+            </p>
 
-            <br />
             <h3 id="versionrequirements">Requirements</h3>
             <p>
-               ..
+                <ul style="padding-left: 20px;">
+                    <li>.NET 4.5+</li>
+                    <li>Newtonsoft.Json 6</li>
+                    <li>Structuremap 2.6</li>
+                    <li>Common.Logging 3</li>
+                    <li>RabbitMQ.Client 3.2.1</li>
+                </ul>
             </p>
 
-            <br />
             <h3 id="dependancy">Adding R.MessageBus to your project</h3>
+            <h4 id="nuget">Nuget</h4>
             <p>
-               ..
+                The easiest way to add R.MessageBus to your project is to use NuGet.
             </p>
-           
+            <p>
+<pre><code class="cs">
+nuget Install-Package R.MessageBus
 
-            <br />
+</code></pre>
+            </p>
+            <h4 id="compiling">Compiling From Source</h4>
+            <p>
+               If you want to use the latest version of R.MessageBus you can clone the source from github.com
+            </p>
+<pre><code class="cs">
+git clone https://github.com/R-Suite/R.MessageBus.git
+
+</code></pre> 
+            
+           <h3 id="project">Using the R.MessageBus Service Project Template</h3>
+            <p>...</p>
+
            <h3 id="configuration">Basic Configuration</h3>
            <p>Calling initialize with no parameters will create an instance of the Bus with default configuration options.</p>
             <p>
                 <pre><code class="cs">
-              public class Program
-              {
-                  public static void Main()
-                  {
-                      IBus bus = Bus.Initialize();
-                  }
-              }
-  
+public class Program
+{
+    public static void Main()
+    {
+        IBus bus = Bus.Initialize();
+    }
+}
             </code></pre>
             </p>
 
-            <br />
-            <h2 id="usage">Basic Usage</h2>
+            <h3 id="usage">Basic Usage</h3>
             <h3></h3>
             <p>
                 ..

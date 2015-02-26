@@ -20,3 +20,25 @@
 }
 
 /* Customize the nav-justified links to be fill the entire space of the .navbar */
+
+
+.sidebar-nav {
+padding: 9px 0;
+}
+
+.nav-list {
+padding-right: 15px;
+padding-left: 15px;
+margin-bottom: 0;
+}
+
+
+.nav-list > li > a {
+padding: 3px 15px;
+}
+
+.nav-list > li > a, .nav-list .nav-header {
+margin-right: -15px;
+margin-left: -15px;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
