@@ -81,7 +81,7 @@
 
                 <h3 id="consuming">Consuming messages with Aggregator</h3>
 
-                <pre><code class="cs">
+<pre><code class="cs">
   public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
   {
       public override int BatchSize()
@@ -104,9 +104,13 @@
             
              <h3 id="configuring">Aggregator Configuration Options</h3>
 
-                <pre><code class="cs">
+<pre><code class="cs">
+  var bus = Bus.Initialize(config =>
+  {
+      // Set where to persist messages while being aggregated.
+      config.SetAggregatorPersistor&lt;InMemoryAggregatorPersistor&gt;();
+  });
   
-
 </code></pre>
 
             <p>
