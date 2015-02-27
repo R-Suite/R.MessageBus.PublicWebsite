@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 
         concat: {
             dist: {
-              src: ['bower_components/bootstrap/dist/bootstrap.js'],
+                src: ['bower_components/jquery/dist/jquery.js', 'bower_components/bootstrap/dist/js/bootstrap.js'],
               dest: 'dist/rmessagebus.min.js'
             }
         },
