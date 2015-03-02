@@ -42,61 +42,72 @@
           <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 103-105, 502-507) for more details.</i>
           </p>
           <p>
-          <h3 id="commanddefinition">Command Definition</h3>
-            <pre><code class="cs">
-              public class PointToPointMessage : Message
-              {
-                  public PointToPointMessage(Guid correlationId) : base(correlationId){}
-              }
+              <h3 id="commanddefinition">Command Definition</h3>
 
-            </code></pre>
+              <pre><code class="cs">
+public class PointToPointMessage : Message
+{
+    public PointToPointMessage(Guid correlationId) : base(correlationId){}
+}
+
+</code></pre>
           </p>
 
           <p>
             <h3 id="endpointmappings">Endpoint Mappings</h3>
-            <p style="margin-top: 30px;">
-                ...
+            <p>
+                Commands can be mapped to destination endpoints during bus intitialisation using the configuration's AddEndPointMapping method:
+
+<pre><code class="cs">var bus = Bus.Initialize(config => config.AddEndPointMapping(typeof(PointToPointMessage), "PointToPoint"));</code></pre>
+
+                Alternatively, the destination endpoint can be specified at the runtime when commands are being sent:
+
+<pre><code class="cs">bus.Send(new PointToPointMessage(id), "PointToPoint");</code></pre>
+
             </p>
 
-          <p>
-              <h3 id="sendingCommands">Sending Commands</h3>
-            <pre><code class="cs">
-              public class Program
-              {
-                  public static void Main()
-                  {
-                      var bus = Bus.Initialize(config => config.AddEndPointMapping(typeof(PointToPointMessage), "PointToPoint"));
-                      bus.Send(new PointToPointMessage(id));
-                  }
-              }
+            <p>
+                <h3 id="sendingCommands">Sending Commands</h3>
 
-            </code></pre>
+                <pre><code class="cs">
+public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize(config => config.AddEndPointMapping(typeof(PointToPointMessage), "PointToPoint"));
+        bus.Send(new PointToPointMessage(id));
+    }
+}
+
+</code></pre>
                       </p>
                       <p>
-                      <h3 id="consumingCommands">Consuming Commands</h3>
-            <pre><code class="cs">
-              public class Program
-              {
-                  public static void Main()
-                  {
-                      var bus = Bus.Initialize(config => config.SetEndPoint("PointToPoint"));
-                  }
-              }
+                          <h3 id="consumingCommands">Consuming Commands</h3>
 
-            </code></pre>
-                      </p>
+                          <pre><code class="cs">
+public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize(config => config.SetEndPoint("PointToPoint"));
+    }
+}
+
+</code></pre>
+            </p>
             <p>
-            <pre><code class="cs">
-              public class PointToPointMessageHandler : IMessageHandler&lt;PointToPointMessage&gt;
-              {
-                  public void Execute(PointToPointMessage command)
-                  {
-                      Console.WriteLine("Received message - {0}", command.CorrelationId);
-                  }
-              }
+                
+                <pre><code class="cs">
+public class PointToPointMessageHandler : IMessageHandler&lt;PointToPointMessage&gt;
+{
+    public void Execute(PointToPointMessage command)
+    {
+        Console.WriteLine("Received message - {0}", command.CorrelationId);
+    }
+}
 
-            </code></pre>
-          </p>
+</code></pre>
+            </p>
           <p>See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/PointToPoint">Point To Point</a> sample application for a complete example.</p>
           
         </div>
