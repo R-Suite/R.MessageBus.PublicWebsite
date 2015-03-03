@@ -55,15 +55,15 @@
           <h3 id="message">Message Definition</h3>
 
 <pre><code class="cs">
-  public class RequestMessage : Message
-  {
-      public RequestMessage(Guid correlationId) : base(correlationId)  { }
-  }
+public class RequestMessage : Message
+{
+    public RequestMessage(Guid correlationId) : base(correlationId)  { }
+}
 
-  public class ResponseMessage : Message
-  {
-      public ResponseMessage(Guid correlationId) : base(correlationId) { }
-  }
+public class ResponseMessage : Message
+{
+    public ResponseMessage(Guid correlationId) : base(correlationId) { }
+}
 
 </code></pre>
 
@@ -71,18 +71,15 @@
           <p>
           <h3 id="synchronous">Synchronous Block</h3>
 
-<pre><code class="cs">
-    ResponseMessage result = bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", new RequestMessage(Guid.NewGuid()));
+<pre><code class="cs">ResponseMessage result = bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", new RequestMessage(Guid.NewGuid()));
 </code></pre>
 
           </p>
           <p>
           <h3 id="asynchronous">Asynchronous Callback</h3>
 
-<pre><code class="cs">
-
-  var message = new RequestMessage(Guid.NewGuid());
-  bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", message, r => Console.WriteLine("Received reply - {0}", r.CorrelationId));
+<pre><code class="cs">var message = new RequestMessage(Guid.NewGuid());
+bus.SendRequest&lt;RequestMessage, ResponseMessage&gt;("Responder", message, r => Console.WriteLine("Received reply - {0}", r.CorrelationId));
 
 </code></pre>
 
@@ -91,15 +88,15 @@
           <h3 id="replier">Replier</h3>
 
 <pre><code class="cs">
-  public class RequestMessageHandler : IMessageHandler&lt;RequestMessage&gt;
-  {
-      public IConsumeContext Context { get; set; }
+public class RequestMessageHandler : IMessageHandler&lt;RequestMessage&gt;
+{
+    public IConsumeContext Context { get; set; }
       
-      public void Execute(RequestMessage message)
-      {
-          Context.Reply(new ResponseMessage(message.CorrelationId));
-      }
-  }
+    public void Execute(RequestMessage message)
+    {
+        Context.Reply(new ResponseMessage(message.CorrelationId));
+    }
+}
 
 </code></pre>
 

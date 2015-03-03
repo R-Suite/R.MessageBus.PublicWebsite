@@ -40,50 +40,51 @@
             <p>
                 
                 <h3 id="eventdefinition">Event Definition</h3>
+
                 <pre><code class="cs">
-  public class PublishSubscribeMessage : Message
-  {
-      public PublishSubscribeMessage(Guid correlationId) : base(correlationId){}
-  }
+public class PublishSubscribeMessage : Message
+{
+    public PublishSubscribeMessage(Guid correlationId) : base(correlationId){}
+}
 
 </code></pre>
             </p>
           <p>
           <h3 id="publishing">Publishing Events</h3>
 <pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          bus.Publish(new PublishSubscribeMessage(id));
-      }
-  }
+public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize();
+        bus.Publish(new PublishSubscribeMessage(id));
+    }
+}
 
 </code></pre>
           </p>
           <p>
           <h3 id="consuming">Consuming Events</h3>
 <pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-      }
-  }
+public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize();
+    }
+}
 
 </code></pre>
           </p>
             <p>
 <pre><code class="cs">
-  public class PublishSubscribeMessageHandler : IMessageHandler&lt;PublishSubscribeMessage&gt;
-  {
-      public void Execute(PublishSubscribeMessage message)
-      {
-          Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
-      }
-  }
+public class PublishSubscribeMessageHandler : IMessageHandler&lt;PublishSubscribeMessage&gt;
+{
+    public void Execute(PublishSubscribeMessage message)
+    {
+        Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
+    }
+}
 
 </code></pre>
           </p>
