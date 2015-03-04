@@ -21,94 +21,113 @@
         <div class="col-xs-12 col-sm-9">
 
             <h2 id="processManager">Process Manager (Long runnning processes/Workflow/Saga)</h2>
-          <p style="margin-top:30px;">
-          <img class="img-responsive" src="scripts/images/ProcessManager.gif" />
-          </p>
-          <p>
-          Using a Process Manager results in a so-called hub-and-spoke pattern of message flow. An incoming message initializes the Process Manager. We call this message the trigger message. Based on the rules inside the process manager it sends a message to processing steps which then send reply messages back. When receiving messages the Process Manager determines the next step to be executed. As a result, all traffic runs through this central hub, hence the term hub-and-spoke. The downside of this central control element is the danger of turning the Process Manager into a performance bottleneck.
-          </p>
-          <p>
-          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 312-321) for more details.</i>
-          </p>
-          <p>
-          <h3 id="creating">Creating the Process Manager</h3>
-
-<pre><code class="cs">
-  public class MealData : IProcessManagerData
-  {
-      public Guid CorrelationId { get; set; }
-      public bool BurgerCooked { get; set; }
-      public bool FoodPrepped { get; set; }
-      public string Meal { get; set; }
-      public string Size { get; set; }
-  }
-
+            <p style="margin-top:30px;">
+                <img class="img-responsive" src="scripts/images/ProcessManager.gif" />
+            </p>
+            <p>
+                Using a Process Manager results in a so-called hub-and-spoke pattern of message flow. An incoming message initializes the Process Manager. 
+                We call this message the trigger message. Based on the rules inside the process manager it sends a message to processing steps which then 
+                send reply messages back. When receiving messages the Process Manager determines the next step to be executed. As a result, 
+                all traffic runs through this central hub, hence the term hub-and-spoke. The downside of this central control element is the danger of 
+                turning the Process Manager into a performance bottleneck.
+            </p>
+            <p>
+                <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 312-321) for more details.</i>
+            </p>
+            <h3 id="creating">Process Manager in R.MessageBus</h3>
+            <p>
+                ...
+                <pre><code class="cs">public class MealData : IProcessManagerData
+{
+    public Guid CorrelationId { get; set; }
+    public bool BurgerCooked { get; set; }
+    public bool FoodPrepped { get; set; }
+    public string Meal { get; set; }
+    public string Size { get; set; }
+}
 </code></pre>
 
-<pre><code class="cs">
-  public class MealProcess : ProcessManager&lt;MealData&gt;, IStartProcessManager&lt;NewOrderMessage&gt;,
-                              IMessageHandler&lt;BurgerCookedMessage&gt;,
-                              IMessageHandler&lt;FoodPrepped&gt;
-  {
-      private readonly IBus _bus;
-      public Meal(IBus bus)
-      {
-          _bus = bus;
-      }
+            </p>
 
-      public void Execute(NewOrderMessage message)
-      {
-          Data.CorrelationId = Guid.NewGuid();
-          Data.Meal = message.Name;
-          Data.Size = message.Size;
-          var prepFoodMessage = new PrepFoodMessage(Data.CorrelationId)
-          {
-              BunSize = message.Size
-          };
+            <h3 id="creating">Configuring Process Manager</h3>
+            <p>
+                ...
+            </p>
+            <h3 id="creating">Starting Process Manager</h3>
+            <p>
+                ...
+            </p>
+            <h3 id="creating">Handling Messages in Process Manager</h3>
+            <p>
+                ...
+            </p>
+            <h3 id="creating">Ending Process Manager</h3>
+            <p>
+                ...
+            </p>
 
-          _bus.Publish(prepFoodMessage);
+                <pre><code class="cs">public class MealProcess : ProcessManager&lt;MealData&gt;, IStartProcessManager&lt;NewOrderMessage&gt;,
+                           IMessageHandler&lt;BurgerCookedMessage&gt;,
+                           IMessageHandler&lt;FoodPrepped&gt;
+{
+    private readonly IBus _bus;
+    public Meal(IBus bus)
+    {
+        _bus = bus;
+    }
 
-          var flipBurgerMessage = new CookBurgerMessage(Data.CorrelationId)
-          {
-              BurgerSize = message.Size
-          };
+    public void Execute(NewOrderMessage message)
+    {
+        Data.CorrelationId = Guid.NewGuid();
+        Data.Meal = message.Name;
+        Data.Size = message.Size;
+        var prepFoodMessage = new PrepFoodMessage(Data.CorrelationId)
+        {
+            BunSize = message.Size
+        };
 
-          _bus.Publish(flipBurgerMessage);
-      }
+        _bus.Publish(prepFoodMessage);
 
-      public void Execute(BurgerCookedMessage message)
-      {
-          Data.BurgerCooked = true;
-          if (Data.FoodPrepped)
-          {
-              _bus.Publish(new OrderReadyMessage(message.CorrelationId)
-              {
+        var flipBurgerMessage = new CookBurgerMessage(Data.CorrelationId)
+        {
+            BurgerSize = message.Size
+        };
+
+        _bus.Publish(flipBurgerMessage);
+    }
+
+    public void Execute(BurgerCookedMessage message)
+    {
+        Data.BurgerCooked = true;
+        if (Data.FoodPrepped)
+        {
+            _bus.Publish(new OrderReadyMessage(message.CorrelationId)
+            {
+            Size = Data.Size,
+            Meal = Data.Meal
+            });
+
+            Complete = true;
+        }
+    }
+
+    public void Execute(FoodPrepped message)
+    {
+        Data.FoodPrepped = true;
+        if (Data.BurgerCooked)
+        {
+            _bus.Publish(new OrderReadyMessage(message.CorrelationId)
+            {
                 Size = Data.Size,
                 Meal = Data.Meal
-              });
-
-              Complete = true;
-          }
-      }
-
-      public void Execute(FoodPrepped message)
-      {
-          Data.FoodPrepped = true;
-          if (Data.BurgerCooked)
-          {
-              _bus.Publish(new OrderReadyMessage(message.CorrelationId)
-              {
-                  Size = Data.Size,
-                  Meal = Data.Meal
-              });
-              Complete = true;
-          }
-      }
-  }
+            });
+            Complete = true;
+        }
+    }
+}
 
 </code></pre>
 
-          </p>
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/McDonalds">McDonalds - Process Manager</a> sample application for a complete example.
           </p>
