@@ -36,7 +36,12 @@
             </p>
             <h3 id="creating">Process Manager in R.MessageBus</h3>
             <p>
-                ...
+                Implementation of Process Manager in R.MessageBus is such that it handles various types of messages, over a period of time,
+                while keeping an interim state. The state is saved in memory by default, but can be persisted to disk as well.
+                Currently, the supported persistance mechanisms include Microsoft® SQL Server™ (without any need for an ORM layer) and MongoDB.
+            </p>
+            <p>
+                R.MessageBus defines the date for interim state by implementing <i>IProcessManagerData</i> where all the public properties are persisted:
                 <pre><code class="cs">public class MealData : IProcessManagerData
 {
     public Guid CorrelationId { get; set; }
@@ -51,6 +56,11 @@
 
             <h3 id="creating">Configuring Process Manager</h3>
             <p>
+                <div><strong>Configure Persistance:</strong></div>
+                ...
+            </p>
+            <p>
+                <div><strong>Configure How to find Process Manager:</strong></div>
                 ...
             </p>
             <h3 id="creating">Starting Process Manager</h3>
