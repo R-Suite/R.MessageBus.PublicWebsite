@@ -57,7 +57,23 @@
             <h3 id="creating">Configuring Process Manager</h3>
             <p>
                 <div><strong>Configure Persistance:</strong></div>
-                ...
+                Currently R.MessageBus offers three persistance mechanisms: MongoDB, Microsoft® SQL Server™, and In-memory. 
+                The MongoDB persistance implementation offers the best performance while its schema-less nature make it a perfect fit 
+                for proccess manager storage. In order to use MongoDB persister, you'll need to install R.MessageBus.Persistance.MongoDb.nupkg.
+                <p>
+                <pre><code class="cs">public class Program
+{
+    public static void Main()
+    {
+        Bus.Initialize(config =>
+        {
+            config.SetProcessManagerFinder&lt;MongoDbProcessManagerFinder&gt;();
+            config.PersistenceStoreConnectionString = "mongodb://localhost/";
+        });
+    }
+}
+</code></pre>
+                </p>
             </p>
             <p>
                 <div><strong>Configure How to find Process Manager:</strong></div>
