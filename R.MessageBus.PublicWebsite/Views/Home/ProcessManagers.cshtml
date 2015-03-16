@@ -37,11 +37,13 @@
             <p>
                 <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 312-321) for more details.</i>
             </p>
+            
+            <br />
             <h3 id="processManagerInRMessageBus">Process Manager in R.MessageBus</h3>
             <p>
                 Implementation of Process Manager in R.MessageBus is such that it handles various types of messages, over a period of time,
                 while keeping an interim state.
-                R.MessageBus defines the date for interim state by implementing <i>IProcessManagerData</i> where all the public properties are persisted:
+                R.MessageBus defines the date for interim state by implementing <code>IProcessManagerData</code> where all the public properties are persisted:
                 <pre><code class="cs">public class MyProcessManagerData : IProcessManagerData
 {
     public Guid CorrelationId { get; set; }
@@ -69,16 +71,17 @@
 </code></pre>
                 </p>
             </p>
-
+            
+            <br />
             <h3 id="handling">Handling Messages in Process Manager</h3>
             <p>
-                Implementing a special interface IStartProcessManager&lt;NewOrderMessage&gt; instructs R.MessageBus to create a new instance process manager.
-                Please note that you can define multiple message types to start new process manager instance.
-                Like any other handler, process manager consumes messages specified by the generic type argument of IMessageHandler&lt;TMessage&gt;
+                Implementing a special interface <code>IStartProcessManager&lt;NewOrderMessage&gt;</code> instructs R.MessageBus to create a new instance of process manager.
+                Please note that you can define multiple message types to create a new process manager instance.
+                Like any other handler, process manager consumes messages specified by the generic type argument of <code>IMessageHandler&lt;TMessage&gt;</code>
                 and will always lookup the correct instance of process manager based on predefined rules.
                 <br />
                 See below for an example on how to define rules for correlating messages into the correct process manager instance.
-                <p>
+<p>
                     <pre><code class="cs">public class MyProcessManager : R.MessageBus.Core.ProcessManager&lt;MyProcessManagerData&gt;,
                                 IStartProcessManager&lt;StartProcessManagerMessage&gt;,
                                 IStartProcessManager&lt;Process1ResponseMessage&gt;,
@@ -95,72 +98,22 @@
 </code></pre>
                 </p>            
             </p>
-
+            
+            <br />
             <h3 id="creating">Ending Process Manager</h3>
             <p>
-                ...
+                After process manager handling all the messages, you might decide that you no longer need the state data persisted by the process manager 
+                and want to remove from the data store. This is done by simple setting <code>Complete = true;</code> in any of the message handling methods.
             </p>
 
-                <pre><code class="cs">public class MealProcess : ProcessManager&lt;MealData&gt;, IStartProcessManager&lt;NewOrderMessage&gt;,
-                           IMessageHandler&lt;BurgerCookedMessage&gt;,
-                           IMessageHandler&lt;FoodPrepped&gt;
+            <pre><code class="cs">...
+
+public void Execute(Process2ResponseMessage message)
 {
-    private readonly IBus _bus;
-    public Meal(IBus bus)
-    {
-        _bus = bus;
-    }
-
-    public void Execute(NewOrderMessage message)
-    {
-        Data.CorrelationId = Guid.NewGuid();
-        Data.Meal = message.Name;
-        Data.Size = message.Size;
-        var prepFoodMessage = new PrepFoodMessage(Data.CorrelationId)
-        {
-            BunSize = message.Size
-        };
-
-        _bus.Publish(prepFoodMessage);
-
-        var flipBurgerMessage = new CookBurgerMessage(Data.CorrelationId)
-        {
-            BurgerSize = message.Size
-        };
-
-        _bus.Publish(flipBurgerMessage);
-    }
-
-    public void Execute(BurgerCookedMessage message)
-    {
-        Data.BurgerCooked = true;
-        if (Data.FoodPrepped)
-        {
-            _bus.Publish(new OrderReadyMessage(message.CorrelationId)
-            {
-            Size = Data.Size,
-            Meal = Data.Meal
-            });
-
-            Complete = true;
-        }
-    }
-
-    public void Execute(FoodPrepped message)
-    {
-        Data.FoodPrepped = true;
-        if (Data.BurgerCooked)
-        {
-            _bus.Publish(new OrderReadyMessage(message.CorrelationId)
-            {
-                Size = Data.Size,
-                Meal = Data.Meal
-            });
-            Complete = true;
-        }
-    }
+    Console.WriteLine("Received Process2ResponseMessage: {0} {1}", message.ProcessId, message.Name);
+    Complete = true;
 }
-
+...
 </code></pre>
 
           <p>
