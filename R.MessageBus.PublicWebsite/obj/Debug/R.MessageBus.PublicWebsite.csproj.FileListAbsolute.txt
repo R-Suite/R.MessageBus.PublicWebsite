@@ -65,3 +65,4 @@ C:\git\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\WebMatrix.WebDa
 C:\git\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\obj\Debug\R.MessageBus.PublicWebsite.csprojResolveAssemblyReference.cache
 C:\git\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\obj\Debug\R.MessageBus.PublicWebsite.dll
 C:\git\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\obj\Debug\R.MessageBus.PublicWebsite.pdb
+C:\git\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\R.MessageBus.PublicWebsite.dll.config

@@ -128,6 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contact.cs" />
+    <Compile Include="Controllers\DownloadsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -145,12 +146,23 @@
     <Content Include="Scripts\images\BroadcastAggregate.gif" />
     <Content Include="Scripts\images\DeadLetter.gif" />
     <Content Include="Scripts\images\logo.png" />
+    <Content Include="Scripts\images\MessageBus_Monitor Message Details.png" />
     <Content Include="Scripts\images\PointToPoint.gif" />
     <Content Include="Scripts\images\ProcessManager.gif" />
     <Content Include="Scripts\images\PublishSubscribe.gif" />
     <Content Include="Scripts\images\RecipientList.gif" />
     <Content Include="Scripts\images\RequestReply.gif" />
     <Content Include="Scripts\images\RoutingTableSimple.gif" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor AUdit.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Error Alert.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Errors.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Exception.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Filter By Tag.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Graph.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Message Content.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Route.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Service Details.png" />
+    <Content Include="Scripts\images\R_MessageBus_Monitor Settings.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -211,6 +223,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\_footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\R.MessageBus.Monitor.Setup.msi" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\R.MessageBus.Monitor.zip" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
