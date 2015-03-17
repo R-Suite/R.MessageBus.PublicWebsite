@@ -32,7 +32,7 @@
         </div>
         <div class="col-xs-12 col-sm-9">
 
-            <h2 id="recipientList">Recipient List</h2>
+          <h2 id="recipientList">Recipient List</h2>
           <p style="margin-top:30px;">
           <img class="img-responsive" src="scripts/images/RecipientList.gif" />
           </p>
@@ -46,129 +46,118 @@
           </p>
           <h3 id="message">Message Definitions</h3>
 
-<pre><code class="cs">
-  public class RecipientListMessage : Message
-  {
-      public RecipientListMessage(Guid correlationId) : base(correlationId) { }
-      public bool SendReply { get; set; }
-  }
+<pre><code class="cs">public class RecipientListMessage : Message
+{
+    public RecipientListMessage(Guid correlationId) : base(correlationId) { }
+    public bool SendReply { get; set; }
+}
 
-  public class RecipientListResponse : Message
-  {
-      public RecipientListResponse(Guid correlationId) : base(correlationId) { }
-      public string Endpoint { get; set; }
-  }
-
+public class RecipientListResponse : Message
+{
+    public RecipientListResponse(Guid correlationId) : base(correlationId) { }
+    public string Endpoint { get; set; }
+}
 </code></pre>
 
           <h3 id="sending">Sending messages to recipients</h3>
 
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          var id = Guid.NewGuid();
-          bus.Send(
-              new List<string>
-                  {
-                      "Consumer1",
-                      "Consumer2"
-                  },
-              new RecipientListMessage(id)
-          );
-      }
-  }
-
-</code></pre>
-
-            <h3 id="sendingrecievingsynch">Sending messages to recipients and receiving synchronous replies</h3>
-
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          var id = Guid.NewGuid();
-          var responses = bus.SendRequest<RecipientListMessage, RecipientListResponse>(
-              new List<string>
-                  {
-                      "Consumer1",
-                      "Consumer2"
-                  },
-              new RecipientListMessage(id)
-          );
-
-          foreach (RecipientListResponse response in responses)
-          {
-              Console.WriteLine("Received response from - {0}", response.Endpoint);
-          }
-      }
-  }
-
-</code></pre>
-
-            <h3 id="sendingrecievingasynch">Sending messages to recipients and receiving asynchronous replies</h3>
-
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          bus.SendRequest<RecipientListMessage, RecipientListResponse>(
-                new List<string>
+<pre><code class="cs">public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize();
+        var id = Guid.NewGuid();
+        bus.Send(
+            new List<string>
                 {
                     "Consumer1",
                     "Consumer2"
                 },
-                new RecipientListMessage(id)
-                {
-                    SendReply = true
-                },
-                r =>
-                {
-                    foreach (RecipientListResponse recipientListResponse in r)
-                    {
-                        Console.WriteLine("Received response from - {0}", recipientListResponse.Endpoint); 
-                    }
-                    Console.WriteLine("");
-                }
-            );
-      }
-  }
+            new RecipientListMessage(id)
+        );
+    }
+}
+</code></pre>
 
+            <h3 id="sendingrecievingsynch">Sending messages to recipients and receiving synchronous replies</h3>
+
+<pre><code class="cs">public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize();
+        var id = Guid.NewGuid();
+        var responses = bus.SendRequest&lt;recipientlistmessage, recipientlistresponse&gt;(
+                       new list<string>
+                {
+                    "Consumer1",
+                    "Consumer2"
+                },
+            new RecipientListMessage(id)
+        );
+
+        foreach (RecipientListResponse response in responses)
+        {
+            Console.WriteLine("Received response from - {0}", response.Endpoint);
+        }
+    }
+}
+</code></pre>
+
+            <h3 id="sendingrecievingasynch">Sending messages to recipients and receiving asynchronous replies</h3>
+
+<pre><code class="cs">public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize();
+        bus.SendRequest&lt;RecipientListMessage, RecipientListResponse&gt;(
+            new List<string>
+            {
+                "Consumer1",
+                "Consumer2"
+            },
+            new RecipientListMessage(id)
+            {
+                SendReply = true
+            },
+            r =>
+            {
+                foreach (RecipientListResponse recipientListResponse in r)
+                {
+                    Console.WriteLine("Received response from - {0}", recipientListResponse.Endpoint); 
+                }
+                Console.WriteLine("");
+            }
+        );
+    }
+}
 </code></pre>
 
           <h3 id="consuming">Consuming messages</h3>
 
-<pre><code class="cs">
-  public class MyMessageHandler : IMessageHandler&lt;RecipientListMessage&gt;
-  {
-      public void Execute(RecipientListMessage message)
-      {
-          Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
+<pre><code class="cs">public class MyMessageHandler : IMessageHandler&lt;RecipientListMessage&gt;
+{
+    public void Execute(RecipientListMessage message)
+    {
+        Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
 
-          if (message.SendReply)
-          {
-              Context.Reply(new RecipientListResponse(message.CorrelationId)
-              {
-                  Endpoint = "Consumer1"
-              });
-          }
-      }
+        if (message.SendReply)
+        {
+            Context.Reply(new RecipientListResponse(message.CorrelationId)
+            {
+                Endpoint = "Consumer1"
+            });
+        }
+    }
 
-      public IConsumeContext Context { get; set; }
-  }
-
+    public IConsumeContext Context { get; set; }
+}
 </code></pre>
 
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RecipientList">Recipient List</a> sample application for a complete example.
           </p>
-
 
         </div>
     </div>

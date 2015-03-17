@@ -26,7 +26,7 @@
         </div>
         <div class="col-xs-12 col-sm-9">
 
-            <h2 id="routingSlip">RoutingSlip</h2>
+          <h2 id="routingSlip">RoutingSlip</h2>
           <p style="margin-top:30px;">
           <img class="img-responsive" src="scripts/images/RoutingTableSimple.gif" />
           </p>
@@ -38,41 +38,35 @@
           </p>
           <h3 id="message">Message Definition</h3>
 
-<pre><code class="cs">
-  public class RoutingSlipMessage : Message
-  {
-      public RoutingSlipMessage(Guid correlationId) : base(correlationId)  { }
-  }
-
+<pre><code class="cs">public class RoutingSlipMessage : Message
+{
+    public RoutingSlipMessage(Guid correlationId) : base(correlationId)  { }
+}
 </code></pre>
 
           <h3 id="routing">Routing messages</h3>
 
-<pre><code class="cs">
-  public class Program
-  {
-      public static void Main()
-      {
-          var bus = Bus.Initialize();
-          bus.Route(new RoutingSlipMessage(id), new List<string> { "RoutingSlip.Endpoint1", "RoutingSlip.Endpoint2" });
-      }
-  }
-
+<pre><code class="cs">public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize();
+        bus.Route(new RoutingSlipMessage(id), new List<string> { "RoutingSlip.Endpoint1", "RoutingSlip.Endpoint2" });
+    }
+}
 </code></pre>
 
           <h3 id="consuming">Consuming messages</h3>
 
-<pre><code class="cs">
-  public class RoutingSlipMessageHandler : IMessageHandler<RoutingSlipMessage>
-  {
-      public void Execute(RoutingSlipMessage message)
-      {
-          Console.WriteLine("Endpoint1 received message - {0}", message.CorrelationId);
-      }
+<pre><code class="cs">public class RoutingSlipMessageHandler : IMessageHandler<RoutingSlipMessage>
+{
+    public void Execute(RoutingSlipMessage message)
+    {
+        Console.WriteLine("Endpoint1 received message - {0}", message.CorrelationId);
+    }
 
-      public IConsumeContext Context { get; set; }
-  }
-
+    public IConsumeContext Context { get; set; }
+}
 </code></pre>
 
           <p>
