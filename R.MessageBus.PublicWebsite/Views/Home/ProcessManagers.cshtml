@@ -10,7 +10,10 @@
                         <a href="#processManager">Process Manager</a>
                     </li>
                     <li>
-                        <a href="#creating">Creating the Process Manager</a>
+                        <a href="#processManagerInRMessageBus">Process Manager in R.MessageBus</a>
+                    </li>
+                    <li>
+                        <a href="#handling">Handling Messages</a>
                     </li>
                     <li>
                         <a href="#telluswhatyouthink">Tell Us What You Think!</a>
@@ -34,108 +37,83 @@
             <p>
                 <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 312-321) for more details.</i>
             </p>
-            <h3 id="creating">Process Manager in R.MessageBus</h3>
+            
+            <br />
+            <h3 id="processManagerInRMessageBus">Process Manager in R.MessageBus</h3>
             <p>
                 Implementation of Process Manager in R.MessageBus is such that it handles various types of messages, over a period of time,
-                while keeping an interim state. The state is saved in memory by default, but can be persisted to disk as well.
-                Currently, the supported persistance mechanisms include Microsoft® SQL Server™ (without any need for an ORM layer) and MongoDB.
-            </p>
-            <p>
-                R.MessageBus defines the date for interim state by implementing <i>IProcessManagerData</i> where all the public properties are persisted:
-                <pre><code class="cs">public class MealData : IProcessManagerData
+                while keeping an interim state.
+                R.MessageBus defines the date for interim state by implementing <code>IProcessManagerData</code> where all the public properties are persisted:
+                <pre><code class="cs">public class MyProcessManagerData : IProcessManagerData
 {
     public Guid CorrelationId { get; set; }
-    public bool BurgerCooked { get; set; }
-    public bool FoodPrepped { get; set; }
-    public string Meal { get; set; }
+    public bool Name { get; set; }
     public string Size { get; set; }
 }
 </code></pre>
-
-            </p>
-
-            <h3 id="creating">Configuring Process Manager</h3>
-            <p>
-                <div><strong>Configure Persistance:</strong></div>
-                ...
             </p>
             <p>
-                <div><strong>Configure How to find Process Manager:</strong></div>
-                ...
-            </p>
-            <h3 id="creating">Starting Process Manager</h3>
-            <p>
-                ...
-            </p>
-            <h3 id="creating">Handling Messages in Process Manager</h3>
-            <p>
-                ...
-            </p>
-            <h3 id="creating">Ending Process Manager</h3>
-            <p>
-                ...
-            </p>
-
-                <pre><code class="cs">public class MealProcess : ProcessManager&lt;MealData&gt;, IStartProcessManager&lt;NewOrderMessage&gt;,
-                           IMessageHandler&lt;BurgerCookedMessage&gt;,
-                           IMessageHandler&lt;FoodPrepped&gt;
+                Currently R.MessageBus offers three persistance mechanisms: MongoDB, Microsoft® SQL Server™, and In-memory. 
+                The MongoDB persistance implementation offers the best performance while its schema-less nature make it a perfect fit 
+                for proccess manager storage. In order to use MongoDB persister, you'll need to install R.MessageBus.Persistance.MongoDb.nupkg.
+                <p>
+                    <pre><code class="cs">public class Program
 {
-    private readonly IBus _bus;
-    public Meal(IBus bus)
+    public static void Main()
     {
-        _bus = bus;
-    }
-
-    public void Execute(NewOrderMessage message)
-    {
-        Data.CorrelationId = Guid.NewGuid();
-        Data.Meal = message.Name;
-        Data.Size = message.Size;
-        var prepFoodMessage = new PrepFoodMessage(Data.CorrelationId)
+        Bus.Initialize(config =>
         {
-            BunSize = message.Size
-        };
-
-        _bus.Publish(prepFoodMessage);
-
-        var flipBurgerMessage = new CookBurgerMessage(Data.CorrelationId)
-        {
-            BurgerSize = message.Size
-        };
-
-        _bus.Publish(flipBurgerMessage);
-    }
-
-    public void Execute(BurgerCookedMessage message)
-    {
-        Data.BurgerCooked = true;
-        if (Data.FoodPrepped)
-        {
-            _bus.Publish(new OrderReadyMessage(message.CorrelationId)
-            {
-            Size = Data.Size,
-            Meal = Data.Meal
-            });
-
-            Complete = true;
-        }
-    }
-
-    public void Execute(FoodPrepped message)
-    {
-        Data.FoodPrepped = true;
-        if (Data.BurgerCooked)
-        {
-            _bus.Publish(new OrderReadyMessage(message.CorrelationId)
-            {
-                Size = Data.Size,
-                Meal = Data.Meal
-            });
-            Complete = true;
-        }
+            config.SetProcessManagerFinder&lt;MongoDbProcessManagerFinder&gt;();
+            config.PersistenceStoreConnectionString = "mongodb://localhost/";
+        });
     }
 }
+</code></pre>
+                </p>
+            </p>
+            
+            <br />
+            <h3 id="handling">Handling Messages in Process Manager</h3>
+            <p>
+                Implementing a special interface <code>IStartProcessManager&lt;NewOrderMessage&gt;</code> instructs R.MessageBus to create a new instance of process manager.
+                Please note that you can define multiple message types to create a new process manager instance.
+                Like any other handler, process manager consumes messages specified by the generic type argument of <code>IMessageHandler&lt;TMessage&gt;</code>
+                and will always lookup the correct instance of process manager based on predefined rules.
+                <br />
+                See below for an example on how to define rules for correlating messages into the correct process manager instance.
+<p>
+                    <pre><code class="cs">public class MyProcessManager : R.MessageBus.Core.ProcessManager&lt;MyProcessManagerData&gt;,
+                                IStartProcessManager&lt;StartProcessManagerMessage&gt;,
+                                IStartProcessManager&lt;Process1ResponseMessage&gt;,
+                                IMessageHandler&lt;Process2ResponseMessage&gt;
+{
+    protected override void ConfigureHowToFindProcessManager(IProcessManagerPropertyMapper mapper)
+    {
+        mapper.ConfigureMapping<MyProcessManagerData, Process1ResponseMessage>(m => m.Name, pm => pm.Name);
+        mapper.ConfigureMapping<MyProcessManagerData, Process2ResponseMessage>(m => m.PmWidget.Size.Width, pm => pm.Widget.Size);
+    }
+        
+    // ...handlers
+}
+</code></pre>
+                </p>            
+            </p>
+            
+            <br />
+            <h3 id="creating">Ending Process Manager</h3>
+            <p>
+                After process manager handling all the messages, you might decide that you no longer need the state data persisted by the process manager 
+                and want to remove from the data store. This is done by simple setting <code>Complete = true;</code> in any of the message handling methods.
+            </p>
 
+            <pre><code class="cs">...
+
+public void Execute(Process2ResponseMessage message)
+{
+    Console.WriteLine("Received Process2ResponseMessage: {0} {1}", message.ProcessId, message.Name);
+    Complete = true;
+}
+...
 </code></pre>
 
           <p>
