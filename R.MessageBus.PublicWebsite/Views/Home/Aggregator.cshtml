@@ -28,96 +28,102 @@
         </div>
         <div class="col-xs-12 col-sm-9">
 
-                <h2 id="aggregator">Aggregator</h2>
-                <p style="margin-top: 30px;">
-                    <img class="img-responsive" src="scripts/images/Aggregator.gif"/>
-                </p>
-                <p>
-                    Aggregator collects and stores individual messages until a complete set of related messages has been received. Then, the Aggregator publishes a single message distilled from the individual messages.
-                </p>
-                <p>
-                    <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 268-282) for more details.</i>
-                </p>
-                <h3>Message Definitions</h3>
-
-                <pre><code class="cs">
-  public class TestMessage : Message
-  {
-      public TestMessage(Guid correlationId) : base(correlationId)
-      {
-      }
-      public int Num { get; set; }
-  }
-
-</code></pre>
-
-                <h3 id="sending">Sending messages to Aggregator</h3>
-
-                <pre><code class="cs">
-  class Program
-  {
-      static void Main(string[] args)
-      {
-          var bus = Bus.Initialize(x =>
-          {
-              x.SetQueueName("Aggregator.Publisher");
-              x.PurgeQueuesOnStart();
-          });
-
-          for (int i = 0; i < 1000; i++)
-          {
-              bus.Send("Aggregator.Consumer", new TestMessage(Guid.NewGuid())
-              {
-                  Num = i + 1
-              });
-              Thread.Sleep(10);
-          }
-
-          Console.ReadLine();
-      }
-  }
-
-</code></pre>
-
-                <h3 id="consuming">Consuming messages with Aggregator</h3>
-
-<pre><code class="cs">
-  public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
-  {
-      public override int BatchSize()
-      {
-          return 100;
-      }
-      public override TimeSpan Timeout()
-      {
-          return new TimeSpan(0, 0, 0, 2);
-      }
-      
-      public override void Execute(IList&lt;TestMessage&gt; message)
-      {
-          Console.WriteLine("***** Received batch of messages ({0}) ******", message.Count);
-      }
-  }
-
-</code></pre>
-            
-            
-             <h3 id="configuring">Aggregator Configuration Options</h3>
-
-<pre><code class="cs">
-  var bus = Bus.Initialize(config =>
-  {
-      // Set where to persist messages while being aggregated.
-      config.SetAggregatorPersistor&lt;InMemoryAggregatorPersistor&gt;();
-  });
-  
-</code></pre>
-
+            <h2 id="aggregator">Aggregator</h2>
+            <p style="margin-top: 30px;">
+                <img class="img-responsive" src="scripts/images/Aggregator.gif"/>
+            </p>
             <p>
-                    See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Aggregator">Aggregator</a> sample application for a complete example.
-                </p>
+                Aggregator collects and stores individual messages until a complete set of related messages has been received. Then, the Aggregator publishes a single message distilled from the individual messages.
+            </p>
+            <p>
+                <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 268-282) for more details.</i>
+            </p>
+            <h3>Message Definitions</h3>
 
-            </div>
+            <pre><code class="cs">public class TestMessage : Message
+{
+    public TestMessage(Guid correlationId) : base(correlationId)
+    {
+    }
+    public int Num { get; set; }
+}
+</code></pre>
+
+            <br />
+            <h3 id="sending">Sending messages to Aggregator</h3>
+
+            <pre><code class="cs">class Program
+{
+    static void Main(string[] args)
+    {
+        var bus = Bus.Initialize(x =>
+        {
+            x.SetQueueName("Aggregator.Publisher");
+            x.PurgeQueuesOnStart();
+        });
+
+        for (int i = 0; i < 1000; i++)
+        {
+            bus.Send("Aggregator.Consumer", new TestMessage(Guid.NewGuid())
+            {
+                Num = i + 1
+            });
+            Thread.Sleep(10);
+        }
+
+        Console.ReadLine();
+    }
+}
+</code></pre>
+
+            <br />
+            <h3 id="consuming">Consuming messages with Aggregator</h3>
+            <p>
+                Aggregator message handler can specify <code>BatchSize</code> and <code>Timeout</code>.
+                The list of aggreagated messages will be handled as soon as the list size reaches the configured <code>BatchSize</code>
+                or the time since the new batch was created exceeds the <code>Timeout</code>.
+            </p>
+            <p>
+                By default, if the <code>Timeout</code> is not set, the <code>BatchSize</code> is set to 10.
+                <pre><code class="cs">public class TestMessageHandler : Aggregator&lt;TestMessage&gt;
+{
+    public override int BatchSize()
+    {
+        return 100;
+    }
+    public override TimeSpan Timeout()
+    {
+        return new TimeSpan(0, 0, 0, 2);
+    }
+      
+    public override void Execute(IList&lt;TestMessage&gt; message)
+    {
+        Console.WriteLine("***** Received batch of messages ({0}) ******", message.Count);
+    }
+}
+</code></pre>
+            </p>
+
+            <br />
+            <h3 id="configuring">Aggregator Configuration Options</h3>
+            <p>
+                Persisiting messages in memory (<code>InMemoryAggregatorPersistor</code>), while being aggregated, offers the best performance but can lead to a potential loss of messages
+                when R.MessageBus endpoint shuts down unexpectedly. In order to make sure a message is never lost, 
+                use <code>MongoDBAggregatorPersistor</code>.
+            </p>
+            <p>
+                <code>InMemoryAggregatorPersistor</code> is the default setting.
+                <pre><code class="cs">var bus = Bus.Initialize(config =>
+{
+    config.SetAggregatorPersistor&lt;MongoDBAggregatorPersistor&gt;();
+});
+</code></pre>
+            </p>
+            <p>
+                See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Aggregator">Aggregator</a> sample application for a complete example.
+            </p>
+
+        </div>
     </div>
     <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
     @Html.Partial("_footer")
