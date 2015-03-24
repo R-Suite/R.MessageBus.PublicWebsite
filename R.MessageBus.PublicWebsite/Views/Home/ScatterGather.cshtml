@@ -32,111 +32,104 @@
           </p>
           <p>
           Scatter-Gather broadcasts a message to multiple recipients and re-aggregates the responses back into a single message.
-           </p>
+          </p>
           <p>
           <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 297-300) for more details.</i>
           </p>
           <h3 id="message">Message Definitions</h3>
 
-<pre><code class="cs">
-  public class Request : Message
-  {
-      public Request(Guid correlationId) : base(correlationId)
-      {
-      }
+<pre><code class="cs">public class Request : Message
+{
+    public Request(Guid correlationId) : base(correlationId)
+    {
+    }
 
-      public bool Delay { get; set; }
-  }
+    public bool Delay { get; set; }
+}
 
-  public class Response : Message
-  {
-      public Response(Guid correlationId) : base(correlationId)
-      {
-      }
+public class Response : Message
+{
+    public Response(Guid correlationId) : base(correlationId)
+    {
+    }
 
-      public string Endpoint { get; set; }
-  }
-
+    public string Endpoint { get; set; }
+}
 </code></pre>
 
           <h3 id="publishing">Publishing Request Messages</h3>
 
-<pre><code class="cs">
-  class Program
-  {
-      static void Main(string[] args)
-      {
-          var bus = Bus.Initialize();
-          bus.StartConsuming();
+<pre><code class="cs">class Program
+{
+    static void Main(string[] args)
+    {
+        var bus = Bus.Initialize();
+        bus.StartConsuming();
 
-          // Scatter Gather Expects 2 replies
-          var id = Guid.NewGuid();
-          var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id), 2);
+        // Scatter Gather Expects 2 replies
+        var id = Guid.NewGuid();
+        var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id), 2);
 
-          foreach (var response in responses)
-          {
-              Console.WriteLine("Received response from - {0}", response.Endpoint);
-          }
+        foreach (var response in responses)
+        {
+            Console.WriteLine("Received response from - {0}", response.Endpoint);
+        }
 
-          // Scatter Gather unknown number of replies
-          id = Guid.NewGuid();
-          var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id){ Delay = true }, timeout: 500);
+        // Scatter Gather unknown number of replies
+        id = Guid.NewGuid();
+        var responses = bus.PublishRequest&lt;Request, Response&gt;(new Request(id){ Delay = true }, timeout: 500);
 
-          foreach (var response in responses)
-          {
-              Console.WriteLine("Received response from - {0}", response.Endpoint);
-          }
-      }
-  }
-
+        foreach (var response in responses)
+        {
+            Console.WriteLine("Received response from - {0}", response.Endpoint);
+        }
+    }
+}
 </code></pre>
 
           <h3 id="consuming">Consuming messages</h3>
 
-<pre><code class="cs">
-  // Consumer 1 Process
-  public class Handler : IMessageHandler&lt;Request&gt;
-  {
-      public void Execute(Request message)
-      {
-          Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
+<pre><code class="cs">// Consumer 1 Process
+public class Handler : IMessageHandler&lt;Request&gt;
+{
+    public void Execute(Request message)
+    {
+        Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
 
-          if (message.Delay)
-          {
-              Thread.Sleep(1000);
-          }
+        if (message.Delay)
+        {
+            Thread.Sleep(1000);
+        }
           
-          Context.Reply(new Response(message.CorrelationId)
-          {
-              Endpoint = "Consumer1"
-          });
-      }
+        Context.Reply(new Response(message.CorrelationId)
+        {
+            Endpoint = "Consumer1"
+        });
+    }
 
-      public IConsumeContext Context { get; set; }
-  }
+    public IConsumeContext Context { get; set; }
+}
 
-  // Consumer 2 Process
-  public class Handler : IMessageHandler&lt;Request&gt;
-  {
-      public void Execute(Request message)
-      {
-          Console.WriteLine("Consumer 2 Received Message - {0}", message.CorrelationId);
+// Consumer 2 Process
+public class Handler : IMessageHandler&lt;Request&gt;
+{
+    public void Execute(Request message)
+    {
+        Console.WriteLine("Consumer 2 Received Message - {0}", message.CorrelationId);
 
-          Context.Reply(new Response(message.CorrelationId)
-          {
-              Endpoint = "Consumer2"
-          });
-      }
+        Context.Reply(new Response(message.CorrelationId)
+        {
+            Endpoint = "Consumer2"
+        });
+    }
 
-      public IConsumeContext Context { get; set; }
-  }
-
+    public IConsumeContext Context { get; set; }
+}
 </code></pre>
 
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/ScatterGather">Scatter-Gather</a> sample application for a complete example.
           </p>
-
 
         </div>
     </div>
