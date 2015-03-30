@@ -10,6 +10,12 @@
                         <a href="#streaming">Message Streaming</a>
                     </li>
                     <li>
+                        <a href="#creating">Creating Message Stream</a>
+                    </li>
+                    <li>
+                        <a href="#consuming">Consuming Message Stream</a>
+                    </li>
+                    <li>
                         <a href="#telluswhatyouthink">Tell Us What You Think!</a>
                     </li>
                 </ul>
@@ -18,74 +24,81 @@
         <div class="col-xs-12 col-sm-9">
 
             <h2 id="streaming">Message Streaming</h2>
-          <p style="margin-top:30px;">
-            By utilising message streaming, R.MessageBus allows transfering large files or even audio/video streaming between two endpoints.
-          </p>
-          <br />
-          <p>
-            Simple use the bus to <strong>create a stream object</strong>
-          </p>
+            <p style="margin-top:30px;">
+                By utilising message streaming, R.MessageBus allows transfering large files or even audio/video streaming between two endpoints.
+            </p>
 
-<pre><code class="cs">
-var stream = bus.CreateStream("StreamConsumer", new StartStreamMessage(Guid.NewGuid())
+            <h3 id="message">Message Definition</h3>
+
+<pre><code class="cs">public class StartStreamMessage : Message
 {
-    Path = "logoCopy.bmp"
-});   
+    public StartStreamMessage(Guid correlationId) : base(correlationId)
+    {
+            
+    }
+    public string Path { get; set; }
+}
+</code></pre>
+            
+                   
+            <br />
+            <h3 id="creating">Creating Message Stream</h3>
+            <p>
+                Use the bus to <strong>create a stream object</strong>
+            </p>
 
+<pre><code class="cs">var stream = bus.CreateStream("StreamConsumer", new StartStreamMessage(Guid.NewGuid())
+{
+    Path = "myFileCopy.doc" // destination file path
+});
 </code></pre>
 
           <p>
             ...and <strong>write your binary data</strong> to it.
           </p>
 
-<pre><code class="cs">
-  var f = new FileStream("logo.bmp", FileMode.Open);
+<pre><code class="cs">var f = new FileStream("myFile.doc", FileMode.Open);
 
-  byte[] buffer = new byte[100000];
-  int read;
-  while ((read = f.Read(buffer, 0, buffer.Length)) > 0)
-  {
-      stream.Write(buffer);
-  }
+byte[] buffer = new byte[100000];
+int read;
+while ((read = f.Read(buffer, 0, buffer.Length)) > 0)
+{
+    stream.Write(buffer);
+}
 
-  stream.Close(); //stop sending
-
+stream.Close(); //stop sending
 </code></pre>
 
+            <br />
+            <h3 id="consuming">Consuming Message Stream</h3>
 
-          <p>
-            Finally, here is how you <strong>consume the stream</strong> on the receiving side.
-          </p>
+            <pre><code class="cs">public class StreamHandler : IStreamHandler&lt;StartStreamMessage&gt;
+{
+    public IMessageBusReadStream Stream { get; set; }
 
-<pre><code class="cs">
-  public class StreamHandler : IStreamHandler&lt;StartStreamMessage&gt;
-  {
-      public IMessageBusReadStream Stream { get; set; }
-
-      public void Execute(StartStreamMessage message)
-      {
-          var ms = new FileStream(message.Path, FileMode.Create);
+    public void Execute(StartStreamMessage message)
+    {
+        var ms = new FileStream(message.Path, FileMode.Create);
           
-          while (!Stream.IsComplete())
-          {
-              var bytes = Stream.Read();
-              if (bytes.Length > 0)
-              {
-                  ms.Write(bytes, 0, bytes.Length);
-              }
-          }
+        while (!Stream.IsComplete())
+        {
+            var bytes = Stream.Read();
+            if (bytes.Length > 0)
+            {
+                ms.Write(bytes, 0, bytes.Length);
+            }
+        }
           
-          ms.Close();
+        ms.Close();
 
-          Console.WriteLine("Stream Read - {0}", message.Path);
-      }
-  }
-
+        Console.WriteLine("Stream Read - {0}", message.Path);
+    }
+}
 </code></pre>
+
           <p>
           See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/Streaming">Streaming</a> sample application for a complete example.
           </p>
-
 
         </div>
     </div>
