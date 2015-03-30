@@ -8,7 +8,10 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                     <li>
-                        <a href="#Placeholder">Placeholder</a>
+                        <a href="#configuration">Configuration</a>
+                    </li>
+                    <li>
+                        <a href="#audit">Audit Monitor</a>
                     </li>
                     <li>
                         <a href="#telluswhatyouthink">Tell Us What You Think!</a>
@@ -17,6 +20,35 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-9">
+            <h2>Auditing</h2>
+            <p style="margin-top:0;">
+              <img class="img-responsive" src="scripts/images/audit.png" />
+              </p>
+              <p>
+              With auditing enabled an R.MessageBus endpoint will send a message containing memory and CPU usage to a heartbeat queue every 30 seconds. All messages will also be forwarded to an audit queue.  Audit messages can be used along with the error queue messages to track the health of your systems endpoints, to monitor for any processing errors and to monitor the traffic between endpoints.
+              </p>
+            <h3 id="configuration">Configuration</h3>
+            <p>Auditing is off by default in R.MessageBus.  Enable auditing by passing true to the SetAuditingEnabled method when configuring the Bus.
+            </p>
+            <pre><code class="cs">
+public class Program
+{
+    public static void Main()
+    {
+        IBus bus = Bus.Initialize(config =>
+        {
+            config.SetAuditingEnabled(true));
+        });
+    }
+}
+            </code></pre>
+            
+            <h3 id="audit">Audit Monitor</h3>
+            <p>To make use of the heartbeat messages, audit messages and error messages we have built a web application that allows you to view the data. <a href="/monitor">Click here for more information.</a></p>
+            <p style="margin-top:30px;">
+                <img class="img-responsive" src="scripts/images/R_MessageBus_Monitor Graph.png" />
+            </p>
+            <p></p>
         </div>
     </div>
     <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
