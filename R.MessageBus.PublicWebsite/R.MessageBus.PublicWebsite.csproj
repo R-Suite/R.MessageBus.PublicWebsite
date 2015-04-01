@@ -143,6 +143,8 @@
     <Content Include="Scripts\dist\rmessagebus.min.js" />
     <Content Include="Scripts\Gruntfile.js" />
     <Content Include="Scripts\images\Aggregator.gif" />
+    <Content Include="Scripts\images\Audit.gif" />
+    <Content Include="Scripts\images\Audit.png" />
     <Content Include="Scripts\images\BroadcastAggregate.gif" />
     <Content Include="Scripts\images\DeadLetter.gif" />
     <Content Include="Scripts\images\logo.png" />
