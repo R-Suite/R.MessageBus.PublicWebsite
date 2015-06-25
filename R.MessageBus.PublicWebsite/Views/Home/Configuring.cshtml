@@ -122,27 +122,26 @@ public class Program
     {
         IBus bus = Bus.Initialize(config =>
         {
-           config.SetContainerType<NinjectContainer>();
+           config.SetContainerType&lt;NinjectContainer&gt;();
         });
     }
 }
 
 </code></pre>
-
             
+            <br/>
             <p>
                 Here we create a new instance of the Ninject StandardKernel and declare a binding for our message handler. 
                 We then initialise the bus container with this instance and tell the bus not to bother scanning for more handlers.
             </p>
 
-            <br/>
 <pre><code class="cs">
 public class Program
 {
     public static void Main()
     {
         var myKernel = new StandardKernel();
-        myKernel.Bind(typeof(IMessageHandler<MyMessage>)).To(typeof(MyMessageHandler));
+        myKernel.Bind(typeof(IMessageHandler&lt;MyMessage&gt;)).To(typeof(MyMessageHandler));
         
         IBus bus = Bus.Initialize(config =>
         {
@@ -154,7 +153,7 @@ public class Program
 
 </code></pre>
 
-            <br/>
+          <br/>
           <h3 id="retries">Retries</h3>
           <p style="margin-top:30px;">
           When your application fails to successfully proccess a message, R.MessageBus implements a generic error handling for all your consumers. Upon catching an exception, the message is held in the "*.Retries" queue for a certain amount of time before being requeued. This process is repeated a number of times until either the message is handled successfully, or the "MaxRetries" limit is reached, at which point the message is moved to the error queue.
