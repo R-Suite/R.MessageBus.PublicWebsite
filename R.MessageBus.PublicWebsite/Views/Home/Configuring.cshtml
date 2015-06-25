@@ -102,19 +102,18 @@ public class Program
           Here we initialised the bus and we are ready to start sending or publishing messages. With this example we are not quite ready to consume incoming messages just yet, but don&apos;t worry about the configuration details at this point, we&apos;ll come back to that later. This is just to  demonstrate how to specify custom configuration options.
           </p>
 
-            
-
             <br/>
             <h3 id="containers">IoC Containers</h3>
             <p>As of the version 2.1.1, R.MessageBus is not tightly coupled to any particular container technology. 
                 If not specified during the initialization, R.MessageBus will resolve dependencies from 
-                it's own implementation of IoC Container. You can, however, configure the bus to use either StructureMap or Ninject containers
+                its own implementation of IoC Container. You can, however, configure the bus to use either StructureMap or Ninject containers
                 and even tell it to use an existing container instance. 
             </p>
 
-          <p>
-          Here we initialise the bus and instruct it to use NinjectContainer. We don't provide an existing instance of the Ninject container/StandardKernel, so R.MessageBus will create one.
-          </p>
+            <br/>
+            <p>
+              Here we initialise the bus and instruct it to use NinjectContainer. We don't provide an existing instance of the Ninject container/StandardKernel, so R.MessageBus will create one.
+            </p>
 <pre><code class="cs">
 public class Program
 {
