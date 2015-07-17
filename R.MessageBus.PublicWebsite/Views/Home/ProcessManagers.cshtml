@@ -89,8 +89,8 @@
 {
     protected override void ConfigureHowToFindProcessManager(IProcessManagerPropertyMapper mapper)
     {
-        mapper.ConfigureMapping<MyProcessManagerData, Process1ResponseMessage>(m => m.Name, pm => pm.Name);
-        mapper.ConfigureMapping<MyProcessManagerData, Process2ResponseMessage>(m => m.PmWidget.Size.Width, pm => pm.Widget.Size);
+        mapper.ConfigureMapping&lt;MyProcessManagerData, Process1ResponseMessage&gt;(m => m.Name, pm => pm.Name);
+        mapper.ConfigureMapping&lt;MyProcessManagerData, Process2ResponseMessage&gt;(m => m.PmWidget.Size.Width, pm => pm.Widget.Size);
     }
         
     // ...handlers
