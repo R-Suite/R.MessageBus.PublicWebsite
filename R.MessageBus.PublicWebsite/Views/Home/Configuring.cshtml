@@ -131,7 +131,7 @@ public class Program
             <br/>
             <p>
                 Here we create a new instance of the Ninject StandardKernel and declare a binding for our message handler. 
-                We then initialise the bus container with this instance and tell the bus not to bother scanning for more handlers.
+                We then set the bus container with this instance and tell the bus not to bother scanning for more handlers.
             </p>
 
 <pre><code class="cs">
@@ -144,7 +144,7 @@ public class Program
         
         IBus bus = Bus.Initialize(config =>
         {
-           config.InitializeContainer(myKernel);
+           config.SetContainer(myKernel);
            config.ScanForMesssageHandlers = false;
         });
     }
