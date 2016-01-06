@@ -10,7 +10,7 @@
                         <a href="#processManager">Process Manager</a>
                     </li>
                     <li>
-                        <a href="#processManagerInRMessageBus">Process Manager in R.MessageBus</a>
+                        <a href="#processManagerInRMessageBus">Process Manager in ServiceConnect</a>
                     </li>
                     <li>
                         <a href="#handling">Handling Messages</a>
@@ -39,11 +39,11 @@
             </p>
             
             <br />
-            <h3 id="processManagerInRMessageBus">Process Manager in R.MessageBus</h3>
+            <h3 id="processManagerInRMessageBus">Process Manager in ServiceConnect</h3>
             <p>
-                Implementation of Process Manager in R.MessageBus is such that it handles various types of messages, over a period of time,
+                Implementation of Process Manager in ServiceConnect is such that it handles various types of messages, over a period of time,
                 while keeping an interim state.
-                R.MessageBus defines the date for interim state by implementing <code>IProcessManagerData</code> where all the public properties are persisted:
+                ServiceConnect defines the date for interim state by implementing <code>IProcessManagerData</code> where all the public properties are persisted:
                 <pre><code class="cs">public class MyProcessManagerData : IProcessManagerData
 {
     public Guid CorrelationId { get; set; }
@@ -53,9 +53,9 @@
 </code></pre>
             </p>
             <p>
-                Currently R.MessageBus offers three persistance mechanisms: MongoDB, Microsoft® SQL Server™, and In-memory. 
+                Currently ServiceConnect offers three persistance mechanisms: MongoDB, Microsoft® SQL Server™, and In-memory. 
                 The MongoDB persistance implementation offers the best performance while its schema-less nature make it a perfect fit 
-                for proccess manager storage. In order to use MongoDB persister, you'll need to install R.MessageBus.Persistance.MongoDb.nupkg.
+                for proccess manager storage. In order to use MongoDB persister, you'll need to install ServiceConnect.Persistance.MongoDb.nupkg.
                 <p>
                     <pre><code class="cs">public class Program
 {
@@ -75,14 +75,14 @@
             <br />
             <h3 id="handling">Handling Messages in Process Manager</h3>
             <p>
-                Implementing a special interface <code>IStartProcessManager&lt;NewOrderMessage&gt;</code> instructs R.MessageBus to create a new instance of process manager.
+                Implementing a special interface <code>IStartProcessManager&lt;NewOrderMessage&gt;</code> instructs ServiceConnect to create a new instance of process manager.
                 Please note that you can define multiple message types to create a new process manager instance.
                 Like any other handler, process manager consumes messages specified by the generic type argument of <code>IMessageHandler&lt;TMessage&gt;</code>
                 and will always lookup the correct instance of process manager based on predefined rules.
                 <br />
                 See below for an example on how to define rules for correlating messages into the correct process manager instance.
 <p>
-                    <pre><code class="cs">public class MyProcessManager : R.MessageBus.Core.ProcessManager&lt;MyProcessManagerData&gt;,
+                    <pre><code class="cs">public class MyProcessManager : ServiceConnect.Core.ProcessManager&lt;MyProcessManagerData&gt;,
                                 IStartProcessManager&lt;StartProcessManagerMessage&gt;,
                                 IStartProcessManager&lt;Process1ResponseMessage&gt;,
                                 IMessageHandler&lt;Process2ResponseMessage&gt;
@@ -117,7 +117,7 @@ public void Execute(Process2ResponseMessage message)
 </code></pre>
 
           <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/McDonalds">McDonalds - Process Manager</a> sample application for a complete example.
+          See <a href="https://github.com/R-Suite/ServiceConnect-CSharp/tree/master/samples/McDonalds">McDonalds - Process Manager</a> sample application for a complete example.
           </p>
 
         </div>

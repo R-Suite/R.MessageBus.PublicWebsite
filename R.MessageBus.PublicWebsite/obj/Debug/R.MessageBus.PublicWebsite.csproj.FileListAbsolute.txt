@@ -58,7 +58,10 @@ C:\git\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\obj\Debug\R.Message
 C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\System.Net.Http.Formatting.dll
 C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\System.Web.Http.dll
 C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\System.Web.Http.WebHost.dll
-C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\Microsoft.Web.Infrastructure.xml
 C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\System.Net.Http.Formatting.xml
 C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\System.Web.Http.xml
 C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\System.Web.Http.WebHost.xml
+C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\Antlr3.Runtime.dll
+C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\System.Web.Optimization.dll
+C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\WebGrease.dll
+C:\GIT\R.MessageBus.PublicWebsite\R.MessageBus.PublicWebsite\bin\Newtonsoft.Json.xml

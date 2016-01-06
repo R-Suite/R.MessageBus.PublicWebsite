@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Configuring R.MessageBus";
+    ViewBag.Title = "Configuring ServiceConnect";
 }
 
 <div class="container-fluid">
@@ -30,7 +30,7 @@
         </div>
         <div class="col-xs-12 col-sm-9">
 
-          <h2>Configuring R.MessageBus</h2>
+          <h2>Configuring ServiceConnect</h2>
           <h3 id="simple">Simple Configuration</h3>
           <p>Calling initialize with no parameters will create an instance of the Bus with default configuration options.</p>
           <p>
@@ -55,7 +55,7 @@ public class Program
           <p>Default configuration is the following,</p>
             <ul class="task-list">
                 <li>Consumer - RabbitMQ</li>
-                <li>Container - R.MessageBus implementation of Service Locator</li>
+                <li>Container - ServiceConnect implementation of Service Locator</li>
                 <li>ScanForMessageHandlers - True</li>
                 <li>AutoStartConsuming - True</li>
                 <li>AddBusToContainer - True</li>
@@ -104,15 +104,15 @@ public class Program
 
             <br/>
             <h3 id="containers">IoC Containers</h3>
-            <p>As of the version 2.1.1, R.MessageBus is not tightly coupled to any particular container technology. 
-                If not specified during the initialization, R.MessageBus will resolve dependencies from 
+            <p>As of the version 2.1.1, ServiceConnect is not tightly coupled to any particular container technology. 
+                If not specified during the initialization, ServiceConnect will resolve dependencies from 
                 its own implementation of IoC Container. You can, however, configure the bus to use either StructureMap or Ninject containers
                 and even tell it to use an existing container instance. 
             </p>
 
             <br/>
             <p>
-              Here we initialise the bus and instruct it to use NinjectContainer. We don't provide an existing instance of the Ninject container/StandardKernel, so R.MessageBus will create one.
+              Here we initialise the bus and instruct it to use NinjectContainer. We don't provide an existing instance of the Ninject container/StandardKernel, so ServiceConnect will create one.
             </p>
 <pre><code class="cs">
 public class Program
@@ -155,7 +155,7 @@ public class Program
           <br/>
           <h3 id="retries">Retries</h3>
           <p style="margin-top:30px;">
-          When your application fails to successfully proccess a message, R.MessageBus implements a generic error handling for all your consumers. Upon catching an exception, the message is held in the "*.Retries" queue for a certain amount of time before being requeued. This process is repeated a number of times until either the message is handled successfully, or the "MaxRetries" limit is reached, at which point the message is moved to the error queue.
+          When your application fails to successfully proccess a message, ServiceConnect implements a generic error handling for all your consumers. Upon catching an exception, the message is held in the "*.Retries" queue for a certain amount of time before being requeued. This process is repeated a number of times until either the message is handled successfully, or the "MaxRetries" limit is reached, at which point the message is moved to the error queue.
           </p>
 
 <pre><code class="cs">

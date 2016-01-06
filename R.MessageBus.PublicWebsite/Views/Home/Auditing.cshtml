@@ -25,10 +25,10 @@
               <img class="img-responsive" src="scripts/images/audit.png" />
               </p>
               <p>
-              With auditing enabled an R.MessageBus endpoint will send a message containing memory and CPU usage to a heartbeat queue every 30 seconds. All messages will also be forwarded to an audit queue.  Audit messages can be used along with the error queue messages to track the health of your systems endpoints, to monitor for any processing errors and to monitor the traffic between endpoints.
+              With auditing enabled an ServiceConnect endpoint will send a message containing memory and CPU usage to a heartbeat queue every 30 seconds. All messages will also be forwarded to an audit queue.  Audit messages can be used along with the error queue messages to track the health of your systems endpoints, to monitor for any processing errors and to monitor the traffic between endpoints.
               </p>
             <h3 id="configuration">Configuration</h3>
-            <p>Auditing is off by default in R.MessageBus.  Enable auditing by passing true to the SetAuditingEnabled method when configuring the Bus.
+            <p>Auditing is off by default in ServiceConnect.  Enable auditing by passing true to the SetAuditingEnabled method when configuring the Bus.
             </p>
             <pre><code class="cs">
 public class Program

@@ -35,10 +35,10 @@
           </p>
           <p>
           Request Reply can be used when the applications may want a two-way conversation. Send a pair of Request-Reply messages, each on its own channel. Requestor
-          sends a request message and waits for the reply message. Replier receives the requested message a responds with a reply message. In R.MessageBus implementation of <i>Request Reply</i> both request and reply messages are on <i>Point-to-Point</i> channel - meaning the messages are always breaodcasted to a single consumer.
+          sends a request message and waits for the reply message. Replier receives the requested message a responds with a reply message. In ServiceConnect implementation of <i>Request Reply</i> both request and reply messages are on <i>Point-to-Point</i> channel - meaning the messages are always breaodcasted to a single consumer.
           </p>
           <p>
-          R.MessageBus offers two implementations of Request Reply:
+          ServiceConnect offers two implementations of Request Reply:
           <ul>
             <li>
               <strong>Synchronous</strong> - a single thread sends the request message, blocks to wait for the reply message and than processes the reply.
@@ -102,7 +102,7 @@ public class RequestMessageHandler : IMessageHandler&lt;RequestMessage&gt;
 
           </p>
           <p>
-          See <a href="https://github.com/R-Suite/R.MessageBus/tree/master/samples/RequestResponse">Request Response</a> sample application for a complete example.
+          See <a href="https://github.com/R-Suite/ServiceConnect-CSharp/tree/master/samples/RequestResponse">Request Response</a> sample application for a complete example.
           </p>
 
 

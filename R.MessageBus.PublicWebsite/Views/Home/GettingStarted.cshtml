@@ -17,7 +17,7 @@
                         <a href="#versionrequirements">Requirements</a>
                     </li>
                     <li>
-                        <a href="#dependancy">Adding R.MessageBus to your project</a>
+                        <a href="#dependancy">Adding ServiceConnect to your project</a>
                         <ul class="nav nav-list">
                             <li>
                                 <a href="#nuget">Nuget</a>
@@ -28,7 +28,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#project">Using the R.MessageBus Project Template</a>
+                        <a href="#project">Using the ServiceConnect Project Template</a>
                     </li>
                     <li>
                         <a href="#configuration">Basic Configuration</a>
@@ -46,19 +46,19 @@
 
             <h2>Getting Started</h2>
             <h3 id="about">About</h3>
-            <p>R.MessageBus is a simple, easy to use asynchronous .NET messaging framework for C#. It sits on top of RabbitMQ as the transport of choice, so will need to have it installed. Currently R.MessageBus is tested on on .Net 4.5  and .Net 4.5.1.
+            <p>ServiceConnect is a simple, easy to use asynchronous .NET messaging framework for C#. It sits on top of RabbitMQ as the transport of choice, so will need to have it installed. Currently ServiceConnect is tested on on .Net 4.5  and .Net 4.5.1.
             </p>
-            <p>While R.MessageBus includes many "traditional" features found in other messaging frameworks, it adds extended support for <strong>Enterprise Integration Patterns</strong> buit-in directly into the core of the message bus, as well as high message throughput for the most demanding applications and streaming ability for transfering large files or streaming video.
+            <p>While ServiceConnect includes many "traditional" features found in other messaging frameworks, it adds extended support for <strong>Enterprise Integration Patterns</strong> buit-in directly into the core of the message bus, as well as high message throughput for the most demanding applications and streaming ability for transfering large files or streaming video.
             </p>
-            <p>R.MessageBus development started in early 2014 out of a specific project&apos;s need for high-performance messaging framework.
-            The intial proof-of-concept turned into a full product and we slowly phased out the third-party messaging framework that we used at that time. Internaly, R.MessageBus proved to be a great success and by the end of 2014, we decided to open-source it.
+            <p>ServiceConnect development started in early 2014 out of a specific project&apos;s need for high-performance messaging framework.
+            The intial proof-of-concept turned into a full product and we slowly phased out the third-party messaging framework that we used at that time. Internaly, ServiceConnect proved to be a great success and by the end of 2014, we decided to open-source it.
             </p>
             <!--<h3>Why async messaging?</h3>
             <p>Unlike in conventional programming where functions are invoked directly by name, asynchronous messaging relies on sending a message to a process where supporting infrastructure select the actual code to run. The primary benefits of this architectual style are encapsulation where clients invoke services without any knowledge of their implementation; and distribution which allows developers to build systems made up of sub-systems that run on disparate computers in different locations and at different times.</p>-->
 
             <h3 id="version">What version does this guide cover?</h3>
             <p>
-               This guide covers R.MessageBus 2.0 (including preview releases).
+               This guide covers ServiceConnect 2.0 (including preview releases).
             </p>
 
             <h3 id="versionrequirements">Requirements</h3>
@@ -72,32 +72,32 @@
                 </ul>
             </p>
 
-            <h3 id="dependancy">Adding R.MessageBus to your project</h3>
+            <h3 id="dependancy">Adding ServiceConnect to your project</h3>
             <h4 id="nuget">Nuget</h4>
             <p>
-                The easiest way to add R.MessageBus to your project is to use NuGet.
+                The easiest way to add ServiceConnect to your project is to use NuGet.
             </p>
             <p>
 <pre><code class="cs">
-nuget Install-Package R.MessageBus
+nuget Install-Package ServiceConnect
 
 </code></pre>
             </p>
             <h4 id="compiling">Compiling From Source</h4>
             <p>
-               If you want to use the latest version of R.MessageBus you can clone the source from github.com
+               If you want to use the latest version of ServiceConnect you can clone the source from github.com
             </p>
 <pre><code class="cs">
-git clone https://github.com/R-Suite/R.MessageBus.git
+git clone https://github.com/R-Suite/ServiceConnect-CSharp.git
 
 </code></pre> 
             
-           <h3 id="project">Using the R.MessageBus Project Template</h3>
+           <h3 id="project">Using the ServiceConnect Project Template</h3>
             <p>
                 In Microsoft Visual Studio, use the <i>New Project dialog box</i> or 
-                <i>Extension Manager</i> to download and install <b>R.MessageBus.EndpointHost</b> project template from the Visual Studio Gallery.
+                <i>Extension Manager</i> to download and install <b>ServiceConnect.EndpointHost</b> project template from the Visual Studio Gallery.
             </p>
-            <p>R.MessageBus.EndpointHost provides boiler plate code for hosting R.MessageBus endpoint in a console window or as a Windows Service - depending on context.</p>
+            <p>ServiceConnect.EndpointHost provides boiler plate code for hosting ServiceConnect endpoint in a console window or as a Windows Service - depending on context.</p>
 
            <h3 id="configuration">Basic Configuration</h3>
            <p>Calling initialize with no parameters will create an instance of the Bus with default configuration options.</p>
