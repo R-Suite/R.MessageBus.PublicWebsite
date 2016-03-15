@@ -230,7 +230,7 @@
     <Content Include="Content\ServiceConnect.Monitor.Setup.msi" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\ServiceConnect.Monitor.zip" />
+    <Content Include="Content\ServiceConnect.Monitor.Setup.rar" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
