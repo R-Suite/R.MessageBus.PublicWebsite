@@ -146,6 +146,7 @@
     <Content Include="Scripts\images\Audit.gif" />
     <Content Include="Scripts\images\Audit.png" />
     <Content Include="Scripts\images\BroadcastAggregate.gif" />
+    <Content Include="Scripts\images\ContentBasedRouter.gif" />
     <Content Include="Scripts\images\DeadLetter.gif" />
     <Content Include="Scripts\images\logo.png" />
     <Content Include="Scripts\images\MessageBus_Monitor Message Details.png" />
