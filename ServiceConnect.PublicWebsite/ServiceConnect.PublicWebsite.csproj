@@ -232,6 +232,12 @@
   <ItemGroup>
     <Content Include="Content\ServiceConnect.Monitor.Setup.rar" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\PolymorphicMessages.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\ContentbasedRouting.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

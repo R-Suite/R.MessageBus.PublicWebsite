@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Events";
+}
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#contenbasedRouter">Content-Based Router</a>
+                    </li>
+                    <li>
+                        <a href="#publishingWithRoutingKey">Publishing messages with Routing Key</a>
+                    </li>
+                    <li>
+                        <a href="#consumingWithRoutingKey">Consuming messages with Routing Key</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+          <h2 id="contenbasedRouter">Content-Based Router</h2>
+          <p style="margin-top:30px;">
+          <img class="img-responsive" src="scripts/images/ContentBasedRouter.gif" />
+          </p>
+          <p>
+          Use a Content-Based Router to route each message to the correct recipient based on message content.
+          </p>
+          <p>
+          <i>See Enterprise Integration Patterns (G. Hohpe, B. Woolf, 2009: 230-236) for more details.</i>
+          </p>
+            <p>
+                
+                <h3 id="publishingWithRoutingKey">Publishing messages with Routing Key</h3>
+
+                <pre><code class="cs">
+public class MyMessage : Message
+{
+    public MyMessage(Guid correlationId) : base(correlationId){}
+}
+
+</code></pre>
+
+<pre><code class="cs">
+public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize();
+        var id = Guid.NewGuid();
+        bus.Publish(new MyMessage(id), "routingkeyA.routingkeyB");
+    }
+}
+
+</code></pre>
+          </p>
+          <p>
+          <h3 id="consumingWithRoutingKey">Consuming messages with Routing Key</h3>
+<pre><code class="cs">
+public class Program
+{
+    public static void Main()
+    {
+        var bus = Bus.Initialize();
+    }
+}
+
+</code></pre>
+          </p>
+            <p>
+<pre><code class="cs">
+// * (star) can substitute for exactly one word.
+// # (hash) can substitute for zero or more words.
+[RoutingKey("routingkeyA.*")]
+public class MyMessageMessageHandler : IMessageHandler&lt;MyMessage&gt;
+{
+    public void Execute(MyMessage message)
+    {
+        Console.WriteLine("Consumer 1 Received Message - {0}", message.CorrelationId);
+    }
+
+    public IConsumeContext Context { get; set; }
+}
+
+</code></pre>
+          </p>
+          <p>
+          See <a href="https://github.com/R-Suite/ServiceConnect-CSharp/tree/master/samples/ContentRouting">ContentRouting</a> sample application for a complete example.
+          </p>
+
+        </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

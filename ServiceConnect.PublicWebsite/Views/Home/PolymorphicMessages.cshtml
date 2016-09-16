@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Polymorphic messages";
+}
+
+<div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="#definingPolymorphicMessages">Defining polymorphic messages</a>
+                    </li>
+                    <li>
+                        <a href="#telluswhatyouthink">Tell Us What You Think!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+          <h2 id="definingPolymorphicMessages">Polymorphic message dispatch</h2>
+          <p style="margin-top:30px;">
+              While every message in ServiceConnect needs to derive from the <code class="cs">ServiceConnect.Interfaces.Message</code> type, 
+              you can define more complicated inheritance trees. 
+              <br />
+              For example:
+          </p>
+
+            <p>
+                <pre><code class="cs">
+public class DbRecordInserted : Message
+{
+    public DbRecordInserted(Guid correlationId) : base(correlationId){}
+}
+
+public class TradeCreated : DbRecordInserted
+{
+    public TradeCreated(Guid correlationId) : base(correlationId){}
+}
+
+</code></pre>
+            </p>
+            <p>
+                ServiceConnect will lookup multiple handlers consisting of all handlers that handle the specified message 
+                including handlers that handle any base class of the message.
+            </p>
+          <p>
+              <br />
+          </p>
+          <p>
+          See <a href="https://github.com/R-Suite/ServiceConnect-CSharp/tree/master/samples/PolymorphicMessages">PolymorphicMessages</a> sample application for a complete example.
+          </p>
+
+        </div>
+    </div>
+    <div id="telluswhatyouthink" style="padding: 20px;">@Html.Partial("../Home/_chat")</div>
+    @Html.Partial("_footer")
+</div>

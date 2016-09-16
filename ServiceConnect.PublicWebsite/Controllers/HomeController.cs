@@ -77,6 +77,11 @@ namespace ServiceConnect.PublicWebsite.Controllers
             return View();
         }
 
+        public ActionResult PolymorphicMessages()
+        {
+            return View();
+        }
+
         public ActionResult RequestReply()
         {
             return View();
@@ -108,6 +113,11 @@ namespace ServiceConnect.PublicWebsite.Controllers
         }
 
         public ActionResult Streaming()
+        {
+            return View();
+        }
+
+        public ActionResult ContentbasedRouting()
         {
             return View();
         }
